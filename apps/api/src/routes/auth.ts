@@ -26,7 +26,7 @@ router.post('/login', async (req: Request, res: Response) => {
       JWT_SECRET, { expiresIn: '8h' }
     );
     res.cookie('kenzly_token', token, cookieOpts);
-    res.json({ success: true, slug: tenant.slug });
+    res.json({ success: true, slug: tenant.slug, token });
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
@@ -81,7 +81,7 @@ router.post('/user-login', async (req: Request, res: Response) => {
       JWT_SECRET, { expiresIn: '8h' }
     );
     res.cookie('kenzly_token', token, cookieOpts);
-    res.json({ success: true, slug: tenant.slug, role: user.role });
+    res.json({ success: true, slug: tenant.slug, role: user.role, token });
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 

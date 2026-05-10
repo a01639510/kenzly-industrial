@@ -4,7 +4,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import styles from './Sidebar.module.css';
 import { useTenant } from '../../contexts/TenantContext';
 import { useRole } from '../../hooks/useRole';
-import { api } from '../../lib/api';
+import { api, tokenStore } from '../../lib/api';
 
 interface Module {
   path: string;
@@ -45,6 +45,7 @@ export default function Sidebar() {
 
   const handleLogout = async () => {
     try { await api.auth.logout(); } catch {}
+    tokenStore.clear();
     router.push(`/login/${slug}`);
   };
 

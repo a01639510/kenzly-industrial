@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import { tokenStore } from '../../../lib/api';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
@@ -30,6 +31,7 @@ export default function LoginPage() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Error al iniciar sesión');
+      if (data.token) tokenStore.set(data.token);
       router.push(`/${slug}`);
     } catch (err: any) {
       setError(err.message);

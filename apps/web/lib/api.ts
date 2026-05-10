@@ -1,7 +1,20 @@
 const BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
+const TOKEN_KEY = 'kenzly_token';
+
+export const tokenStore = {
+  get: () => (typeof window !== 'undefined' ? localStorage.getItem(TOKEN_KEY) : null),
+  set: (t: string) => typeof window !== 'undefined' && localStorage.setItem(TOKEN_KEY, t),
+  clear: () => typeof window !== 'undefined' && localStorage.removeItem(TOKEN_KEY),
+};
+
 async function req<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`${BASE}${path}`, { credentials: 'include', ...init });
+  const token = tokenStore.get();
+  const headers: Record<string, string> = {
+    ...(init?.headers as Record<string, string>),
+  };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+  const res = await fetch(`${BASE}${path}`, { credentials: 'include', ...init, headers });
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: 'Error de red' }));
     throw new Error(err.error || 'Error desconocido');

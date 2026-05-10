@@ -13,7 +13,8 @@ export const cookieOpts = {
 };
 
 export const authMiddleware = (req: Request, res: Response, next: any) => {
-  const token = req.cookies?.kenzly_token;
+  const bearer = (req.headers.authorization || '').replace(/^Bearer\s+/i, '');
+  const token  = bearer || req.cookies?.kenzly_token;
   if (!token) return res.status(401).json({ error: 'No autenticado' });
   try {
     (req as any).user = jwt.verify(token, JWT_SECRET);
@@ -24,7 +25,8 @@ export const authMiddleware = (req: Request, res: Response, next: any) => {
 };
 
 export const adminAuthMiddleware = (req: Request, res: Response, next: any) => {
-  const token = req.cookies?.kenzly_admin_token;
+  const bearer = (req.headers.authorization || '').replace(/^Bearer\s+/i, '');
+  const token  = bearer || req.cookies?.kenzly_admin_token;
   if (!token) return res.status(401).json({ error: 'No autorizado' });
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as any;
