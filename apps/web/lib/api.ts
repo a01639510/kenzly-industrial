@@ -1,11 +1,20 @@
 const BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
 const TOKEN_KEY = 'kenzly_token';
+const COOKIE_MAX_AGE = 8 * 3600; // 8 hours, same as JWT
 
 export const tokenStore = {
   get: () => (typeof window !== 'undefined' ? localStorage.getItem(TOKEN_KEY) : null),
-  set: (t: string) => typeof window !== 'undefined' && localStorage.setItem(TOKEN_KEY, t),
-  clear: () => typeof window !== 'undefined' && localStorage.removeItem(TOKEN_KEY),
+  set: (t: string) => {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem(TOKEN_KEY, t);
+    document.cookie = `${TOKEN_KEY}=${t}; path=/; max-age=${COOKIE_MAX_AGE}; SameSite=Lax`;
+  },
+  clear: () => {
+    if (typeof window === 'undefined') return;
+    localStorage.removeItem(TOKEN_KEY);
+    document.cookie = `${TOKEN_KEY}=; path=/; max-age=0; SameSite=Lax`;
+  },
 };
 
 async function req<T>(path: string, init?: RequestInit): Promise<T> {
