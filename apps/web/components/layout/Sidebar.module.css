@@ -1,0 +1,238 @@
+.sidebar {
+  width: 240px;
+  min-height: 100vh;
+  background: #0f172a;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.2s ease;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  flex-shrink: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.sidebar.collapsed {
+  width: 64px;
+}
+
+/* ── Logo area ── */
+.logoArea {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  min-height: 60px;
+  flex-shrink: 0;
+}
+
+.brand {
+  font-size: 15px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.brandSub {
+  font-size: 8px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 2px;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+.collapseBtn {
+  background: rgba(255, 255, 255, 0.07);
+  border: none;
+  border-radius: 7px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  color: #94a3b8;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.collapseBtn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+/* ── Navigation ── */
+.nav {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  scrollbar-width: none;
+}
+
+.nav::-webkit-scrollbar {
+  display: none;
+}
+
+.navSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-bottom: 4px;
+}
+
+.navLabel {
+  font-size: 9px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 2px;
+  padding: 10px 8px 4px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  width: 100%;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.navItem:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.navItem.active {
+  background: var(--primary, #6366f1);
+  color: #fff;
+  font-weight: 700;
+}
+
+.navIcon {
+  font-size: 14px;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.navText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.navDivider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 6px 4px;
+}
+
+/* ── Asset chips ── */
+.assetChips {
+  padding: 4px 8px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.assetChip {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 700;
+  text-align: left;
+  transition: all 0.15s;
+  font-family: inherit;
+  letter-spacing: 0.3px;
+}
+
+.assetChip:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.assetChip.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Bottom section ── */
+.bottomSection {
+  padding: 10px 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.userInfo {
+  padding: 10px 10px 8px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.userName {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.65);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userRole {
+  font-size: 8px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.28);
+  letter-spacing: 1.8px;
+  margin-top: 2px;
+}
+
+.logoutBtn {
+  width: 100%;
+  padding: 9px 10px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  transition: all 0.15s;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.logoutBtn:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: #fca5a5;
+}

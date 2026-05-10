@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm dev *)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(pkill -f \"tsx\")",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"turbo dev\")",
+      "Bash(curl -s http://localhost:3001/admin/tenants)",
+      "Bash(pnpm add *)"
+    ]
+  }
+}

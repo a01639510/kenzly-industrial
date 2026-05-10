@@ -1,0 +1,16 @@
+{
+  "name": "backly-industrial",
+  "private": true,
+  "packageManager": "pnpm@10.29.2",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.33",
+    "@types/react": "18.3.28",
+    "@types/react-dom": "18.3.7",
+    "turbo": "2.8.10",
+    "typescript": "5.9.3"
+  }
+}

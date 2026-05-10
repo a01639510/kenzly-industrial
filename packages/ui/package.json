@@ -1,0 +1,11 @@
+{
+  "name": "@backly/ui",
+  "version": "0.0.0",
+  "main": "./src/index.tsx",
+  "types": "./src/index.tsx",
+  "dependencies": {
+    "react": "^18.0.0",
+    "@backly/config": "workspace:*",
+    "@backly/types": "workspace:*"
+  }
+}
