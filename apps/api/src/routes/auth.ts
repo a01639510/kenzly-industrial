@@ -41,8 +41,9 @@ router.post('/admin-login', async (req: Request, res: Response) => {
 });
 
 router.post('/logout', (_req: Request, res: Response) => {
-  res.clearCookie('kenzly_token');
-  res.clearCookie('kenzly_admin_token');
+  const clearOpts = { ...cookieOpts, maxAge: 0 };
+  res.clearCookie('kenzly_token', clearOpts);
+  res.clearCookie('kenzly_admin_token', clearOpts);
   res.json({ success: true });
 });
 

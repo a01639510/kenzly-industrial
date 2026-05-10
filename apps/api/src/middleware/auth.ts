@@ -3,10 +3,12 @@ import jwt from 'jsonwebtoken';
 
 export const JWT_SECRET = process.env.JWT_SECRET || 'cambiar-en-produccion';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 export const cookieOpts = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === 'production',
-  sameSite: 'lax' as const,
+  secure: isProd,
+  sameSite: (isProd ? 'none' : 'lax') as 'none' | 'lax',
   maxAge: 8 * 60 * 60 * 1000,
 };
 
