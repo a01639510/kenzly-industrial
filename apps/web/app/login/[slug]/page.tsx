@@ -1,25 +1,25 @@
 "use client"
 import React, { useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { tokenStore } from '../../../lib/api';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
 export default function LoginPage() {
   const params = useParams();
-  const router = useRouter();
   const slug = params.slug as string;
 
-  const [mode, setMode]       = useState<'code' | 'user'>('code');
-  const [code, setCode]       = useState('');
+  const [mode, setMode]         = useState<'code' | 'user'>('code');
+  const [code, setCode]         = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError]     = useState('');
-  const [loading, setLoading] = useState(false);
+  const [error, setError]       = useState('');
+  const [status, setStatus]     = useState('');
+  const [loading, setLoading]   = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true); setError('');
+    setLoading(true); setError(''); setStatus('');
     try {
       const endpoint = mode === 'code' ? '/auth/login' : '/auth/user-login';
       const body     = mode === 'code'
@@ -31,8 +31,10 @@ export default function LoginPage() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Error al iniciar sesión');
-      if (data.token) tokenStore.set(data.token);
-      router.push(`/${slug}`);
+      if (!data.token) throw new Error(`Sin token en respuesta. Keys: ${Object.keys(data).join(', ')}`);
+      tokenStore.set(data.token);
+      setStatus('✓ Autenticado. Redirigiendo...');
+      window.location.href = `/${slug}`;
     } catch (err: any) {
       setError(err.message);
     } finally { setLoading(false); }
@@ -76,7 +78,8 @@ export default function LoginPage() {
             </>
           )}
 
-          {error && <p style={errorStyle}>{error}</p>}
+          {error  && <p style={errorStyle}>{error}</p>}
+          {status && <p style={statusStyle}>{status}</p>}
 
           <button type="submit" disabled={loading || !canSubmit} style={btnStyle(loading || !canSubmit)}>
             {loading ? 'VERIFICANDO...' : 'INGRESAR'}
@@ -127,4 +130,8 @@ const btnStyle = (disabled: boolean): React.CSSProperties => ({
 const errorStyle: React.CSSProperties = {
   fontSize: '11px', color: '#f87171', backgroundColor: '#450a0a',
   padding: '10px 14px', borderRadius: '8px', border: '1px solid #7f1d1d', margin: 0
+};
+const statusStyle: React.CSSProperties = {
+  fontSize: '11px', color: '#34d399', backgroundColor: '#022c22',
+  padding: '10px 14px', borderRadius: '8px', border: '1px solid #065f46', margin: 0
 };
