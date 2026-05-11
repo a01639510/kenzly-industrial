@@ -8,6 +8,7 @@ import { useAuthStore }  from '@/store/useAuthStore'
 import { refreshSensorCache } from '@/data/sensorCache'
 import Dashboard   from '@/pages/Dashboard'
 import Maintenance from '@/pages/Maintenance'
+import Orders      from '@/pages/Orders'
 import Reports     from '@/pages/Reports'
 import Alerts      from '@/pages/Alerts'
 import Workforce   from '@/pages/Workforce'
@@ -70,6 +71,7 @@ const router = createBrowserRouter([
     children: [
       { index: true,          element: <Dashboard /> },
       { path: 'maintenance',  element: <Maintenance /> },
+      { path: 'orders',       element: <Orders /> },
       { path: 'reports',      element: <Reports /> },
       { path: 'alerts',       element: <Alerts /> },
       { path: 'workforce',    element: <Workforce /> },

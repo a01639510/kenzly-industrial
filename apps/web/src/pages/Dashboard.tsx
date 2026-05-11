@@ -394,9 +394,9 @@ export default function Dashboard() {
   }, [])
 
   const oeeData = [
-    { label: 'Disponibilidad', value: kpis.uptime,  color: 'var(--primary)' },
-    { label: 'Rendimiento',    value: Math.round(kpis.oee / 0.88), color: 'var(--accent)' },
-    { label: 'Calidad',        value: Math.round(kpis.oee / 0.81), color: 'var(--success)' },
+    { label: 'Disponibilidad', value: (kpis as any).availability ?? kpis.uptime,            color: 'var(--primary)' },
+    { label: 'Rendimiento',    value: (kpis as any).performance  ?? Math.round(kpis.oee / 0.88), color: 'var(--accent)' },
+    { label: 'Calidad',        value: (kpis as any).quality      ?? Math.round(kpis.oee / 0.81), color: 'var(--success)' },
   ]
 
   const thirtyDays = Array.from({ length: 30 }, (_, i) => {
@@ -454,7 +454,7 @@ export default function Dashboard() {
               <Gauge value={kpis.energy / 3.4} size={90} color="var(--accent)" label="Energía" unit="kWh" />
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
                 <Thermometer size={20} color="var(--warning)" />
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 24, fontWeight: 700, color: 'var(--text-primary)' }}>{kpis.temperature}°</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 24, fontWeight: 700, color: 'var(--text-primary)' }}>{(kpis as any).temperature ?? 22}°</span>
                 <span style={{ fontSize: 9, color: 'var(--text-muted)', fontWeight: 700 }}>AMBIENTE (°C)</span>
               </div>
             </div>

@@ -1,57 +1,72 @@
-import { useState, useEffect, useRef } from 'react'
-import { ALL_HISTORIES, getMachineStatus, getOEEStats, getHourlyProduction, generateRealtimeVariation } from '@/data/mockSensors'
-import { useSensorHistory } from '@/data/sensorCache'
+import { useState, useEffect } from 'react'
+import { getOEEStats, getHourlyProduction } from '@/data/mockSensors'
+import { getCachedHistory, useSensorHistory, useCacheVersion } from '@/data/sensorCache'
 import { COMPANY_CONFIG } from '@/config/company'
+import { THRESHOLDS } from '@/config/thresholds'
+import { apiFetch } from '@/lib/apiClient'
+
+type OEESummary = {
+  oee: number
+  availability: number
+  performance:  number
+  quality:      number
+}
+
+// ── Derive KPIs from sensor cache synchronously (instant, no API wait) ────────
+function kpisFromCache(oee: OEESummary) {
+  const uptime = Math.round(
+    COMPANY_CONFIG.machines.reduce((s, m) => s + (getCachedHistory(m.id).slice(-1)[0]?.uptime ?? 0), 0) /
+    COMPANY_CONFIG.machines.length
+  )
+  const production = COMPANY_CONFIG.machines.reduce(
+    (s, m) => s + (getCachedHistory(m.id).slice(-1)[0]?.production ?? 0), 0
+  )
+  const energy = Math.round(
+    COMPANY_CONFIG.machines.reduce((s, m) => s + (getCachedHistory(m.id).slice(-1)[0]?.energy ?? 0), 0)
+  )
+  return { ...oee, uptime, production, energy, alerts: 3 }
+}
 
 export function useLiveKPIs() {
-  const [kpis, setKpis] = useState(() => computeKPIs())
-
-  function computeKPIs() {
-    const oeeAll = COMPANY_CONFIG.machines.map(m => getOEEStats(m.id).oee)
-    const oee    = Math.round(oeeAll.reduce((a, b) => a + b, 0) / oeeAll.length)
-
-    const uptimeAll = COMPANY_CONFIG.machines.map(m => {
-      const last = ALL_HISTORIES[m.id].readings.slice(-1)[0]
-      return last?.uptime ?? 0
-    })
-    const uptime = Math.round(uptimeAll.reduce((a, b) => a + b, 0) / uptimeAll.length)
-
-    const production = COMPANY_CONFIG.machines.reduce((sum, m) => {
-      const last = ALL_HISTORIES[m.id].readings.slice(-1)[0]
-      return sum + (last?.production ?? 0)
-    }, 0)
-
-    return {
-      oee:        generateRealtimeVariation(oee,    2),
-      uptime:     generateRealtimeVariation(uptime, 1),
-      production: Math.round(generateRealtimeVariation(production, production * 0.02)),
-      alerts:     3,
-      energy:     Math.round(generateRealtimeVariation(285, 15)),  // kWh
-      temperature:Math.round(generateRealtimeVariation(22, 1.5)), // ambient °C
-    }
-  }
+  const [oee, setOee] = useState<OEESummary>({ oee: 82, availability: 90, performance: 88, quality: 95 })
 
   useEffect(() => {
-    const id = setInterval(() => setKpis(computeKPIs()), 5000)
+    const fetch = () =>
+      apiFetch<OEESummary>('/oee/summary')
+        .then(data => setOee(data))
+        .catch(() => {}) // keep previous on error
+
+    fetch()
+    const id = setInterval(fetch, 30_000)
     return () => clearInterval(id)
   }, [])
 
-  return kpis
+  // sensor-based KPIs update reactively when sensorCache refreshes
+  useCacheVersion()
+  return kpisFromCache(oee)
+}
+
+// ── Machine statuses from real sensor cache ───────────────────────────────────
+function statusFromCache(machineId: string) {
+  const last = getCachedHistory(machineId).slice(-1)[0]
+  if (!last) return { machineId, vibration: 0, temperature: 0, status: 'operating' as const, uptime: 0 }
+
+  const status: 'operating' | 'warning' | 'fault' =
+    last.isFault ||
+    last.vibration   >= THRESHOLDS.vibration.critical ||
+    last.temperature >= THRESHOLDS.temperature.critical
+      ? 'fault'
+      : last.vibration   >= THRESHOLDS.vibration.warning ||
+        last.temperature >= THRESHOLDS.temperature.warning
+        ? 'warning'
+        : 'operating'
+
+  return { machineId, vibration: last.vibration, temperature: last.temperature, status, uptime: last.uptime }
 }
 
 export function useMachineStatuses() {
-  const [statuses, setStatuses] = useState(() =>
-    COMPANY_CONFIG.machines.map(m => ({ machine: m, ...getMachineStatus(m.id) }))
-  )
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setStatuses(COMPANY_CONFIG.machines.map(m => ({ machine: m, ...getMachineStatus(m.id) })))
-    }, 6000)
-    return () => clearInterval(id)
-  }, [])
-
-  return statuses
+  useCacheVersion()
+  return COMPANY_CONFIG.machines.map(m => ({ machine: m, ...statusFromCache(m.id) }))
 }
 
 export function useHourlyProduction(machineId?: string) {
@@ -60,7 +75,7 @@ export function useHourlyProduction(machineId?: string) {
 
   useEffect(() => {
     setData(getHourlyProduction(id))
-    const interval = setInterval(() => setData(getHourlyProduction(id)), 30000)
+    const interval = setInterval(() => setData(getHourlyProduction(id)), 30_000)
     return () => clearInterval(interval)
   }, [id])
 
