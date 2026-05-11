@@ -146,7 +146,7 @@ const loadingWrap: React.CSSProperties = {
 
 const topBarStyle: React.CSSProperties = {
   height: 56,
-  background: 'rgba(255,255,255,0.75)',
+  background: 'rgba(255,255,255,0.55)',
   backdropFilter: 'blur(16px)',
   WebkitBackdropFilter: 'blur(16px)',
   borderBottom: '1px solid rgba(255,255,255,0.3)',

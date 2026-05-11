@@ -136,7 +136,7 @@ export default function ParosPage() {
 
 function KpiCard({ label, value, sub, color }: { label: string; value: string; sub: string; color: string }) {
   return (
-    <div style={{ background: 'rgba(255,255,255,0.94)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)', padding: '16px 20px', minWidth: 160, boxShadow: '0 2px 12px rgba(0,0,0,0.08)' }}>
+    <div style={{ background: 'rgba(255,255,255,0.55)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)', padding: '16px 20px', minWidth: 160, boxShadow: '0 2px 12px rgba(0,0,0,0.08)' }}>
       <div style={{ fontSize: 8, fontWeight: 800, color: '#94a3b8', letterSpacing: 1.5, marginBottom: 8 }}>{label}</div>
       <div style={{ fontSize: 36, fontWeight: 900, color, lineHeight: 1, marginBottom: 4 }}>{value}</div>
       <div style={{ fontSize: 10, fontWeight: 600, color: '#94a3b8' }}>{sub}</div>
@@ -149,7 +149,7 @@ const catBadge = (color: string): React.CSSProperties => ({
   background: `${color}18`, color,
 });
 const tableCard: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.94)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
+  background: 'rgba(255,255,255,0.55)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
   borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)',
   overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
 };

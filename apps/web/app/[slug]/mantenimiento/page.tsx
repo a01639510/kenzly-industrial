@@ -122,7 +122,7 @@ export default function MantenimientoPage() {
             { label: 'COMPLETADAS MES', value: summary.doneMonth, color: '#10b981' },
             { label: 'TOTAL TAREAS',    value: summary.total,     color: '#6366f1' },
           ].map(c => (
-            <div key={c.label} style={{ background: 'rgba(255,255,255,0.94)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)', padding: '14px 18px', flex: 1, minWidth: 130, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
+            <div key={c.label} style={{ background: 'rgba(255,255,255,0.55)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)', padding: '14px 18px', flex: 1, minWidth: 130, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
               <div style={{ fontSize: 24, fontWeight: 900, color: c.color, lineHeight: 1 }}>{c.value}</div>
               <div style={{ fontSize: 8, fontWeight: 800, color: '#94a3b8', letterSpacing: 1.5, marginTop: 6 }}>{c.label}</div>
             </div>
@@ -351,7 +351,7 @@ const filterBtn = (active: boolean, primary: string): React.CSSProperties => ({
   color: active ? '#fff' : '#64748b', fontFamily: 'inherit',
 });
 const tableCard: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.94)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
+  background: 'rgba(255,255,255,0.55)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
   borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)', overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
 };
 const th: React.CSSProperties = {

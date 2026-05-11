@@ -139,12 +139,12 @@ const catBadge = (color: string): React.CSSProperties => ({
 });
 
 const kpiCard: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.94)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
+  background: 'rgba(255,255,255,0.55)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
   borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)',
   padding: '16px 20px', minWidth: 160, boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
 };
 const tableCard: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.94)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
+  background: 'rgba(255,255,255,0.55)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
   borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)',
   overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
 };
