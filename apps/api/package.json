@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "test:db": "tsx src/test-db.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "simulate": "tsx src/simulator.ts",
+    "simulate:seed": "tsx src/simulator.ts --seed-only"
   },
   "dependencies": {
     "@backly/types": "workspace:*",
