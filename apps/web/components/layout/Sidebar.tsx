@@ -31,7 +31,7 @@ export default function Sidebar() {
   const { role, canDo } = useRole();
   const router  = useRouter();
   const pathname = usePathname();
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   const areas      = manifest?.areas ?? {};
   const isDashboard = pathname === `/${slug}`;

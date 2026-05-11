@@ -48,17 +48,17 @@ export default function GaugeWidget({ data, color }: GaugeWidgetProps) {
   
   // Lógica de colores Modern Soft
   let dynamicColor = color;
-  let statusBg = 'rgba(0, 0, 0, 0.03)';
-  let statusTextColor = '#64748b';
+  let statusBg = 'rgba(255,255,255,0.08)';
+  let statusTextColor = 'rgba(255,255,255,0.45)';
 
   if (percentage >= 90) {
     dynamicColor = '#ef4444';
-    statusBg = '#fee2e2';
-    statusTextColor = '#991b1b';
+    statusBg = 'rgba(239,68,68,0.18)';
+    statusTextColor = '#fca5a5';
   } else if (percentage >= 70) {
     dynamicColor = '#f59e0b';
-    statusBg = '#fef3c7';
-    statusTextColor = '#92400e';
+    statusBg = 'rgba(245,158,11,0.18)';
+    statusTextColor = '#fcd34d';
   }
 
   const connectionColors = {
@@ -93,9 +93,9 @@ export default function GaugeWidget({ data, color }: GaugeWidgetProps) {
 
       {/* VALOR PRINCIPAL: Grande y contundente como en la imagen */}
       <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '20px' }}>
-        <span style={{ 
-          ...valueStyle, 
-          color: percentage >= 90 ? '#ef4444' : '#1e293b',
+        <span style={{
+          ...valueStyle,
+          color: percentage >= 90 ? '#ef4444' : '#f1f5f9',
         }}>
           {displayValue.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}
         </span>
@@ -131,31 +131,24 @@ export default function GaugeWidget({ data, color }: GaugeWidgetProps) {
   );
 }
 
-/** * ESTILOS SOFT UI / MODERN GAUGE 
- */
+/** ESTILOS DARK GLASS */
 const cardStyle = {
-  backgroundColor: 'rgba(255, 255, 255, 0.5)',
-  backdropFilter: 'blur(10px)',
-  borderRadius: '32px',
-  padding: '24px',
-  border: '1px solid rgba(255, 255, 255, 0.6)',
   position: 'relative' as const,
-  transition: 'transform 0.2s ease',
 };
 
 const labelStyle = {
-  fontSize: '11px',
+  fontSize: '10px',
   fontWeight: '800',
-  color: '#94a3b8',
+  color: 'rgba(255,255,255,0.38)',
   margin: 0,
-  letterSpacing: '1px',
+  letterSpacing: '1.2px',
   textTransform: 'uppercase' as const
 };
 
 const assetIdStyle = {
-  fontSize: '10px',
+  fontSize: '9px',
   fontWeight: '600',
-  color: '#cbd5e1'
+  color: 'rgba(255,255,255,0.28)'
 };
 
 const valueStyle = {
@@ -168,16 +161,16 @@ const valueStyle = {
 };
 
 const unitStyle = {
-  fontSize: '14px',
-  color: '#94a3b8',
+  fontSize: '13px',
+  color: 'rgba(255,255,255,0.40)',
   fontWeight: '700',
   fontFamily: robotoMono.style.fontFamily
 };
 
 const trackStyle = {
   width: '100%',
-  height: '6px',
-  backgroundColor: 'rgba(0,0,0,0.04)',
+  height: '5px',
+  backgroundColor: 'rgba(255,255,255,0.10)',
   borderRadius: '100px',
   overflow: 'hidden'
 };
@@ -185,20 +178,20 @@ const trackStyle = {
 const progressStyle = {
   height: '100%',
   borderRadius: '100px',
-  transition: 'width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)' 
+  transition: 'width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)'
 };
 
 const minMaxStyle = {
   fontSize: '9px',
   fontWeight: '700',
-  color: '#cbd5e1',
+  color: 'rgba(255,255,255,0.28)',
   letterSpacing: '0.5px'
 };
 
 const pillStyle = {
   fontSize: '9px',
   fontWeight: '800',
-  padding: '4px 10px',
+  padding: '3px 9px',
   borderRadius: '100px',
   letterSpacing: '0.5px'
 };
@@ -206,11 +199,11 @@ const pillStyle = {
 const footerStyle = {
   display: 'flex',
   justifyContent: 'space-between',
-  marginTop: '20px',
-  paddingTop: '15px',
-  borderTop: '1px solid rgba(0,0,0,0.03)',
+  marginTop: '16px',
+  paddingTop: '12px',
+  borderTop: '1px solid rgba(255,255,255,0.07)',
   fontSize: '9px',
   fontWeight: '700',
-  color: '#cbd5e1',
+  color: 'rgba(255,255,255,0.28)',
   textTransform: 'uppercase' as const
 };

@@ -63,10 +63,12 @@ function TenantShell({ slug, children }: { slug: string; children: React.ReactNo
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', fontFamily: "'Inter', system-ui, sans-serif",
       background: [
-        'radial-gradient(ellipse at 12% 12%,  rgba(20,55,90,0.55) 0%, transparent 55%)',
-        'radial-gradient(ellipse at 88% 88%,  rgba(15,50,40,0.45) 0%, transparent 55%)',
-        'radial-gradient(ellipse at 50% 50%,  rgba(10,18,35,0.7)  0%, transparent 70%)',
-        '#0d1117',
+        'radial-gradient(ellipse at 8%  8%,  #2a8aa8 0%, transparent 50%)',
+        'radial-gradient(ellipse at 85% 12%, #3d6a48 0%, transparent 48%)',
+        'radial-gradient(ellipse at 50% 50%, #173d2c 0%, transparent 55%)',
+        'radial-gradient(ellipse at 8%  90%, #a89880 0%, transparent 42%)',
+        'radial-gradient(ellipse at 78% 90%, #0a1410 0%, transparent 50%)',
+        '#112318',
       ].join(', '),
     }}>
       <Sidebar />
@@ -138,7 +140,7 @@ export default function TenantLayout({ children }: { children: React.ReactNode }
 const loadingWrap: React.CSSProperties = {
   minHeight: '100vh', display: 'flex', flexDirection: 'column',
   alignItems: 'center', justifyContent: 'center',
-  background: '#0d1117', fontFamily: 'system-ui, sans-serif',
+  background: '#112318', fontFamily: 'system-ui, sans-serif',
   color: '#f8fafc',
 };
 

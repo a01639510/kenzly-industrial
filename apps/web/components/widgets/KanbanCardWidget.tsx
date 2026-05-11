@@ -120,31 +120,33 @@ export default function KanbanCardWidget({ data, color = '#2563eb' }: KanbanProp
   );
 }
 
-// --- ESTILOS ---
+// --- ESTILOS DARK GLASS ---
 const stripContainer = (isOver: boolean) => ({
-  display: 'flex', alignItems: 'center', backgroundColor: 'white', borderRadius: '24px', padding: '16px 24px',
-  border: `1px solid ${isOver ? '#ef4444' : '#e2e8f0'}`, boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)',
-  gap: '20px', width: '100%', boxSizing: 'border-box' as const
+  display: 'flex', alignItems: 'center',
+  border: `1px solid ${isOver ? 'rgba(239,68,68,0.35)' : 'rgba(255,255,255,0.08)'}`,
+  borderRadius: '14px', padding: '16px 20px',
+  gap: '20px', width: '100%', boxSizing: 'border-box' as const,
+  background: isOver ? 'rgba(239,68,68,0.06)' : 'rgba(255,255,255,0.04)',
 });
-const nodeSection = { display: 'flex', flexDirection: 'column' as const, alignItems: 'center', minWidth: '110px' };
-const nodeLabel = { fontSize: '9px', fontWeight: '900', color: '#94a3b8', letterSpacing: '0.8px' };
+const nodeSection = { display: 'flex', flexDirection: 'column' as const, alignItems: 'center', minWidth: '100px' };
+const nodeLabel = { fontSize: '9px', fontWeight: '900', color: 'rgba(255,255,255,0.35)', letterSpacing: '0.8px' };
 const nodeValue = (c: string) => ({ fontSize: '20px', fontWeight: '800', color: c, fontFamily: robotoMono.style.fontFamily });
-const assetName = { fontSize: '9px', color: '#64748b', fontWeight: '600', maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis' };
-const divider = { width: '1px', height: '40px', backgroundColor: '#f1f5f9' };
+const assetName = { fontSize: '9px', color: 'rgba(255,255,255,0.30)', fontWeight: '600', maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis' };
+const divider = { width: '1px', height: '40px', backgroundColor: 'rgba(255,255,255,0.08)' };
 const centerFlow = { flex: 1, display: 'flex', flexDirection: 'column' as const, gap: '6px' };
 const topRow = { display: 'flex', justifyContent: 'space-between', alignItems: 'center' };
-const titleStyle = { margin: 0, fontSize: '11px', color: '#475569', fontWeight: '900' };
+const titleStyle = { margin: 0, fontSize: '11px', color: 'rgba(255,255,255,0.70)', fontWeight: '900' };
 const pillStyle = (isOver: boolean, color: string) => ({
   fontSize: '9px', fontWeight: '900' as any, padding: '2px 8px', borderRadius: '100px',
-  backgroundColor: isOver ? '#fee2e2' : '#f0f9ff', color: color
+  backgroundColor: isOver ? 'rgba(239,68,68,0.18)' : 'rgba(255,255,255,0.08)', color: color
 });
 const mainDisplay = { display: 'flex', alignItems: 'center', gap: '20px' };
-const progressTrack = { flex: 1, height: '8px', backgroundColor: '#f1f5f9', borderRadius: '10px', overflow: 'hidden' };
+const progressTrack = { flex: 1, height: '6px', backgroundColor: 'rgba(255,255,255,0.10)', borderRadius: '10px', overflow: 'hidden' };
 const progressBar = (w: number, c: string) => ({
   width: `${w}%`, height: '100%', backgroundColor: c, transition: 'width 1s ease-in-out', borderRadius: '10px'
 });
 const valueGroup = { display: 'flex', flexDirection: 'column' as const, alignItems: 'flex-end', minWidth: '90px' };
 const bigValue = { fontSize: '26px', fontWeight: '800', fontFamily: robotoMono.style.fontFamily, lineHeight: 1 };
-const unitStyle = { fontSize: '12px', marginLeft: '4px', color: '#94a3b8' };
-const wipTag = { fontSize: '8px', fontWeight: '900', color: '#94a3b8' };
-const limitFooter = { display: 'flex', justifyContent: 'space-between', fontSize: '9px', fontWeight: '700', color: '#94a3b8' };
+const unitStyle = { fontSize: '12px', marginLeft: '4px', color: 'rgba(255,255,255,0.40)' };
+const wipTag = { fontSize: '8px', fontWeight: '900', color: 'rgba(255,255,255,0.35)' };
+const limitFooter = { display: 'flex', justifyContent: 'space-between', fontSize: '9px', fontWeight: '700', color: 'rgba(255,255,255,0.30)' };

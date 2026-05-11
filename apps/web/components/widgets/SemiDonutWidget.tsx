@@ -80,19 +80,14 @@ export default function SemiDonutWidget({ data, color = "#10b981" }: any) {
   );
 }
 
-/** --- ESTILOS CORREGIDOS PARA MEJOR ACOMODO --- */
+/** --- ESTILOS DARK GLASS --- */
 
 const containerStyle = {
-  backgroundColor: 'rgba(255, 255, 255, 0.5)',
-  backdropFilter: 'blur(10px)',
-  borderRadius: '28px',
-  padding: '20px',
-  border: '1px solid rgba(255, 255, 255, 0.7)',
   display: 'flex',
   flexDirection: 'column' as const,
   justifyContent: 'space-between',
-  height: '100%', // Para que llene el slot del grid
-  minHeight: '220px',
+  height: '100%',
+  minHeight: '200px',
   boxSizing: 'border-box' as const
 };
 
@@ -103,11 +98,11 @@ const headerStyle = {
   marginBottom: '10px'
 };
 
-const labelStyle = { fontSize: '10px', fontWeight: '900', color: '#94a3b8', letterSpacing: '1px' };
+const labelStyle = { fontSize: '10px', fontWeight: '900', color: 'rgba(255,255,255,0.38)', letterSpacing: '1px' };
 
-const timeStyle = { 
-  fontSize: '8px', fontWeight: '700', color: '#cbd5e1', 
-  display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' 
+const timeStyle = {
+  fontSize: '8px', fontWeight: '700', color: 'rgba(255,255,255,0.28)',
+  display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px'
 };
 
 const pulseDot = (c: string) => ({
@@ -117,8 +112,8 @@ const pulseDot = (c: string) => ({
 
 const statusPill = (pct: number) => ({
   fontSize: '9px', fontWeight: '900', padding: '2px 8px', borderRadius: '8px',
-  backgroundColor: pct > 90 ? '#fee2e2' : 'rgba(0,0,0,0.03)',
-  color: pct > 90 ? '#ef4444' : '#64748b'
+  backgroundColor: pct > 90 ? 'rgba(239,68,68,0.18)' : 'rgba(255,255,255,0.08)',
+  color: pct > 90 ? '#fca5a5' : 'rgba(255,255,255,0.45)'
 });
 
 const chartAreaStyle = {
@@ -133,8 +128,8 @@ const chartAreaStyle = {
 const arcBackgroundStyle = {
   width: '100%',
   maxWidth: '180px',
-  aspectRatio: '2 / 1', // Mantiene la forma de semicírculo perfecta
-  backgroundColor: 'rgba(0,0,0,0.03)',
+  aspectRatio: '2 / 1',
+  backgroundColor: 'rgba(255,255,255,0.08)',
   borderTopLeftRadius: '500px',
   borderTopRightRadius: '500px',
   position: 'relative' as const,
@@ -147,7 +142,7 @@ const arcBackgroundStyle = {
 const innerHoleStyle = {
   width: '75%',
   height: '75%',
-  backgroundColor: 'white',
+  backgroundColor: 'rgba(255,255,255,0.07)',
   borderTopLeftRadius: '500px',
   borderTopRightRadius: '500px',
   zIndex: 2,
@@ -159,30 +154,30 @@ const innerHoleStyle = {
 
 const valueContainer = { textAlign: 'center' as const };
 
-const valueStyle = { 
-  fontSize: '1.8rem', 
-  fontWeight: '800', 
-  color: '#1e293b', 
+const valueStyle = {
+  fontSize: '1.8rem',
+  fontWeight: '800',
+  color: '#f1f5f9',
   lineHeight: 1,
   fontFamily: robotoMono.style.fontFamily,
   letterSpacing: '-1px'
 };
 
-const unitStyle = { fontSize: '8px', color: '#cbd5e1', fontWeight: '900', marginTop: '2px' };
+const unitStyle = { fontSize: '8px', color: 'rgba(255,255,255,0.35)', fontWeight: '900', marginTop: '2px' };
 
-const footerStyle = { 
-  display: 'flex', 
-  alignItems: 'center', 
-  gap: '10px', 
-  marginTop: '10px' 
+const footerStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '10px',
+  marginTop: '10px'
 };
 
-const limitLabel = { fontSize: '9px', fontWeight: '800', color: '#cbd5e1' };
+const limitLabel = { fontSize: '9px', fontWeight: '800', color: 'rgba(255,255,255,0.28)' };
 
 const trendLine = (c: string, pct: number) => ({
   flex: 1,
   height: '2px',
-  backgroundColor: 'rgba(0,0,0,0.03)',
+  backgroundColor: 'rgba(255,255,255,0.08)',
   position: 'relative' as const,
   borderRadius: '2px'
 });

@@ -30,18 +30,15 @@ export default function ProductionWidget({ data, color, latestTelemetry }: Produ
   const progress = data.props.target ? (displayValue / data.props.target) * 100 : 0;
 
   return (
-    <div 
-      key={data.id} 
-      style={{ 
-        background: 'white', 
-        padding: '1.8rem', 
-        borderRadius: '4px', 
-        borderLeft: `6px solid ${color}`, 
-        boxShadow: '0 4px 6px rgba(0,0,0,0.05)' 
+    <div
+      key={data.id}
+      style={{
+        borderLeft: `3px solid ${color}`,
+        paddingLeft: '16px',
       }}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <h3 style={{ color: '#495057', fontSize: '0.85rem', fontWeight: '700', margin: 0, textTransform: 'uppercase' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.2rem' }}>
+        <h3 style={{ color: 'rgba(255,255,255,0.40)', fontSize: '0.78rem', fontWeight: '800', margin: 0, textTransform: 'uppercase', letterSpacing: '1px' }}>
           {data.title}
         </h3>
         <div className="status-pulse" style={{ 
@@ -54,42 +51,42 @@ export default function ProductionWidget({ data, color, latestTelemetry }: Produ
       </div>
 
       <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.6rem' }}>
-        <span style={{ 
-          fontSize: '3.2rem', 
-          fontWeight: '700', 
-          color: '#212529', 
-          fontFamily: robotoMono.style.fontFamily 
+        <span style={{
+          fontSize: '3rem',
+          fontWeight: '800',
+          color: '#f1f5f9',
+          fontFamily: robotoMono.style.fontFamily
         }}>
           {displayValue.toLocaleString()}
         </span>
-        <span style={{ 
-          fontSize: '1.2rem', 
-          color: '#adb5bd', 
-          fontFamily: robotoMono.style.fontFamily 
+        <span style={{
+          fontSize: '1rem',
+          color: 'rgba(255,255,255,0.40)',
+          fontFamily: robotoMono.style.fontFamily
         }}>
           {displayUnit}
         </span>
       </div>
 
       {data.props.target && (
-        <div style={{ marginTop: '1.5rem', fontSize: '0.8rem', color: '#666' }}>
+        <div style={{ marginTop: '1.2rem', fontSize: '0.75rem', color: 'rgba(255,255,255,0.40)' }}>
           <span>Objetivo: {data.props.target.toLocaleString()} {displayUnit}</span>
-          <div style={{ width: '100%', height: '8px', backgroundColor: '#e9ecef', marginTop: '5px', borderRadius: '2px', overflow: 'hidden' }}>
-            <div style={{ width: `${Math.min(100, progress)}%`, height: '100%', backgroundColor: color, transition: 'width 1s ease-in-out' }} />
+          <div style={{ width: '100%', height: '5px', backgroundColor: 'rgba(255,255,255,0.10)', marginTop: '6px', borderRadius: '100px', overflow: 'hidden' }}>
+            <div style={{ width: `${Math.min(100, progress)}%`, height: '100%', backgroundColor: color, transition: 'width 1s ease-in-out', borderRadius: '100px' }} />
           </div>
         </div>
       )}
 
       {latestTelemetry && (
-        <p style={{ 
-          fontSize: '0.7rem', 
-          color: '#adb5bd', 
-          marginTop: '10px', 
+        <p style={{
+          fontSize: '0.65rem',
+          color: 'rgba(255,255,255,0.28)',
+          marginTop: '10px',
           marginRight: 0,
           textAlign: 'right',
-          fontFamily: robotoMono.style.fontFamily 
+          fontFamily: robotoMono.style.fontFamily
         }}>
-          ÚLTIMA ACTUALIZACIÓN: {new Date(latestTelemetry.timestamp).toLocaleTimeString()}
+          ACTUALIZACIÓN: {new Date(latestTelemetry.timestamp).toLocaleTimeString()}
         </p>
       )}
     </div>

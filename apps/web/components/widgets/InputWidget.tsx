@@ -79,34 +79,34 @@ export default function InputWidget({ data, color = '#3b82f6' }: any) {
       </div>
       
       <div style={{ textAlign: 'left' }}>
-        <label style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: '#64748b', marginBottom: '8px', textTransform: 'uppercase' }}>
+        <label style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: 'rgba(255,255,255,0.35)', marginBottom: '8px', textTransform: 'uppercase' }}>
           {(data.props?.key || 'valor').replace(/_/g, ' ')} actual en <strong>{data.props.unit}</strong>
         </label>
-        
+
         <div style={{ position: 'relative' }}>
-          <input 
-            type="number" 
+          <input
+            type="number"
             step="0.1"
-            placeholder="0.00" 
+            placeholder="0.00"
             value={inputValue}
             onChange={(e) => {
                 setInputValue(e.target.value);
                 setStatusMessage(null);
             }}
-            style={{ 
-                width: '100%', 
-                padding: '12px 15px', 
-                fontSize: '1.8rem', 
-                border: '1px solid #e2e8f0', 
-                borderRadius: '12px', 
+            style={{
+                width: '100%',
+                padding: '12px 15px',
+                fontSize: '1.8rem',
+                border: '1px solid rgba(255,255,255,0.12)',
+                borderRadius: '12px',
                 fontFamily: robotoMono.style.fontFamily,
                 outlineColor: color,
-                backgroundColor: '#f8fafc',
-                color: '#1e293b',
+                backgroundColor: 'rgba(255,255,255,0.06)',
+                color: '#f1f5f9',
                 boxSizing: 'border-box'
-            }} 
+            }}
           />
-          <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: '#cbd5e1', fontWeight: '800', fontSize: '0.8rem' }}>
+          <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.30)', fontWeight: '800', fontSize: '0.8rem' }}>
               {data.props.unit?.toUpperCase()}
           </span>
         </div>
@@ -133,15 +133,15 @@ export default function InputWidget({ data, color = '#3b82f6' }: any) {
       </button>
       
       {statusMessage && (
-        <div style={{ 
-          marginTop: '5px', 
+        <div style={{
+          marginTop: '5px',
           padding: '12px',
           borderRadius: '10px',
-          fontSize: '0.75rem', 
+          fontSize: '0.75rem',
           fontWeight: '600',
-          backgroundColor: statusMessage.type === 'success' ? '#f0fdf4' : statusMessage.type === 'error' ? '#fef2f2' : '#f0f9ff',
-          color: statusMessage.type === 'success' ? '#166534' : statusMessage.type === 'error' ? '#991b1b' : '#075985',
-          border: `1px solid ${statusMessage.type === 'success' ? '#bbf7d0' : statusMessage.type === 'error' ? '#fecaca' : '#bae6fd'}`
+          backgroundColor: statusMessage.type === 'success' ? 'rgba(16,185,129,0.12)' : statusMessage.type === 'error' ? 'rgba(239,68,68,0.12)' : 'rgba(59,130,246,0.12)',
+          color: statusMessage.type === 'success' ? '#6ee7b7' : statusMessage.type === 'error' ? '#fca5a5' : '#93c5fd',
+          border: `1px solid ${statusMessage.type === 'success' ? 'rgba(16,185,129,0.25)' : statusMessage.type === 'error' ? 'rgba(239,68,68,0.25)' : 'rgba(59,130,246,0.25)'}`
         }}>
           {statusMessage.text}
         </div>
