@@ -14,12 +14,11 @@ export default function SemiDonutWidget({ data, color = "#10b981" }: any) {
     }
     return Number(rawTelemetry?.value) || 0;
   })();
-  const timestamp = rawTelemetry?.timestamp; 
+  const timestamp = rawTelemetry?.timestamp;
   const label = data.props?.label || "KPI";
   const unit = data.props?.unit || "";
   const maxValue = Number(data.props?.maxValue) || 100;
 
-  // Lógica de Recencia
   const getRecency = () => {
     if (!timestamp) return null;
     const diff = Math.floor((new Date().getTime() - new Date(timestamp).getTime()) / 60000);
@@ -48,16 +47,15 @@ export default function SemiDonutWidget({ data, color = "#10b981" }: any) {
         </div>
       </div>
 
-      {/* ÁREA DEL GRÁFICO - Ajustada para centrado total */}
+      {/* ÁREA DEL GRÁFICO */}
       <div style={chartAreaStyle}>
         <div style={arcBackgroundStyle}>
-          {/* Arco de progreso */}
           <div style={{
             position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-            background: `conic-gradient(from 0.75turn at 50% 100%, ${color} 0%, ${color} ${percentage / 2}%, rgba(0,0,0,0.05) 0deg)`,
+            background: `conic-gradient(from 0.75turn at 50% 100%, ${color} 0%, ${color} ${percentage / 2}%, rgba(0,0,0,0.08) 0deg)`,
             transition: 'all 1.5s cubic-bezier(0.22, 1, 0.36, 1)',
           }} />
-          
+
           {/* Centro (Hueco) */}
           <div style={innerHoleStyle}>
             <div style={valueContainer}>
@@ -69,7 +67,7 @@ export default function SemiDonutWidget({ data, color = "#10b981" }: any) {
           </div>
         </div>
       </div>
-      
+
       {/* FOOTER */}
       <div style={footerStyle}>
         <span style={limitLabel}>0</span>
@@ -79,8 +77,6 @@ export default function SemiDonutWidget({ data, color = "#10b981" }: any) {
     </div>
   );
 }
-
-/** --- ESTILOS DARK GLASS --- */
 
 const containerStyle = {
   display: 'flex',
@@ -98,10 +94,10 @@ const headerStyle = {
   marginBottom: '10px'
 };
 
-const labelStyle = { fontSize: '10px', fontWeight: '900', color: 'rgba(255,255,255,0.38)', letterSpacing: '1px' };
+const labelStyle = { fontSize: '10px', fontWeight: '900', color: 'rgba(15,23,42,0.55)', letterSpacing: '1px' };
 
 const timeStyle = {
-  fontSize: '8px', fontWeight: '700', color: 'rgba(255,255,255,0.28)',
+  fontSize: '8px', fontWeight: '700', color: 'rgba(15,23,42,0.38)',
   display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px'
 };
 
@@ -112,8 +108,8 @@ const pulseDot = (c: string) => ({
 
 const statusPill = (pct: number) => ({
   fontSize: '9px', fontWeight: '900', padding: '2px 8px', borderRadius: '8px',
-  backgroundColor: pct > 90 ? 'rgba(239,68,68,0.18)' : 'rgba(255,255,255,0.08)',
-  color: pct > 90 ? '#fca5a5' : 'rgba(255,255,255,0.45)'
+  backgroundColor: pct > 90 ? 'rgba(239,68,68,0.14)' : 'rgba(0,0,0,0.07)',
+  color: pct > 90 ? '#b91c1c' : 'rgba(15,23,42,0.50)'
 });
 
 const chartAreaStyle = {
@@ -129,7 +125,7 @@ const arcBackgroundStyle = {
   width: '100%',
   maxWidth: '180px',
   aspectRatio: '2 / 1',
-  backgroundColor: 'rgba(255,255,255,0.08)',
+  backgroundColor: 'rgba(0,0,0,0.08)',
   borderTopLeftRadius: '500px',
   borderTopRightRadius: '500px',
   position: 'relative' as const,
@@ -142,7 +138,7 @@ const arcBackgroundStyle = {
 const innerHoleStyle = {
   width: '75%',
   height: '75%',
-  backgroundColor: 'rgba(255,255,255,0.07)',
+  backgroundColor: 'rgba(255,255,255,0.60)',
   borderTopLeftRadius: '500px',
   borderTopRightRadius: '500px',
   zIndex: 2,
@@ -157,13 +153,13 @@ const valueContainer = { textAlign: 'center' as const };
 const valueStyle = {
   fontSize: '1.8rem',
   fontWeight: '800',
-  color: '#f1f5f9',
+  color: '#0f172a',
   lineHeight: 1,
   fontFamily: robotoMono.style.fontFamily,
   letterSpacing: '-1px'
 };
 
-const unitStyle = { fontSize: '8px', color: 'rgba(255,255,255,0.35)', fontWeight: '900', marginTop: '2px' };
+const unitStyle = { fontSize: '8px', color: 'rgba(15,23,42,0.42)', fontWeight: '900', marginTop: '2px' };
 
 const footerStyle = {
   display: 'flex',
@@ -172,12 +168,12 @@ const footerStyle = {
   marginTop: '10px'
 };
 
-const limitLabel = { fontSize: '9px', fontWeight: '800', color: 'rgba(255,255,255,0.28)' };
+const limitLabel = { fontSize: '9px', fontWeight: '800', color: 'rgba(15,23,42,0.38)' };
 
 const trendLine = (c: string, pct: number) => ({
   flex: 1,
   height: '2px',
-  backgroundColor: 'rgba(255,255,255,0.08)',
+  backgroundColor: 'rgba(0,0,0,0.08)',
   position: 'relative' as const,
   borderRadius: '2px'
 });

@@ -32,7 +32,7 @@ export default function ProductionPerHourWidget({ data, history = [], color, goa
       <div style={{ padding: '10px', textAlign: 'center' }}>
         <h3 style={labelStyle}>{label.toUpperCase()}</h3>
         <div style={valueStyle}>{currentValue} <span style={unitStyle}>pzs</span></div>
-        <p style={{ fontSize: '10px', color: 'rgba(255,255,255,0.35)' }}>Esperando datos históricos...</p>
+        <p style={{ fontSize: '10px', color: 'rgba(15,23,42,0.42)' }}>Esperando datos históricos...</p>
       </div>
     );
   }
@@ -55,21 +55,21 @@ export default function ProductionPerHourWidget({ data, history = [], color, goa
       <div style={{ flex: 1, width: '100%', marginTop: '10px' }}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.06)" />
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(0,0,0,0.07)" />
             <XAxis
               dataKey="time"
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 10, fill: 'rgba(255,255,255,0.35)', fontWeight: 'bold' }}
+              tick={{ fontSize: 10, fill: 'rgba(15,23,42,0.40)', fontWeight: 'bold' }}
             />
             <YAxis
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 10, fill: 'rgba(255,255,255,0.35)' }}
+              tick={{ fontSize: 10, fill: 'rgba(15,23,42,0.40)' }}
             />
             <Tooltip
-              cursor={{ fill: 'rgba(255,255,255,0.04)' }}
-              contentStyle={{ borderRadius: '12px', border: '1px solid rgba(255,255,255,0.10)', backgroundColor: 'rgba(15,30,22,0.95)', color: '#f1f5f9', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}
+              cursor={{ fill: 'rgba(0,0,0,0.04)' }}
+              contentStyle={{ borderRadius: '12px', border: '1px solid rgba(0,0,0,0.08)', backgroundColor: 'rgba(255,255,255,0.92)', color: '#0f172a', boxShadow: '0 8px 24px rgba(0,0,0,0.12)' }}
             />
             {/* Línea de Meta */}
             <ReferenceLine y={goalPPH} stroke="#ef4444" strokeDasharray="3 3" />
@@ -91,7 +91,7 @@ export default function ProductionPerHourWidget({ data, history = [], color, goa
 }
 
 // Estilos rápidos
-const labelStyle: React.CSSProperties = { fontSize: '10px', fontWeight: '900', color: 'rgba(255,255,255,0.38)', letterSpacing: '1px', margin: 0 };
-const valueStyle: React.CSSProperties = { fontSize: '32px', fontWeight: '900', color: '#f1f5f9', lineHeight: '1' };
-const unitStyle: React.CSSProperties = { fontSize: '10px', fontWeight: '800', color: 'rgba(255,255,255,0.38)' };
-const goalBadgeStyle: React.CSSProperties = { fontSize: '9px', fontWeight: '900', color: '#fca5a5', backgroundColor: 'rgba(239,68,68,0.15)', padding: '2px 8px', borderRadius: '4px', marginLeft: 'auto' };
+const labelStyle: React.CSSProperties = { fontSize: '10px', fontWeight: '900', color: 'rgba(15,23,42,0.55)', letterSpacing: '1px', margin: 0 };
+const valueStyle: React.CSSProperties = { fontSize: '32px', fontWeight: '900', color: '#0f172a', lineHeight: '1' };
+const unitStyle: React.CSSProperties = { fontSize: '10px', fontWeight: '800', color: 'rgba(15,23,42,0.45)' };
+const goalBadgeStyle: React.CSSProperties = { fontSize: '9px', fontWeight: '900', color: '#b91c1c', backgroundColor: 'rgba(239,68,68,0.12)', padding: '2px 8px', borderRadius: '4px', marginLeft: 'auto' };

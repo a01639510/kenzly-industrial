@@ -26,7 +26,7 @@ export default function KanbanCardWidget({ data, color = '#2563eb' }: KanbanProp
 
   const fetchBalance = useCallback(async () => {
     if (!sourceAsset || !targetAsset) return;
-    
+
     try {
       const params = new URLSearchParams({
         sourceAsset: sourceAsset.trim(),
@@ -37,10 +37,9 @@ export default function KanbanCardWidget({ data, color = '#2563eb' }: KanbanProp
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/telemetry/kanban/balance?${params.toString()}`, { credentials: 'include' });
       if (!res.ok) throw new Error("API Error");
-      
+
       const json = await res.json();
-      
-      // Aseguramos que los valores sean numéricos
+
       setBalanceData({
         produced: Number(json.produced) || 0,
         consumed: Number(json.consumed) || 0,
@@ -65,7 +64,7 @@ export default function KanbanCardWidget({ data, color = '#2563eb' }: KanbanProp
 
   return (
     <div style={stripContainer(isOverLimit)}>
-      
+
       {/* SECCIÓN ENTRADA (A) */}
       <div style={nodeSection}>
         <span style={nodeLabel}>ENTRADA (A)</span>
@@ -98,7 +97,7 @@ export default function KanbanCardWidget({ data, color = '#2563eb' }: KanbanProp
             <span style={wipTag}>WIP ACTUAL</span>
           </div>
         </div>
-        
+
         <div style={limitFooter}>
           <span>MIN: 0</span>
           <span>LÍMITE: {limitWIP}</span>
@@ -120,33 +119,32 @@ export default function KanbanCardWidget({ data, color = '#2563eb' }: KanbanProp
   );
 }
 
-// --- ESTILOS DARK GLASS ---
 const stripContainer = (isOver: boolean) => ({
   display: 'flex', alignItems: 'center',
-  border: `1px solid ${isOver ? 'rgba(239,68,68,0.35)' : 'rgba(255,255,255,0.08)'}`,
+  border: `1px solid ${isOver ? 'rgba(239,68,68,0.30)' : 'rgba(0,0,0,0.08)'}`,
   borderRadius: '14px', padding: '16px 20px',
   gap: '20px', width: '100%', boxSizing: 'border-box' as const,
-  background: isOver ? 'rgba(239,68,68,0.06)' : 'rgba(255,255,255,0.04)',
+  background: isOver ? 'rgba(239,68,68,0.07)' : 'rgba(255,255,255,0.30)',
 });
 const nodeSection = { display: 'flex', flexDirection: 'column' as const, alignItems: 'center', minWidth: '100px' };
-const nodeLabel = { fontSize: '9px', fontWeight: '900', color: 'rgba(255,255,255,0.35)', letterSpacing: '0.8px' };
+const nodeLabel = { fontSize: '9px', fontWeight: '900', color: 'rgba(15,23,42,0.42)', letterSpacing: '0.8px' };
 const nodeValue = (c: string) => ({ fontSize: '20px', fontWeight: '800', color: c, fontFamily: robotoMono.style.fontFamily });
-const assetName = { fontSize: '9px', color: 'rgba(255,255,255,0.30)', fontWeight: '600', maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis' };
-const divider = { width: '1px', height: '40px', backgroundColor: 'rgba(255,255,255,0.08)' };
+const assetName = { fontSize: '9px', color: 'rgba(15,23,42,0.38)', fontWeight: '600', maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis' };
+const divider = { width: '1px', height: '40px', backgroundColor: 'rgba(0,0,0,0.08)' };
 const centerFlow = { flex: 1, display: 'flex', flexDirection: 'column' as const, gap: '6px' };
 const topRow = { display: 'flex', justifyContent: 'space-between', alignItems: 'center' };
-const titleStyle = { margin: 0, fontSize: '11px', color: 'rgba(255,255,255,0.70)', fontWeight: '900' };
+const titleStyle = { margin: 0, fontSize: '11px', color: 'rgba(15,23,42,0.72)', fontWeight: '900' };
 const pillStyle = (isOver: boolean, color: string) => ({
   fontSize: '9px', fontWeight: '900' as any, padding: '2px 8px', borderRadius: '100px',
-  backgroundColor: isOver ? 'rgba(239,68,68,0.18)' : 'rgba(255,255,255,0.08)', color: color
+  backgroundColor: isOver ? 'rgba(239,68,68,0.14)' : 'rgba(0,0,0,0.06)', color: isOver ? '#b91c1c' : color
 });
 const mainDisplay = { display: 'flex', alignItems: 'center', gap: '20px' };
-const progressTrack = { flex: 1, height: '6px', backgroundColor: 'rgba(255,255,255,0.10)', borderRadius: '10px', overflow: 'hidden' };
+const progressTrack = { flex: 1, height: '6px', backgroundColor: 'rgba(0,0,0,0.10)', borderRadius: '10px', overflow: 'hidden' };
 const progressBar = (w: number, c: string) => ({
   width: `${w}%`, height: '100%', backgroundColor: c, transition: 'width 1s ease-in-out', borderRadius: '10px'
 });
 const valueGroup = { display: 'flex', flexDirection: 'column' as const, alignItems: 'flex-end', minWidth: '90px' };
 const bigValue = { fontSize: '26px', fontWeight: '800', fontFamily: robotoMono.style.fontFamily, lineHeight: 1 };
-const unitStyle = { fontSize: '12px', marginLeft: '4px', color: 'rgba(255,255,255,0.40)' };
-const wipTag = { fontSize: '8px', fontWeight: '900', color: 'rgba(255,255,255,0.35)' };
-const limitFooter = { display: 'flex', justifyContent: 'space-between', fontSize: '9px', fontWeight: '700', color: 'rgba(255,255,255,0.30)' };
+const unitStyle = { fontSize: '12px', marginLeft: '4px', color: 'rgba(15,23,42,0.42)' };
+const wipTag = { fontSize: '8px', fontWeight: '900', color: 'rgba(15,23,42,0.40)' };
+const limitFooter = { display: 'flex', justifyContent: 'space-between', fontSize: '9px', fontWeight: '700', color: 'rgba(15,23,42,0.38)' };

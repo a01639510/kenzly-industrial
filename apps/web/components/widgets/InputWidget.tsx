@@ -79,7 +79,7 @@ export default function InputWidget({ data, color = '#3b82f6' }: any) {
       </div>
       
       <div style={{ textAlign: 'left' }}>
-        <label style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: 'rgba(255,255,255,0.35)', marginBottom: '8px', textTransform: 'uppercase' }}>
+        <label style={{ display: 'block', fontSize: '0.65rem', fontWeight: '700', color: 'rgba(15,23,42,0.50)', marginBottom: '8px', textTransform: 'uppercase' }}>
           {(data.props?.key || 'valor').replace(/_/g, ' ')} actual en <strong>{data.props.unit}</strong>
         </label>
 
@@ -97,16 +97,16 @@ export default function InputWidget({ data, color = '#3b82f6' }: any) {
                 width: '100%',
                 padding: '12px 15px',
                 fontSize: '1.8rem',
-                border: '1px solid rgba(255,255,255,0.12)',
+                border: '1px solid rgba(0,0,0,0.12)',
                 borderRadius: '12px',
                 fontFamily: robotoMono.style.fontFamily,
                 outlineColor: color,
-                backgroundColor: 'rgba(255,255,255,0.06)',
-                color: '#f1f5f9',
+                backgroundColor: 'rgba(255,255,255,0.55)',
+                color: '#0f172a',
                 boxSizing: 'border-box'
             }}
           />
-          <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.30)', fontWeight: '800', fontSize: '0.8rem' }}>
+          <span style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(15,23,42,0.35)', fontWeight: '800', fontSize: '0.8rem' }}>
               {data.props.unit?.toUpperCase()}
           </span>
         </div>

@@ -144,10 +144,10 @@ const loadingWrap: React.CSSProperties = {
 
 const topBarStyle: React.CSSProperties = {
   height: 56,
-  background: 'rgba(20,22,40,0.72)',
+  background: 'rgba(255,255,255,0.60)',
   backdropFilter: 'blur(24px)',
   WebkitBackdropFilter: 'blur(24px)',
-  borderBottom: '1px solid rgba(255,255,255,0.10)',
+  borderBottom: '1px solid rgba(0,0,0,0.07)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -160,14 +160,14 @@ const pageTitleStyle: React.CSSProperties = {
   margin: 0,
   fontSize: 15,
   fontWeight: 700,
-  color: '#f1f5f9',
+  color: '#0f172a',
   letterSpacing: -0.2,
 };
 
 const clockStyle: React.CSSProperties = {
   fontSize: 13,
   fontWeight: 700,
-  color: 'rgba(255,255,255,0.45)',
+  color: 'rgba(15,23,42,0.40)',
   fontVariantNumeric: 'tabular-nums',
   letterSpacing: 0.5,
   minWidth: 70,
@@ -176,10 +176,10 @@ const clockStyle: React.CSSProperties = {
 
 const actionBtnStyle = (color: string, active = false): React.CSSProperties => ({
   padding: '6px 12px',
-  border: `1px solid ${active ? color + '50' : 'rgba(255,255,255,0.15)'}`,
+  border: `1px solid ${active ? color + '50' : 'rgba(0,0,0,0.12)'}`,
   borderRadius: 8,
-  background: active ? color + '22' : 'rgba(255,255,255,0.10)',
-  color: active ? color : 'rgba(255,255,255,0.55)',
+  background: active ? color + '18' : 'rgba(0,0,0,0.05)',
+  color: active ? color : 'rgba(15,23,42,0.50)',
   cursor: 'pointer',
   fontSize: 10,
   fontWeight: 800,

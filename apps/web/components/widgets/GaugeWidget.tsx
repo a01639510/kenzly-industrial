@@ -26,12 +26,12 @@ interface GaugeWidgetProps {
 }
 
 export default function GaugeWidget({ data, color }: GaugeWidgetProps) {
-  const { 
-    assetId, 
-    key, 
-    label, 
-    maxValue = 100, 
-    unit = '' 
+  const {
+    assetId,
+    key,
+    label,
+    maxValue = 100,
+    unit = ''
   } = data.props;
 
   const subKey = data.props.subKey;
@@ -45,70 +45,66 @@ export default function GaugeWidget({ data, color }: GaugeWidgetProps) {
   })();
   const timestamp = rawTelemetry?.timestamp;
   const percentage = Math.min((displayValue / maxValue) * 100, 100);
-  
-  // Lógica de colores Modern Soft
+
   let dynamicColor = color;
-  let statusBg = 'rgba(255,255,255,0.08)';
-  let statusTextColor = 'rgba(255,255,255,0.45)';
+  let statusBg = 'rgba(0,0,0,0.06)';
+  let statusTextColor = 'rgba(15,23,42,0.50)';
 
   if (percentage >= 90) {
     dynamicColor = '#ef4444';
-    statusBg = 'rgba(239,68,68,0.18)';
-    statusTextColor = '#fca5a5';
+    statusBg = 'rgba(239,68,68,0.14)';
+    statusTextColor = '#b91c1c';
   } else if (percentage >= 70) {
     dynamicColor = '#f59e0b';
-    statusBg = 'rgba(245,158,11,0.18)';
-    statusTextColor = '#fcd34d';
+    statusBg = 'rgba(245,158,11,0.14)';
+    statusTextColor = '#92400e';
   }
 
   const connectionColors = {
-    green: '#10b981', 
-    yellow: '#f59e0b', 
-    red: '#ef4444'    
+    green: '#10b981',
+    yellow: '#f59e0b',
+    red: '#ef4444'
   };
   const connectionStatus = !assetId || !key ? 'red' : (data.latestData ? 'green' : 'yellow');
 
   return (
     <div style={cardStyle}>
-      {/* HEADER: Etiquetas pequeñas y Status Dot */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '15px' }}>
         <div>
           <h3 style={labelStyle}>{label || 'MÉTRICA'}</h3>
           <span style={assetIdStyle}>{assetId}</span>
         </div>
-        
+
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
           {percentage >= 70 && (
             <div style={{ ...pillStyle, backgroundColor: statusBg, color: statusTextColor }}>
               {percentage >= 90 ? 'CRÍTICO' : 'ALERTA'}
             </div>
           )}
-          <div style={{ 
-            width: '8px', height: '8px', borderRadius: '50%', 
+          <div style={{
+            width: '8px', height: '8px', borderRadius: '50%',
             backgroundColor: connectionColors[connectionStatus],
-            boxShadow: `0 0 10px ${connectionColors[connectionStatus]}66`
+            boxShadow: `0 0 8px ${connectionColors[connectionStatus]}88`
           }} />
         </div>
       </div>
 
-      {/* VALOR PRINCIPAL: Grande y contundente como en la imagen */}
       <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '20px' }}>
         <span style={{
           ...valueStyle,
-          color: percentage >= 90 ? '#ef4444' : '#f1f5f9',
+          color: percentage >= 90 ? '#ef4444' : '#0f172a',
         }}>
           {displayValue.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}
         </span>
         <span style={unitStyle}>{unit.toUpperCase()}</span>
       </div>
 
-      {/* BARRA DE PROGRESO: Minimalista y redondeada */}
       <div style={trackStyle}>
-        <div style={{ 
-          ...progressStyle, 
-          width: `${percentage}%`, 
+        <div style={{
+          ...progressStyle,
+          width: `${percentage}%`,
           backgroundColor: dynamicColor,
-          boxShadow: `0 0 15px ${dynamicColor}44`
+          boxShadow: `0 0 12px ${dynamicColor}44`
         }} />
       </div>
 
@@ -116,13 +112,12 @@ export default function GaugeWidget({ data, color }: GaugeWidgetProps) {
          <span style={minMaxStyle}>0%</span>
          <span style={minMaxStyle}>LIMITE: {maxValue}</span>
       </div>
-      
-      {/* FOOTER: Datos técnicos con transparencia */}
+
       <div style={footerStyle}>
          <span style={{ letterSpacing: '0.5px' }}>
             {data.props.subKey || key || 'SENSOR'}
          </span>
-         
+
          {timestamp && (
             <span>{new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
          )}
@@ -131,7 +126,6 @@ export default function GaugeWidget({ data, color }: GaugeWidgetProps) {
   );
 }
 
-/** ESTILOS DARK GLASS */
 const cardStyle = {
   position: 'relative' as const,
 };
@@ -139,7 +133,7 @@ const cardStyle = {
 const labelStyle = {
   fontSize: '10px',
   fontWeight: '800',
-  color: 'rgba(255,255,255,0.38)',
+  color: 'rgba(15,23,42,0.55)',
   margin: 0,
   letterSpacing: '1.2px',
   textTransform: 'uppercase' as const
@@ -148,7 +142,7 @@ const labelStyle = {
 const assetIdStyle = {
   fontSize: '9px',
   fontWeight: '600',
-  color: 'rgba(255,255,255,0.28)'
+  color: 'rgba(15,23,42,0.38)'
 };
 
 const valueStyle = {
@@ -162,7 +156,7 @@ const valueStyle = {
 
 const unitStyle = {
   fontSize: '13px',
-  color: 'rgba(255,255,255,0.40)',
+  color: 'rgba(15,23,42,0.42)',
   fontWeight: '700',
   fontFamily: robotoMono.style.fontFamily
 };
@@ -170,7 +164,7 @@ const unitStyle = {
 const trackStyle = {
   width: '100%',
   height: '5px',
-  backgroundColor: 'rgba(255,255,255,0.10)',
+  backgroundColor: 'rgba(0,0,0,0.10)',
   borderRadius: '100px',
   overflow: 'hidden'
 };
@@ -184,7 +178,7 @@ const progressStyle = {
 const minMaxStyle = {
   fontSize: '9px',
   fontWeight: '700',
-  color: 'rgba(255,255,255,0.28)',
+  color: 'rgba(15,23,42,0.35)',
   letterSpacing: '0.5px'
 };
 
@@ -201,9 +195,9 @@ const footerStyle = {
   justifyContent: 'space-between',
   marginTop: '16px',
   paddingTop: '12px',
-  borderTop: '1px solid rgba(255,255,255,0.07)',
+  borderTop: '1px solid rgba(0,0,0,0.08)',
   fontSize: '9px',
   fontWeight: '700',
-  color: 'rgba(255,255,255,0.28)',
+  color: 'rgba(15,23,42,0.35)',
   textTransform: 'uppercase' as const
 };

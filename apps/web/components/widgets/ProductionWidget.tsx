@@ -38,7 +38,7 @@ export default function ProductionWidget({ data, color, latestTelemetry }: Produ
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.2rem' }}>
-        <h3 style={{ color: 'rgba(255,255,255,0.40)', fontSize: '0.78rem', fontWeight: '800', margin: 0, textTransform: 'uppercase', letterSpacing: '1px' }}>
+        <h3 style={{ color: 'rgba(15,23,42,0.55)', fontSize: '0.78rem', fontWeight: '800', margin: 0, textTransform: 'uppercase', letterSpacing: '1px' }}>
           {data.title}
         </h3>
         <div className="status-pulse" style={{ 
@@ -54,14 +54,14 @@ export default function ProductionWidget({ data, color, latestTelemetry }: Produ
         <span style={{
           fontSize: '3rem',
           fontWeight: '800',
-          color: '#f1f5f9',
+          color: '#0f172a',
           fontFamily: robotoMono.style.fontFamily
         }}>
           {displayValue.toLocaleString()}
         </span>
         <span style={{
           fontSize: '1rem',
-          color: 'rgba(255,255,255,0.40)',
+          color: 'rgba(15,23,42,0.42)',
           fontFamily: robotoMono.style.fontFamily
         }}>
           {displayUnit}
@@ -69,9 +69,9 @@ export default function ProductionWidget({ data, color, latestTelemetry }: Produ
       </div>
 
       {data.props.target && (
-        <div style={{ marginTop: '1.2rem', fontSize: '0.75rem', color: 'rgba(255,255,255,0.40)' }}>
+        <div style={{ marginTop: '1.2rem', fontSize: '0.75rem', color: 'rgba(15,23,42,0.50)' }}>
           <span>Objetivo: {data.props.target.toLocaleString()} {displayUnit}</span>
-          <div style={{ width: '100%', height: '5px', backgroundColor: 'rgba(255,255,255,0.10)', marginTop: '6px', borderRadius: '100px', overflow: 'hidden' }}>
+          <div style={{ width: '100%', height: '5px', backgroundColor: 'rgba(0,0,0,0.10)', marginTop: '6px', borderRadius: '100px', overflow: 'hidden' }}>
             <div style={{ width: `${Math.min(100, progress)}%`, height: '100%', backgroundColor: color, transition: 'width 1s ease-in-out', borderRadius: '100px' }} />
           </div>
         </div>
@@ -80,7 +80,7 @@ export default function ProductionWidget({ data, color, latestTelemetry }: Produ
       {latestTelemetry && (
         <p style={{
           fontSize: '0.65rem',
-          color: 'rgba(255,255,255,0.28)',
+          color: 'rgba(15,23,42,0.35)',
           marginTop: '10px',
           marginRight: 0,
           textAlign: 'right',
