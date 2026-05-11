@@ -90,7 +90,7 @@ function TenantShell({ slug, children }: { slug: string; children: React.ReactNo
         </header>
 
         {/* ── Content area ── */}
-        <main style={{ flex: 1, overflow: 'auto', background: '#f8fafc' }}>
+        <main style={{ flex: 1, overflow: 'auto', background: 'transparent' }}>
           {children}
         </main>
       </div>
@@ -136,8 +136,10 @@ const loadingWrap: React.CSSProperties = {
 
 const topBarStyle: React.CSSProperties = {
   height: 56,
-  background: '#ffffff',
-  borderBottom: '1px solid #e2e8f0',
+  background: 'rgba(255,255,255,0.75)',
+  backdropFilter: 'blur(16px)',
+  WebkitBackdropFilter: 'blur(16px)',
+  borderBottom: '1px solid rgba(255,255,255,0.3)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
