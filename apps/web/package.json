@@ -1,31 +1,33 @@
 {
   "name": "@backly/web",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@backly/config": "workspace:*",
-    "@backly/ui": "workspace:*",
-    "clsx": "^2.1.1",
-    "jose": "^6.2.3",
-    "jspdf": "^4.2.0",
-    "jspdf-autotable": "^5.0.7",
-    "lodash": "^4.17.23",
-    "lucide-react": "^0.575.0",
-    "next": "16.1.6",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "react-grid-layout": "^2.2.2",
-    "react-resizable": "^3.1.3",
-    "recharts": "^3.7.0",
-    "tailwind-merge": "^3.5.0"
+    "date-fns": "^3.6.0",
+    "framer-motion": "^11.3.8",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
+    "lucide-react": "^0.400.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.25.1",
+    "recharts": "^2.12.7",
+    "xlsx": "^0.18.5",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.23",
-    "@types/react-grid-layout": "^2.1.0"
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.4"
   }
 }

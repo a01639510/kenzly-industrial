@@ -5,7 +5,11 @@
       "Bash(cat > *)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(pnpm install *)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(pnpm tsc *)",
+      "Bash(pkill -f \"vite\")"
     ],
     "additionalDirectories": [
       "/Users/mateochavezpinto/Desktop/KENZLY/backly-industrial/apps/web/app/[slug]",
