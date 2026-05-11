@@ -51,38 +51,20 @@ html { font-size: 16px; }
 body {
   margin: 0;
   font-family: var(--font-display);
-  /* Warm silver base — mid-tone so dark and light blobs read clearly */
   background-color: #B2AFA8;
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 
-  background-image:
-    /* Deep charcoal blob — upper-left (the dark mass in the image) */
-    radial-gradient(ellipse 62% 72% at 14% 28%,  rgba(24,18,16,0.86) 0%, transparent 62%),
-    /* Bright silver-white highlight — lower-right */
-    radial-gradient(ellipse 68% 65% at 84% 72%,  rgba(255,255,255,0.80) 0%, transparent 58%),
-    /* Secondary dark pocket — center-left transition */
-    radial-gradient(ellipse 28% 38% at 40% 55%,  rgba(20,16,14,0.38) 0%, transparent 48%),
-    /* Soft warm silver mid-highlight — top-right */
-    radial-gradient(ellipse 42% 32% at 72% 14%,  rgba(220,218,214,0.55) 0%, transparent 52%);
+  background-image: url('/bg.jpg');
+  background-size: cover;
+  background-position: center;
   background-attachment: fixed;
 }
 
-/* Sparkle grain — higher density to match the platinum dust in the ref */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  /* Two noise layers: fine sparkle + coarser texture */
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.28'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
-  background-size: 180px 180px, 320px 320px;
-  pointer-events: none;
-  z-index: 0;
-}
+/* No grain overlay needed — the background image has its own texture */
+body::before { display: none; }
 
 #root { position: relative; z-index: 1; }
 
