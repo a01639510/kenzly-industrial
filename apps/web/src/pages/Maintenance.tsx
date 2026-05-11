@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/Badge'
 import { GlassButton } from '@/components/ui/GlassButton'
 import { AreaChartWidget } from '@/components/charts/AreaChartWidget'
 import { COMPANY_CONFIG } from '@/config/company'
-import { ALL_HISTORIES } from '@/data/mockSensors'
+import { useSensorHistory } from '@/data/sensorCache'
 import { usePrediction } from '@/hooks/usePrediction'
 import { AlertTriangle, CheckCircle, Clock, Wrench, TrendingUp, Download } from 'lucide-react'
 
@@ -87,7 +87,7 @@ function PredictionPanel({ machineId }: { machineId: string }) {
 
 export default function Maintenance() {
   const [machineId, setMachineId] = useState<string>(COMPANY_CONFIG.machines[0].id)
-  const hist    = ALL_HISTORIES[machineId]?.readings ?? []
+  const hist    = useSensorHistory(machineId)
   const last60  = hist.slice(-60)
 
   const chartData = last60.map(r => ({

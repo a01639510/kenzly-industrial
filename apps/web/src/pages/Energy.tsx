@@ -6,7 +6,7 @@ import { AreaChartWidget } from '@/components/charts/AreaChartWidget'
 import { BarChartWidget } from '@/components/charts/BarChartWidget'
 import { DonutChart } from '@/components/charts/DonutChart'
 import { COMPANY_CONFIG } from '@/config/company'
-import { ALL_HISTORIES } from '@/data/mockSensors'
+import { getCachedHistory, useCacheVersion } from '@/data/sensorCache'
 import { Zap, Leaf, DollarSign, TrendingDown, AlertTriangle } from 'lucide-react'
 
 const COST_PER_KWH = 2.45   // MXN
@@ -21,7 +21,7 @@ const AREA_COLORS: Record<string, string> = {
 
 function buildData(days: number) {
   return COMPANY_CONFIG.machines.map(m => {
-    const readings = ALL_HISTORIES[m.id].readings.slice(-days)
+    const readings = getCachedHistory(m.id).slice(-days)
     const totalKwh  = readings.reduce((s, r) => s + r.energy, 0)
     const avgDaily  = totalKwh / days
     const cost      = totalKwh * COST_PER_KWH
@@ -31,15 +31,15 @@ function buildData(days: number) {
 }
 
 function buildTrend(days: number) {
-  const first = ALL_HISTORIES[COMPANY_CONFIG.machines[0].id].readings
+  const first    = getCachedHistory(COMPANY_CONFIG.machines[0].id)
   const startIdx = first.length - days
   return Array.from({ length: days }, (_, i) => {
-    const idx = startIdx + i
+    const idx   = startIdx + i
     const total = COMPANY_CONFIG.machines.reduce((sum, m) => {
-      return sum + (ALL_HISTORIES[m.id].readings[idx]?.energy ?? 0)
+      return sum + (getCachedHistory(m.id)[idx]?.energy ?? 0)
     }, 0)
     return {
-      date: ALL_HISTORIES[COMPANY_CONFIG.machines[0].id].readings[idx]?.date ?? '',
+      date: first[idx]?.date ?? '',
       kwh:  Math.round(total * 10) / 10,
     }
   })
@@ -60,6 +60,7 @@ function peakHour(hourly: { hora: string; kwh: number }[]) {
 }
 
 export default function Energy() {
+  useCacheVersion()
   const [period, setPeriod] = useState<7 | 30 | 90>(30)
   const machines  = buildData(period)
   const trend     = buildTrend(period)

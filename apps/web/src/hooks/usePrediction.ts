@@ -1,10 +1,8 @@
 import { useMemo } from 'react'
-import { ALL_HISTORIES } from '@/data/mockSensors'
-import { predictFailure, calculateMTBF, type PredictionResult } from '@/services/mlEngine'
+import { useSensorHistory } from '@/data/sensorCache'
+import { predictFailure, type PredictionResult } from '@/services/mlEngine'
 
 export function usePrediction(machineId: string): PredictionResult {
-  return useMemo(() => {
-    const readings = ALL_HISTORIES[machineId]?.readings ?? []
-    return predictFailure(readings)
-  }, [machineId])
+  const readings = useSensorHistory(machineId)
+  return useMemo(() => predictFailure(readings), [readings])
 }

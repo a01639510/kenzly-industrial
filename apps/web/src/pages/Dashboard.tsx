@@ -13,7 +13,7 @@ import { BarChartWidget } from '@/components/charts/BarChartWidget'
 import { useLiveKPIs, useMachineStatuses } from '@/hooks/useMockData'
 import { usePrediction } from '@/hooks/usePrediction'
 import { COMPANY_CONFIG } from '@/config/company'
-import { ALL_HISTORIES } from '@/data/mockSensors'
+import { useSensorHistory } from '@/data/sensorCache'
 import { useAlertStore } from '@/store/useAlertStore'
 
 // ── Machine PPH baseline (from mock params) ───────────────────────────
@@ -64,7 +64,7 @@ function bottleneck(fromId: string, toId: string) {
 function MachinePanel({ machineId, onClose }: { machineId: string; onClose: () => void }) {
   const machine  = COMPANY_CONFIG.machines.find(m => m.id === machineId)!
   const pred     = usePrediction(machineId)
-  const hist     = ALL_HISTORIES[machineId]?.readings.slice(-14) ?? []
+  const hist     = useSensorHistory(machineId).slice(-14)
   const chartData = hist.map(r => ({ date: r.date, vibración: r.vibration, temperatura: r.temperature }))
   const last     = hist[hist.length - 1]
 

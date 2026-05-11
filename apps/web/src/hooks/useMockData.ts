@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { ALL_HISTORIES, getMachineStatus, getOEEStats, getHourlyProduction, generateRealtimeVariation } from '@/data/mockSensors'
+import { useSensorHistory } from '@/data/sensorCache'
 import { COMPANY_CONFIG } from '@/config/company'
 
 export function useLiveKPIs() {
@@ -67,5 +68,5 @@ export function useHourlyProduction(machineId?: string) {
 }
 
 export function useMachineHistory(machineId: string) {
-  return ALL_HISTORIES[machineId]?.readings ?? []
+  return useSensorHistory(machineId)
 }

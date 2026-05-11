@@ -6,7 +6,8 @@ import { Badge } from '@/components/ui/Badge'
 import { BarChartWidget } from '@/components/charts/BarChartWidget'
 import { DonutChart } from '@/components/charts/DonutChart'
 import { COMPANY_CONFIG, type Machine } from '@/config/company'
-import { ALL_HISTORIES, getOEEStats } from '@/data/mockSensors'
+import { getOEEStats } from '@/data/mockSensors'
+import { getCachedHistory, useCacheVersion } from '@/data/sensorCache'
 import { FileText, Download, FileSpreadsheet, Calendar } from 'lucide-react'
 import jsPDF from 'jspdf'
 
@@ -88,7 +89,7 @@ function OEEReport({ machines }: { machines: readonly Machine[] }) {
 
 function EnergyReport({ machines, selectedArea }: { machines: readonly Machine[], selectedArea: string }) {
   const data = machines.map((m, i) => {
-    const readings = ALL_HISTORIES[m.id].readings.slice(-30)
+    const readings = getCachedHistory(m.id).slice(-30)
     const total = readings.reduce((s, r) => s + r.energy, 0)
     return { area: m.area, name: m.name.split(' ').slice(0, 2).join(' '), kwh: Math.round(total), color: MACHINE_COLORS[i % MACHINE_COLORS.length] }
   })
@@ -132,7 +133,7 @@ function EnergyReport({ machines, selectedArea }: { machines: readonly Machine[]
 function ProductionReport({ machines }: { machines: readonly Machine[] }) {
   const weeklyData = Array.from({ length: 8 }, (_, i) => {
     const total = machines.reduce((sum, m) => {
-      const week = ALL_HISTORIES[m.id].readings.slice(-((8 - i) * 7), -((7 - i) * 7))
+      const week = getCachedHistory(m.id).slice(-((8 - i) * 7), -((7 - i) * 7))
       return sum + week.reduce((s, r) => s + r.production, 0)
     }, 0)
     return { semana: `Sem ${i + 1}`, unidades: total }
@@ -164,6 +165,7 @@ function ProductionReport({ machines }: { machines: readonly Machine[] }) {
 }
 
 export default function Reports() {
+  useCacheVersion()
   const [reportType,   setReportType]   = useState<ReportType>('oee')
   const [selectedArea, setSelectedArea] = useState<string>('Todas')
   const [dateRange,    setDateRange]    = useState({ from: '2026-04-01', to: '2026-04-30' })
@@ -222,7 +224,7 @@ export default function Reports() {
     import('xlsx').then(XLSX => {
       const data = filteredMachines.map(m => {
         const s    = getOEEStats(m.id)
-        const hist = ALL_HISTORIES[m.id].readings.slice(-30)
+        const hist = getCachedHistory(m.id).slice(-30)
         return {
           'Equipo':              m.name,
           'Área':                m.area,

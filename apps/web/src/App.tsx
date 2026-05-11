@@ -1,9 +1,11 @@
 import { createBrowserRouter, RouterProvider, Outlet, Navigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Sidebar }   from '@/components/layout/Sidebar'
 import { KioskBar }  from '@/components/layout/KioskBar'
 import { useKioskStore } from '@/store/useKioskStore'
 import { useAuthStore }  from '@/store/useAuthStore'
+import { refreshSensorCache } from '@/data/sensorCache'
 import Dashboard   from '@/pages/Dashboard'
 import Maintenance from '@/pages/Maintenance'
 import Reports     from '@/pages/Reports'
@@ -16,6 +18,11 @@ import Login       from '@/pages/Login'
 function AppLayout() {
   const kioskActive = useKioskStore(s => s.active)
   const { user, loading } = useAuthStore()
+
+  // Once authenticated, refresh sensor cache from API in background
+  useEffect(() => {
+    if (user) refreshSensorCache()
+  }, [user])
 
   if (loading) return (
     <div style={{

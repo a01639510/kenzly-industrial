@@ -31,7 +31,7 @@ router.get('/history/:assetId/:key', async (req: Request, res: Response) => {
   const key = String(req.params.key).trim();
   const subKey = req.query.subKey ? String(req.query.subKey).trim() : null;
   const rawHours = Number(req.query.hours);
-  const hours = (!isNaN(rawHours) && rawHours > 0 && rawHours <= 168) ? rawHours : 48;
+  const hours = (!isNaN(rawHours) && rawHours > 0 && rawHours <= 720) ? rawHours : 48;
   const { tenantId } = (req as any).user;
   try {
     const allowed = await getTenantAssetIds(tenantId);
@@ -55,7 +55,7 @@ router.get('/history/:assetId/:key', async (req: Request, res: Response) => {
           [assetId, subKey, key, hours]
         )
       : await pool.query(
-          `SELECT timestamp,
+          `SELECT timestamp, metadata,
             COALESCE(
               (metadata->$2->>'value')::numeric,
               (metadata->$2->>'raw')::numeric,
