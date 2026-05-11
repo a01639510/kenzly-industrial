@@ -5,6 +5,7 @@ import Dashboard   from '@/pages/Dashboard'
 import Maintenance from '@/pages/Maintenance'
 import Reports     from '@/pages/Reports'
 import Alerts      from '@/pages/Alerts'
+import Workforce   from '@/pages/Workforce'
 
 function AppLayout() {
   return (
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       { path: 'maintenance',   element: <Maintenance /> },
       { path: 'reports',       element: <Reports /> },
       { path: 'alerts',        element: <Alerts /> },
+      { path: 'workforce',     element: <Workforce /> },
     ],
   },
 ])

@@ -2,22 +2,22 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap');
 
-/* ── Design Tokens — Plata / Blanco / Azul Eléctrico ───────────────── */
+/* ── Design Tokens — Mesh Gradient Tech ────────────────────────────── */
 :root {
-  --bg-base:             #06080F;
-  --bg-surface:          rgba(255,255,255,0.045);
-  --bg-surface-hover:    rgba(255,255,255,0.075);
-  --bg-surface-active:   rgba(255,255,255,0.11);
-  --border-glass:        rgba(200,215,240,0.09);
-  --border-glass-bright: rgba(200,215,240,0.18);
-  --blur-glass:          blur(16px);
+  --bg-base:             #555555;
+  --bg-surface:          rgba(255,255,255,0.03);
+  --bg-surface-hover:    rgba(255,255,255,0.08);
+  --bg-surface-active:   rgba(255,255,255,0.12);
+  --border-glass:        rgba(255,255,255,0.12);
+  --border-glass-bright: rgba(255,255,255,0.22);
+  --blur-glass:          blur(20px);
 
   /* ── Brand ── */
-  --primary:             #1A6DFF;          /* azul eléctrico */
-  --primary-dim:         rgba(26,109,255,0.14);
-  --primary-glow:        rgba(26,109,255,0.28);
-  --accent:              #8FAAC8;          /* plata / silver-blue */
-  --accent-dim:          rgba(143,170,200,0.12);
+  --primary:             #1A6DFF;
+  --primary-dim:         rgba(26,109,255,0.16);
+  --primary-glow:        rgba(26,109,255,0.32);
+  --accent:              #8FAAC8;
+  --accent-dim:          rgba(143,170,200,0.14);
 
   /* ── Semantic ── */
   --success:             #22C55E;
@@ -28,12 +28,12 @@
   --danger-dim:          rgba(239,68,68,0.14);
 
   /* ── Text ── */
-  --text-primary:        rgba(240,245,255,0.94);
-  --text-secondary:      rgba(190,210,235,0.58);
-  --text-muted:          rgba(160,185,215,0.32);
+  --text-primary:        rgba(255,255,255,0.95);
+  --text-secondary:      rgba(255,255,255,0.60);
+  --text-muted:          rgba(255,255,255,0.32);
 
   /* ── Shadow / Glow ── */
-  --shadow-glass:        0 4px 28px rgba(0,0,0,0.50);
+  --shadow-glass:        0 4px 28px rgba(0,0,0,0.35);
   --shadow-glow-primary: 0 0 24px rgba(26,109,255,0.30);
 
   --radius-card: 16px;
@@ -49,27 +49,27 @@ html { font-size: 16px; }
 body {
   margin: 0;
   font-family: var(--font-display);
-  background-color: var(--bg-base);
+  background-color: #555555;
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 
-  /* Azul eléctrico top-left + reflejo plata top-right + halo frío bottom */
   background-image:
-    radial-gradient(ellipse 72% 58% at 0%    0%,   rgba(26,109,255,0.24)  0%, transparent 54%),
-    radial-gradient(ellipse 48% 36% at 100%  0%,   rgba(180,200,230,0.07) 0%, transparent 46%),
-    radial-gradient(ellipse 38% 52% at 100% 100%,  rgba(26, 80,180,0.07)  0%, transparent 52%),
-    radial-gradient(ellipse 30% 30% at 50%  40%,   rgba(26,109,255,0.03)  0%, transparent 60%);
+    radial-gradient(at 30%   0%,  rgba(255,255,255,0.4)  0%, transparent 50%),
+    radial-gradient(at 100% 50%,  rgba(26,109,255,0.8)   0%, transparent 60%),
+    radial-gradient(at 0%   30%,  rgba(0,0,0,0.9)        0%, transparent 50%),
+    radial-gradient(at 20%  100%, rgba(143,170,200,0.5)  0%, transparent 50%);
+  background-attachment: fixed;
 }
 
-/* Grain overlay — textura plateada sutil */
+/* Grain overlay */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
-  background-size: 300px 300px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.80' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
   pointer-events: none;
   z-index: 0;
 }
@@ -92,11 +92,19 @@ body::before {
   border-color: var(--border-glass-bright);
 }
 
+/* ── Flow line animation ─────────────────────────────────────────────── */
+@keyframes flow-dash {
+  to { stroke-dashoffset: -40; }
+}
+.flow-line {
+  animation: flow-dash 1.4s linear infinite;
+}
+
 /* ── Scrollbar ──────────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(180,200,230,0.14); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(180,200,230,0.25); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.14); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.28); }
 
 /* ── Skeleton shimmer ───────────────────────────────────────────────── */
 @keyframes shimmer {
@@ -106,7 +114,7 @@ body::before {
 .skeleton {
   background: linear-gradient(90deg,
     rgba(255,255,255,0.04) 25%,
-    rgba(180,200,230,0.09) 50%,
+    rgba(255,255,255,0.10) 50%,
     rgba(255,255,255,0.04) 75%
   );
   background-size: 800px 100%;
@@ -133,7 +141,7 @@ body::before {
 
 /* ── Recharts tooltip ───────────────────────────────────────────────── */
 .recharts-tooltip-wrapper .recharts-default-tooltip {
-  background: rgba(6,8,15,0.96) !important;
+  background: rgba(20,20,30,0.96) !important;
   border: 1px solid var(--border-glass-bright) !important;
   border-radius: var(--radius-sm) !important;
   backdrop-filter: blur(20px) !important;

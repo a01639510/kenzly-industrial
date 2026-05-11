@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  LayoutDashboard, Wrench, FileText, Bell, ChevronRight, ChevronLeft, LogOut, User,
+  LayoutDashboard, Wrench, FileText, Bell, ChevronRight, ChevronLeft, LogOut, User, Users,
 } from 'lucide-react'
 import { COMPANY_CONFIG } from '@/config/company'
 import { useAlertStore } from '@/store/useAlertStore'
@@ -10,6 +10,7 @@ import { useAlertStore } from '@/store/useAlertStore'
 const NAV = [
   { to: '/',            icon: LayoutDashboard, label: 'Dashboard'    },
   { to: '/maintenance', icon: Wrench,           label: 'Mantenimiento' },
+  { to: '/workforce',   icon: Users,            label: 'Operadores'   },
   { to: '/reports',     icon: FileText,         label: 'Reportes'     },
   { to: '/alerts',      icon: Bell,             label: 'Alertas'      },
 ]
