@@ -4,8 +4,8 @@ export const COMPANY_CONFIG = {
   name:        'Grupo Acero Norte',
   shortName:   'GAN',
   logo:        '/logo.svg',
-  primaryColor:'#0EA5E9',   // sky-500
-  accentColor: '#14B8A6',   // teal-500
+  primaryColor:'#1A6DFF',   // azul eléctrico
+  accentColor: '#8FAAC8',   // plata / silver-blue
   industry:    'manufactura',
   currency:    'MXN',
   timezone:    'America/Monterrey',
