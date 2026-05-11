@@ -37,6 +37,8 @@ export function AreaChartWidget({ data, xKey, areas, height = 200 }: AreaChartWi
             borderRadius: 10, backdropFilter: 'blur(16px)', color: 'rgba(255,255,255,0.9)',
             fontSize: 12, boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
           }}
+          labelStyle={{ color: 'rgba(255,255,255,0.65)', fontWeight: 600 }}
+          itemStyle={{ color: 'rgba(255,255,255,0.9)' }}
           cursor={{ stroke: 'rgba(255,255,255,0.10)', strokeWidth: 1 }}
         />
         {areas.map(a => (

@@ -231,14 +231,14 @@ export default function Orders() {
       await apiFetch('/orders', {
         method: 'POST',
         body: JSON.stringify({
-          order_number:    form.order_number || `OP-${Date.now()}`,
-          product_name:    form.product_name,
-          target_quantity: form.target_quantity,
-          asset_id:        form.asset_id,
-          area_id:         machine?.area ?? 'general',
-          priority:        form.priority,
-          due_at:          new Date(form.due_at).toISOString(),
-          notes:           form.notes || null,
+          orderNumber:    form.order_number || `OP-${Date.now()}`,
+          productName:    form.product_name,
+          targetQuantity: form.target_quantity,
+          assetId:        form.asset_id,
+          areaId:         machine?.area ?? 'general',
+          priority:       form.priority,
+          dueAt:          new Date(form.due_at).toISOString(),
+          notes:          form.notes || null,
         }),
       })
       setShowForm(false)
@@ -375,14 +375,14 @@ export default function Orders() {
                       {(isPending || isActive) && (
                         <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
                           {isPending && (
-                            <GlassButton size="sm" onClick={() => updateStatus(order.id, 'EN_PROCESO', { started_at: new Date().toISOString() })} disabled={busy}
+                            <GlassButton size="sm" onClick={() => updateStatus(order.id, 'EN_PROCESO')} disabled={busy}
                               style={{ fontSize: 11, padding: '4px 12px', display: 'flex', alignItems: 'center', gap: 4 }}>
                               <ChevronRight size={12} /> {busy ? '…' : 'Iniciar'}
                             </GlassButton>
                           )}
                           {isActive && (
                             <>
-                              <GlassButton size="sm" onClick={() => updateStatus(order.id, 'COMPLETADA', { completed_at: new Date().toISOString(), actual_quantity: order.target_quantity })} disabled={busy}
+                              <GlassButton size="sm" onClick={() => updateStatus(order.id, 'COMPLETADA', { actualQuantity: order.target_quantity })} disabled={busy}
                                 style={{ fontSize: 11, padding: '4px 12px', display: 'flex', alignItems: 'center', gap: 4, color: 'var(--success)' }}>
                                 <CheckCircle2 size={12} /> {busy ? '…' : 'Completar'}
                               </GlassButton>

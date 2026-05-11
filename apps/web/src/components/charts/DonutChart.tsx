@@ -33,6 +33,8 @@ export function DonutChart({ data, size = 180, inner = 55, label }: DonutChartPr
               borderRadius: 10, backdropFilter: 'blur(16px)', color: 'rgba(255,255,255,0.9)',
               fontSize: 12,
             }}
+            labelStyle={{ color: 'rgba(255,255,255,0.65)', fontWeight: 600 }}
+            itemStyle={{ color: 'rgba(255,255,255,0.9)' }}
             formatter={(v: number, name: string) => [`${v} (${Math.round(v / total * 100)}%)`, name]}
           />
         </PieChart>

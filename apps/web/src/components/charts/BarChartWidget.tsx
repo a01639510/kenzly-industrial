@@ -34,6 +34,8 @@ export function BarChartWidget({
             borderRadius: 10, backdropFilter: 'blur(16px)', color: 'rgba(255,255,255,0.9)',
             fontSize: 12, boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
           }}
+          labelStyle={{ color: 'rgba(255,255,255,0.65)', fontWeight: 600 }}
+          itemStyle={{ color: 'rgba(255,255,255,0.9)' }}
         />
         {reference && (
           <ReferenceLine
