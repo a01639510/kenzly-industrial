@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(mkdir -p /Users/mateochavezpinto/Desktop/KENZLY/backly-industrial/apps/web/app/\\\\[slug\\\\]/mantenimiento)",
-      "Bash(cat > *)"
+      "Bash(cat > *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ],
     "additionalDirectories": [
       "/Users/mateochavezpinto/Desktop/KENZLY/backly-industrial/apps/web/app/[slug]",

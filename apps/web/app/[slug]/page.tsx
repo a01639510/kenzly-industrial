@@ -268,13 +268,13 @@ const kanbanGrid: React.CSSProperties = {
 };
 
 const widgetCard: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.06)',
-  backdropFilter: 'blur(24px)',
-  WebkitBackdropFilter: 'blur(24px)',
+  background: 'rgba(14,17,38,0.82)',
+  backdropFilter: 'blur(28px)',
+  WebkitBackdropFilter: 'blur(28px)',
   borderRadius: 20,
-  border: '1px solid rgba(255,255,255,0.09)',
+  border: '1px solid rgba(255,255,255,0.10)',
   padding: 22,
-  boxShadow: '0 8px 32px rgba(0,0,0,0.35)',
+  boxShadow: '0 12px 40px rgba(0,0,0,0.28)',
   transition: 'transform 0.15s, box-shadow 0.15s',
 };
 
