@@ -124,7 +124,7 @@ export default function OEEPage() {
                 { label: 'Meta de producción', value: `${summary.details.target_quantity.toLocaleString()} pzs` },
                 { label: 'Scrap',              value: `${summary.details.scrap_quantity} pzs`, alert: summary.details.scrap_quantity > 0 },
               ].map(item => (
-                <div key={item.label} style={{ background: '#f8fafc', borderRadius: 8, padding: '12px 14px' }}>
+                <div key={item.label} style={{ background: 'rgba(255,255,255,0.5)', borderRadius: 8, padding: '12px 14px' }}>
                   <div style={{ fontSize: 9, fontWeight: 700, color: '#94a3b8', marginBottom: 4 }}>{item.label}</div>
                   <div style={{ fontSize: 16, fontWeight: 900, color: (item as any).alert ? '#ef4444' : '#0f172a' }}>
                     {item.value}
@@ -160,6 +160,7 @@ function EmptyState({ text }: { text: string }) {
 }
 
 const card: React.CSSProperties = {
-  background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0',
-  padding: 20, boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+  background: 'rgba(255,255,255,0.88)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
+  borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)',
+  padding: 20, boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
 };

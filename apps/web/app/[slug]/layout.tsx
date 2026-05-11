@@ -131,7 +131,8 @@ export default function TenantLayout({ children }: { children: React.ReactNode }
 const loadingWrap: React.CSSProperties = {
   minHeight: '100vh', display: 'flex', flexDirection: 'column',
   alignItems: 'center', justifyContent: 'center',
-  background: '#f8fafc', fontFamily: 'system-ui, sans-serif',
+  background: 'transparent', fontFamily: 'system-ui, sans-serif',
+  color: '#f8fafc',
 };
 
 const topBarStyle: React.CSSProperties = {

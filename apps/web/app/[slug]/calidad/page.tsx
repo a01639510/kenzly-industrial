@@ -139,13 +139,14 @@ const catBadge = (color: string): React.CSSProperties => ({
 });
 
 const kpiCard: React.CSSProperties = {
-  background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0',
-  padding: '16px 20px', minWidth: 160,
-  boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+  background: 'rgba(255,255,255,0.88)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
+  borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)',
+  padding: '16px 20px', minWidth: 160, boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
 };
 const tableCard: React.CSSProperties = {
-  background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0',
-  overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+  background: 'rgba(255,255,255,0.88)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
+  borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)',
+  overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
 };
 const tableHeader: React.CSSProperties = {
   padding: '14px 20px', borderBottom: '1px solid #f1f5f9',
@@ -155,8 +156,8 @@ const tableTitle: React.CSSProperties = {
 };
 const th: React.CSSProperties = {
   padding: '9px 16px', textAlign: 'left', fontSize: 9, fontWeight: 800,
-  color: '#94a3b8', letterSpacing: 1.5, background: '#f8fafc',
-  borderBottom: '1px solid #e2e8f0', whiteSpace: 'nowrap',
+  color: '#94a3b8', letterSpacing: 1.5, background: 'rgba(255,255,255,0.4)',
+  borderBottom: '1px solid rgba(255,255,255,0.3)', whiteSpace: 'nowrap',
 };
 const td: React.CSSProperties = {
   padding: '11px 16px', color: '#475569', fontWeight: 600, whiteSpace: 'nowrap',

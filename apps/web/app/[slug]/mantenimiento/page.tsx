@@ -122,7 +122,7 @@ export default function MantenimientoPage() {
             { label: 'COMPLETADAS MES', value: summary.doneMonth, color: '#10b981' },
             { label: 'TOTAL TAREAS',    value: summary.total,     color: '#6366f1' },
           ].map(c => (
-            <div key={c.label} style={{ background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', padding: '14px 18px', flex: 1, minWidth: 130, boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+            <div key={c.label} style={{ background: 'rgba(255,255,255,0.88)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)', padding: '14px 18px', flex: 1, minWidth: 130, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
               <div style={{ fontSize: 24, fontWeight: 900, color: c.color, lineHeight: 1 }}>{c.value}</div>
               <div style={{ fontSize: 8, fontWeight: 800, color: '#94a3b8', letterSpacing: 1.5, marginTop: 6 }}>{c.label}</div>
             </div>
@@ -328,7 +328,7 @@ export default function MantenimientoPage() {
 function Modal({ title, children, onClose }: { title: string; children: React.ReactNode; onClose: () => void }) {
   return (
     <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, backdropFilter: 'blur(4px)' }} onClick={e => e.target === e.currentTarget && onClose()}>
-      <div style={{ background: '#fff', borderRadius: 16, width: '100%', maxWidth: 520, maxHeight: '90vh', overflow: 'auto', boxShadow: '0 20px 60px rgba(0,0,0,0.15)' }}>
+      <div style={{ background: 'rgba(240,249,255,0.95)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', borderRadius: 16, width: '100%', maxWidth: 520, maxHeight: '90vh', overflow: 'auto', border: '1px solid rgba(255,255,255,0.6)', boxShadow: '0 20px 60px rgba(0,0,0,0.3)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '18px 22px', borderBottom: '1px solid #e2e8f0' }}>
           <span style={{ fontSize: 13, fontWeight: 800, color: '#0f172a', letterSpacing: 0.5 }}>{title}</span>
           <button style={{ background: '#f1f5f9', border: 'none', borderRadius: 7, width: 28, height: 28, cursor: 'pointer', fontSize: 12, color: '#64748b' }} onClick={onClose}>✕</button>
@@ -351,11 +351,12 @@ const filterBtn = (active: boolean, primary: string): React.CSSProperties => ({
   color: active ? '#fff' : '#64748b', fontFamily: 'inherit',
 });
 const tableCard: React.CSSProperties = {
-  background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+  background: 'rgba(255,255,255,0.88)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
+  borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)', overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
 };
 const th: React.CSSProperties = {
-  padding: '9px 14px', textAlign: 'left', fontSize: 9, fontWeight: 800, color: '#94a3b8',
-  letterSpacing: 1.5, background: '#f8fafc', borderBottom: '1px solid #e2e8f0', whiteSpace: 'nowrap',
+  padding: '9px 14px', textAlign: 'left', fontSize: 9, fontWeight: 800, color: '#64748b',
+  letterSpacing: 1.5, background: 'rgba(255,255,255,0.4)', borderBottom: '1px solid rgba(255,255,255,0.3)', whiteSpace: 'nowrap',
 };
 const td: React.CSSProperties = { padding: '11px 14px', verticalAlign: 'middle' };
 const assetBadge: React.CSSProperties = {
@@ -366,15 +367,15 @@ const actionBtn = (color: string): React.CSSProperties => ({
   fontSize: 9, fontWeight: 800, color, cursor: 'pointer', letterSpacing: 0.3, fontFamily: 'inherit',
 });
 const fi: React.CSSProperties = {
-  padding: '9px 11px', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 9,
+  padding: '9px 11px', background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: 9,
   fontSize: 12, color: '#0f172a', outline: 'none', fontFamily: 'inherit', width: '100%', boxSizing: 'border-box',
 };
 const mFooter: React.CSSProperties = {
   display: 'flex', justifyContent: 'flex-end', gap: 8, paddingTop: 8,
 };
 const cancelBtn: React.CSSProperties = {
-  padding: '9px 18px', background: '#f1f5f9', border: 'none', borderRadius: 9,
-  fontSize: 11, fontWeight: 800, color: '#64748b', cursor: 'pointer', fontFamily: 'inherit',
+  padding: '9px 18px', background: 'rgba(255,255,255,0.6)', border: '1px solid rgba(255,255,255,0.4)', borderRadius: 9,
+  fontSize: 11, fontWeight: 800, color: '#1e293b', cursor: 'pointer', fontFamily: 'inherit',
 };
 const confirmBtn = (disabled: boolean, color: string): React.CSSProperties => ({
   padding: '9px 18px', background: disabled ? '#bae6fd' : color, border: 'none', borderRadius: 9,

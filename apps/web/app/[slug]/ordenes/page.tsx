@@ -95,10 +95,11 @@ export default function OrdenesPage() {
 
     return (
       <div key={order.id} style={{
-        background: '#fff', borderRadius: compact ? 10 : 12,
+        background: 'rgba(255,255,255,0.88)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
+        borderRadius: compact ? 10 : 12,
         padding: compact ? '12px 14px' : '16px 18px',
-        border: isActive ? `1px solid ${primaryColor}44` : overdue ? '1px solid #fca5a5' : '1px solid #e2e8f0',
-        boxShadow: isActive ? `0 2px 12px ${primaryColor}12` : '0 1px 3px rgba(0,0,0,0.05)',
+        border: isActive ? `1px solid ${primaryColor}60` : overdue ? '1px solid #fca5a5' : '1px solid rgba(255,255,255,0.45)',
+        boxShadow: isActive ? `0 2px 12px ${primaryColor}20` : '0 2px 8px rgba(0,0,0,0.08)',
         opacity: isDone ? 0.75 : 1, marginBottom: 10,
       }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start', marginBottom: 6, flexWrap: 'wrap' }}>
@@ -151,11 +152,11 @@ export default function OrdenesPage() {
     const filtered = statusFilter ? orders.filter(o => o.status === statusFilter) : orders;
     return (
       <>
-        <div style={{ display: 'flex', gap: 6, marginBottom: 20, background: '#f1f5f9', borderRadius: 10, padding: 3, width: 'fit-content' }}>
+        <div style={{ display: 'flex', gap: 6, marginBottom: 20, background: 'rgba(255,255,255,0.35)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', borderRadius: 10, padding: 3, width: 'fit-content' }}>
           {[{ key: null, label: 'TODAS' }, { key: 'EN_PROCESO', label: 'EN PROCESO' }, { key: 'PENDIENTE', label: 'PENDIENTE' }, { key: 'COMPLETADA', label: 'COMPLETADA' }, { key: 'CANCELADA', label: 'CANCELADA' }].map(tab => (
             <button key={String(tab.key)} onClick={() => setStatusFilter(tab.key)}
               style={{ padding: '6px 14px', border: 'none', borderRadius: 8, cursor: 'pointer', fontSize: 10, fontWeight: 800, letterSpacing: 0.5, fontFamily: 'inherit',
-                background: statusFilter === tab.key ? '#fff' : 'transparent',
+                background: statusFilter === tab.key ? 'rgba(255,255,255,0.9)' : 'transparent',
                 color: statusFilter === tab.key ? primaryColor : '#64748b',
                 boxShadow: statusFilter === tab.key ? '0 1px 4px rgba(0,0,0,0.1)' : 'none',
               }}>
@@ -186,7 +187,7 @@ export default function OrdenesPage() {
         {cols.map(col => {
           const colOrders = orders.filter(o => o.status === col.status);
           return (
-            <div key={col.status} style={{ background: '#f8fafc', borderRadius: 12, padding: '12px 10px', border: '1px solid #e2e8f0' }}>
+            <div key={col.status} style={{ background: 'rgba(255,255,255,0.65)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', borderRadius: 12, padding: '12px 10px', border: '1px solid rgba(255,255,255,0.45)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14, paddingBottom: 10, borderBottom: `2px solid ${col.color}22` }}>
                 <div style={{ width: 8, height: 8, borderRadius: '50%', background: col.color, boxShadow: `0 0 5px ${col.color}` }} />
                 <span style={{ fontSize: 10, fontWeight: 800, color: '#0f172a', letterSpacing: 0.8 }}>{col.label}</span>
@@ -226,7 +227,7 @@ export default function OrdenesPage() {
             const isToday   = day.toDateString() === today;
             const dayOrders = ordersForDay(day);
             return (
-              <div key={i} style={{ background: isToday ? `${primaryColor}06` : '#fff', borderRadius: 10, padding: '10px 8px', border: isToday ? `1px solid ${primaryColor}28` : '1px solid #e2e8f0' }}>
+              <div key={i} style={{ background: isToday ? `${primaryColor}18` : 'rgba(255,255,255,0.75)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', borderRadius: 10, padding: '10px 8px', border: isToday ? `1px solid ${primaryColor}50` : '1px solid rgba(255,255,255,0.45)' }}>
                 <div style={{ textAlign: 'center', marginBottom: 8, paddingBottom: 6, borderBottom: '1px solid #f1f5f9' }}>
                   <div style={{ fontSize: 8, fontWeight: 800, color: isToday ? primaryColor : '#94a3b8', letterSpacing: 1 }}>{dayNames[i]}</div>
                   <div style={{ fontSize: 16, fontWeight: 900, color: isToday ? primaryColor : '#0f172a', lineHeight: 1.2 }}>{day.getDate()}</div>
@@ -245,7 +246,7 @@ export default function OrdenesPage() {
           })}
         </div>
         {unscheduled.length > 0 && (
-          <div style={{ marginTop: 16, background: '#fff', borderRadius: 10, padding: '14px 18px', border: '1px solid #e2e8f0' }}>
+          <div style={{ marginTop: 16, background: 'rgba(255,255,255,0.88)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: 10, padding: '14px 18px', border: '1px solid rgba(255,255,255,0.45)' }}>
             <div style={{ fontSize: 9, fontWeight: 800, color: '#94a3b8', letterSpacing: 1.5, marginBottom: 10 }}>SIN FECHA ({unscheduled.length})</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
               {unscheduled.map(o => (
@@ -280,7 +281,7 @@ export default function OrdenesPage() {
             { label: 'VENCIDAS ACTIVAS', value: String(overdue), color: overdue > 0 ? '#ef4444' : '#10b981', sub: 'Sin completar y expiradas' },
             { label: 'CICLO PROMEDIO', value: `${cycleHrs}h`, color: '#3b82f6', sub: 'Inicio → Completada' },
           ].map(kpi => (
-            <div key={kpi.label} style={{ background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', padding: '16px 18px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+            <div key={kpi.label} style={{ background: 'rgba(255,255,255,0.88)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)', padding: '16px 18px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
               <div style={{ fontSize: 8, fontWeight: 800, color: '#94a3b8', letterSpacing: 1.5, marginBottom: 8 }}>{kpi.label}</div>
               <div style={{ fontSize: 32, fontWeight: 900, color: kpi.color, lineHeight: 1, marginBottom: 4 }}>{kpi.value}</div>
               <div style={{ fontSize: 10, color: '#94a3b8', fontWeight: 600 }}>{kpi.sub}</div>
@@ -288,7 +289,7 @@ export default function OrdenesPage() {
           ))}
         </div>
         {otdPct != null && (
-          <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', padding: '18px 20px', marginBottom: 14, boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+          <div style={{ background: 'rgba(255,255,255,0.88)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)', padding: '18px 20px', marginBottom: 14, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
             <div style={{ fontSize: 9, fontWeight: 800, color: '#94a3b8', letterSpacing: 1.5, marginBottom: 10 }}>DESGLOSE 30 DÍAS</div>
             <div style={{ display: 'flex', height: 22, borderRadius: 8, overflow: 'hidden', gap: 2 }}>
               {onTime > 0  && <div style={{ flex: onTime, background: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 900, color: '#fff' }}>{onTime}</div>}
@@ -305,7 +306,7 @@ export default function OrdenesPage() {
           </div>
         )}
         {compliance.trend?.length > 0 && (
-          <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', padding: '18px 20px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+          <div style={{ background: 'rgba(255,255,255,0.88)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)', padding: '18px 20px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
             <div style={{ fontSize: 9, fontWeight: 800, color: '#94a3b8', letterSpacing: 1.5, marginBottom: 12 }}>CUMPLIMIENTO SEMANAL</div>
             <div style={{ display: 'flex', gap: 12, alignItems: 'flex-end', height: 80 }}>
               {compliance.trend.map((w: any) => {
@@ -335,11 +336,11 @@ export default function OrdenesPage() {
     <div style={{ padding: 24 }}>
       {/* View tabs + action */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, gap: 12, flexWrap: 'wrap' }}>
-        <div style={{ display: 'flex', background: '#f1f5f9', borderRadius: 10, padding: 3, gap: 2 }}>
+        <div style={{ display: 'flex', background: 'rgba(255,255,255,0.35)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', borderRadius: 10, padding: 3, gap: 2 }}>
           {(['lista', 'kanban', 'semana', 'metricas'] as ViewMode[]).map(v => (
             <button key={v} onClick={() => setView(v)}
               style={{ padding: '6px 14px', border: 'none', borderRadius: 8, cursor: 'pointer', fontSize: 10, fontWeight: 800, letterSpacing: 0.5, fontFamily: 'inherit', transition: 'all 0.15s',
-                background: view === v ? '#fff' : 'transparent',
+                background: view === v ? 'rgba(255,255,255,0.9)' : 'transparent',
                 color: view === v ? primaryColor : '#64748b',
                 boxShadow: view === v ? '0 1px 4px rgba(0,0,0,0.1)' : 'none',
               }}>
@@ -419,12 +420,12 @@ const ab = (color: string): React.CSSProperties => ({
   fontSize: 9, fontWeight: 800, color, background: `${color}10`, letterSpacing: 0.5, whiteSpace: 'nowrap', fontFamily: 'inherit',
 });
 const navBtn: React.CSSProperties = {
-  padding: '6px 14px', border: '1px solid #e2e8f0', borderRadius: 9,
-  cursor: 'pointer', fontSize: 10, fontWeight: 700, color: '#64748b', background: '#fff', fontFamily: 'inherit',
+  padding: '6px 14px', border: '1px solid rgba(255,255,255,0.5)', borderRadius: 9,
+  cursor: 'pointer', fontSize: 10, fontWeight: 700, color: '#1e293b', background: 'rgba(255,255,255,0.7)', fontFamily: 'inherit',
 };
 function EmptyCard({ text }: { text: string }) {
   return (
-    <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', padding: 48, textAlign: 'center', color: '#94a3b8', fontSize: 12, fontWeight: 700 }}>
+    <div style={{ background: 'rgba(255,255,255,0.88)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)', padding: 48, textAlign: 'center', color: '#475569', fontSize: 12, fontWeight: 700 }}>
       {text}
     </div>
   );
