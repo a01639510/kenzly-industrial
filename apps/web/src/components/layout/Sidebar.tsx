@@ -2,15 +2,19 @@ import { useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  LayoutDashboard, Wrench, FileText, Bell, ChevronRight, ChevronLeft, LogOut, User, Users,
+  LayoutDashboard, Wrench, FileText, Bell, ChevronRight, ChevronLeft,
+  LogOut, User, Users, Zap, Sliders, Monitor,
 } from 'lucide-react'
 import { COMPANY_CONFIG } from '@/config/company'
 import { useAlertStore } from '@/store/useAlertStore'
+import { useKioskStore } from '@/store/useKioskStore'
 
 const NAV = [
   { to: '/',            icon: LayoutDashboard, label: 'Dashboard'    },
   { to: '/maintenance', icon: Wrench,           label: 'Mantenimiento' },
   { to: '/workforce',   icon: Users,            label: 'Operadores'   },
+  { to: '/energy',      icon: Zap,              label: 'Energía'      },
+  { to: '/whatif',      icon: Sliders,          label: 'Simulador'    },
   { to: '/reports',     icon: FileText,         label: 'Reportes'     },
   { to: '/alerts',      icon: Bell,             label: 'Alertas'      },
 ]
@@ -19,10 +23,11 @@ export function Sidebar() {
   const [collapsed, setCollapsed] = useState(true)
   const location  = useLocation()
   const active    = useAlertStore(s => s.alerts.filter(a => !a.acknowledged).length)
+  const kiosk     = useKioskStore(s => s.enter)
 
   return (
     <motion.aside
-      animate={{ width: collapsed ? 60 : 220 }}
+      animate={{ width: collapsed ? 60 : 224 }}
       transition={{ type: 'spring', stiffness: 260, damping: 26 }}
       style={{
         height: '100vh', flexShrink: 0, display: 'flex', flexDirection: 'column',
@@ -85,8 +90,8 @@ export function Sidebar() {
               <div style={{
                 display: 'flex', alignItems: 'center', gap: 10,
                 padding: '9px 10px', borderRadius: 10,
-                background: isActive ? 'rgba(14,165,233,0.15)' : 'transparent',
-                border: `1px solid ${isActive ? 'rgba(14,165,233,0.25)' : 'transparent'}`,
+                background: isActive ? 'rgba(26,109,255,0.15)' : 'transparent',
+                border: `1px solid ${isActive ? 'rgba(26,109,255,0.25)' : 'transparent'}`,
                 color: isActive ? 'var(--primary)' : 'var(--text-secondary)',
                 transition: 'all 0.15s', cursor: 'pointer', position: 'relative',
                 justifyContent: collapsed ? 'center' : 'flex-start',
@@ -124,8 +129,37 @@ export function Sidebar() {
         })}
       </nav>
 
-      {/* User */}
-      <div style={{ padding: '10px 6px', borderTop: '1px solid rgba(255,255,255,0.06)', flexShrink: 0 }}>
+      {/* Bottom: Kiosk button + User */}
+      <div style={{ padding: '10px 6px', borderTop: '1px solid rgba(255,255,255,0.06)', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 4 }}>
+        {/* Kiosk button */}
+        <button
+          onClick={kiosk}
+          style={{
+            display: 'flex', alignItems: 'center', gap: 10,
+            padding: '8px 10px', borderRadius: 10, cursor: 'pointer',
+            background: 'rgba(26,109,255,0.10)', border: '1px solid rgba(26,109,255,0.22)',
+            color: 'var(--primary)', transition: 'all 0.15s', width: '100%',
+            justifyContent: collapsed ? 'center' : 'flex-start',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(26,109,255,0.20)' }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'rgba(26,109,255,0.10)' }}
+          title="Modo Quiosco"
+        >
+          <Monitor size={16} style={{ flexShrink: 0 }} />
+          <AnimatePresence>
+            {!collapsed && (
+              <motion.span
+                initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -8 }}
+                style={{ fontSize: 11, fontWeight: 700, whiteSpace: 'nowrap' }}
+              >
+                Modo Quiosco
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </button>
+
+        {/* User */}
         <div style={{
           display: 'flex', alignItems: 'center', gap: 10,
           padding: '8px 10px', borderRadius: 10,

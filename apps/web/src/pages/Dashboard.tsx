@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Activity, Zap, Package, AlertTriangle, Thermometer, X, TrendingDown } from 'lucide-react'
+import { Activity, Zap, Package, AlertTriangle, Thermometer, X, TrendingDown, QrCode } from 'lucide-react'
+import { QRCodeSVG } from 'qrcode.react'
 import { PageWrapper } from '@/components/layout/PageWrapper'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { KPITile } from '@/components/ui/KPITile'
@@ -173,6 +175,27 @@ function MachinePanel({ machineId, onClose }: { machineId: string; onClose: () =
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 800, color: 'var(--text-primary)' }}>{value}</div>
             </div>
           ))}
+        </div>
+
+        {/* QR Code */}
+        <div style={{ padding: '14px', borderRadius: 12, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
+            <QrCode size={11} color="var(--text-muted)" />
+            <span style={{ fontSize: 9, fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '1px', textTransform: 'uppercase' }}>Acceso Móvil</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+            <div style={{ padding: 6, background: '#fff', borderRadius: 8, flexShrink: 0 }}>
+              <QRCodeSVG value={`${window.location.origin}/?machine=${machineId}`} size={80} level="M" />
+            </div>
+            <div>
+              <div style={{ fontSize: 11, color: 'var(--text-secondary)', fontWeight: 600, lineHeight: 1.5, marginBottom: 6 }}>
+                Escanea para abrir el dashboard de esta máquina en tu móvil.
+              </div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--text-muted)', wordBreak: 'break-all' }}>
+                {`?machine=${machineId}`}
+              </div>
+            </div>
+          </div>
         </div>
       </motion.div>
     </>
@@ -357,8 +380,18 @@ function ProductionFlow({ onSelectMachine }: { onSelectMachine: (id: string) => 
 // ── Main Dashboard ────────────────────────────────────────────────────
 export default function Dashboard() {
   const [selectedMachine, setSelectedMachine] = useState<string | null>(null)
+  const [searchParams, setSearchParams] = useSearchParams()
   const kpis    = useLiveKPIs()
   const alerts  = useAlertStore(s => s.alerts.filter(a => !a.acknowledged))
+
+  // Auto-open slide-over if ?machine= is in URL (e.g. from QR scan)
+  useEffect(() => {
+    const machineParam = searchParams.get('machine')
+    if (machineParam && COMPANY_CONFIG.machines.find(m => m.id === machineParam)) {
+      setSelectedMachine(machineParam)
+      setSearchParams({}, { replace: true })  // clean URL after opening
+    }
+  }, [])
 
   const oeeData = [
     { label: 'Disponibilidad', value: kpis.uptime,  color: 'var(--primary)' },
