@@ -9,11 +9,26 @@
       "Bash(pnpm install *)",
       "Bash(curl -s http://localhost:3000)",
       "Bash(pnpm tsc *)",
-      "Bash(pkill -f \"vite\")"
+      "Bash(pkill -f \"vite\")",
+      "Bash(cp /Users/mateochavezpinto/.claude/projects/-Users-mateochavezpinto-Desktop-KENZLY-backly-industrial/memory/*.md ~/Documents/Obsidian/KENZLY-Industrial/Memory/ && echo \"copied\")",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(npx -y @modelcontextprotocol/server-filesystem /Users/mateochavezpinto/Documents/Obsidian/KENZLY-Industrial)",
+      "Bash(ln -s \"/Users/mateochavezpinto/.claude/projects/-Users-mateochavezpinto-Desktop-KENZLY-backly-industrial/memory\" ~/Documents/Obsidian/KENZLY-Industrial/Memory)",
+      "Bash(open ~/Documents/Obsidian/KENZLY-Industrial)",
+      "Bash(npx tsc *)",
+      "Bash(git -C /Users/mateochavezpinto/Desktop/KENZLY/backly-industrial status)",
+      "Bash(git -C /Users/mateochavezpinto/Desktop/KENZLY/backly-industrial diff)",
+      "Bash(git -C /Users/mateochavezpinto/Desktop/KENZLY/backly-industrial log --oneline -3)",
+      "Bash(git -C /Users/mateochavezpinto/Desktop/KENZLY/backly-industrial add apps/web/src/lib/apiClient.ts apps/web/src/store/useAuthStore.ts apps/web/.env.example .claude/settings.json)",
+      "Bash(git -C /Users/mateochavezpinto/Desktop/KENZLY/backly-industrial commit -m ' *)"
     ],
     "additionalDirectories": [
       "/Users/mateochavezpinto/Desktop/KENZLY/backly-industrial/apps/web/app/[slug]",
-      "/tmp"
+      "/tmp",
+      "/Users/mateochavezpinto/.claude/projects/-Users-mateochavezpinto-Desktop-KENZLY-backly-industrial/memory",
+      "/Users/mateochavezpinto/Documents/Obsidian/KENZLY-Industrial",
+      "/Users/mateochavezpinto/.claude"
     ]
   }
 }
