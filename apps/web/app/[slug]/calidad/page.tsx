@@ -54,9 +54,9 @@ export default function CalidadPage() {
                     <Label>{c.label}</Label>
                     <div style={{ fontSize: 36, fontWeight: 900, color: c.color, lineHeight: 1 }}>
                       {Number(c.value).toLocaleString()}
-                      <span style={{ fontSize: 11, fontWeight: 600, color: '#94a3b8', marginLeft: 4 }}>pzs</span>
+                      <span style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.40)', marginLeft: 4 }}>pzs</span>
                     </div>
-                    <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 4 }}>{c.sub}</div>
+                    <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.40)', marginTop: 4 }}>{c.sub}</div>
                   </div>
                 ))}
                 {summary.byCategory.slice(0, 3).map((bc: any) => (
@@ -65,10 +65,10 @@ export default function CalidadPage() {
                       <div style={{ width: 8, height: 8, borderRadius: '50%', background: CAT_COLOR[bc.reason_category] || '#94a3b8' }} />
                       <Label>{bc.reason_category || 'SIN CAT.'}</Label>
                     </div>
-                    <div style={{ fontSize: 32, fontWeight: 900, color: CAT_COLOR[bc.reason_category] || '#94a3b8', lineHeight: 1 }}>
+                    <div style={{ fontSize: 32, fontWeight: 900, color: CAT_COLOR[bc.reason_category] || 'rgba(255,255,255,0.50)', lineHeight: 1 }}>
                       {Number(bc.total).toLocaleString()}
                     </div>
-                    <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 4 }}>pzs esta semana</div>
+                    <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.40)', marginTop: 4 }}>pzs esta semana</div>
                   </div>
                 ))}
               </div>
@@ -97,7 +97,7 @@ export default function CalidadPage() {
                   </thead>
                   <tbody>
                     {records.map(r => (
-                      <tr key={r.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                      <tr key={r.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                         <td style={td}>{fmtDate(r.created_at)}</td>
                         <td style={td}>{r.asset_id || '—'}</td>
                         <td style={{ ...td, maxWidth: 140, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{r.product_name || '—'}</td>
@@ -127,40 +127,40 @@ export default function CalidadPage() {
 }
 
 function Label({ children }: { children: React.ReactNode }) {
-  return <div style={{ fontSize: 8, fontWeight: 800, color: '#94a3b8', letterSpacing: 1.5, marginBottom: 4 }}>{children}</div>;
+  return <div style={{ fontSize: 8, fontWeight: 800, color: 'rgba(255,255,255,0.35)', letterSpacing: 1.5, marginBottom: 4 }}>{children}</div>;
 }
 function EmptyTable({ text }: { text: string }) {
-  return <div style={{ padding: 48, textAlign: 'center', color: '#94a3b8', fontSize: 12, fontWeight: 700 }}>{text}</div>;
+  return <div style={{ padding: 48, textAlign: 'center', color: 'rgba(255,255,255,0.35)', fontSize: 12, fontWeight: 700 }}>{text}</div>;
 }
 
 const catBadge = (color: string): React.CSSProperties => ({
   fontSize: 9, fontWeight: 800, padding: '2px 8px', borderRadius: 6,
-  background: `${color}18`, color,
+  background: `${color}20`, color,
 });
 
 const kpiCard: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.55)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
-  borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)',
-  padding: '16px 20px', minWidth: 160, boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+  background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+  borderRadius: 12, border: '1px solid rgba(255,255,255,0.10)',
+  padding: '16px 20px', minWidth: 160, boxShadow: '0 4px 24px rgba(0,0,0,0.30)',
 };
 const tableCard: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.55)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
-  borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)',
-  overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+  background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+  borderRadius: 12, border: '1px solid rgba(255,255,255,0.10)',
+  overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.30)',
 };
 const tableHeader: React.CSSProperties = {
-  padding: '14px 20px', borderBottom: '1px solid #f1f5f9',
+  padding: '14px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)',
 };
 const tableTitle: React.CSSProperties = {
-  fontSize: 11, fontWeight: 800, color: '#475569', letterSpacing: 1,
+  fontSize: 11, fontWeight: 800, color: 'rgba(255,255,255,0.55)', letterSpacing: 1,
 };
 const th: React.CSSProperties = {
   padding: '9px 16px', textAlign: 'left', fontSize: 9, fontWeight: 800,
-  color: '#94a3b8', letterSpacing: 1.5, background: 'rgba(255,255,255,0.4)',
-  borderBottom: '1px solid rgba(255,255,255,0.3)', whiteSpace: 'nowrap',
+  color: 'rgba(255,255,255,0.35)', letterSpacing: 1.5, background: 'rgba(255,255,255,0.04)',
+  borderBottom: '1px solid rgba(255,255,255,0.08)', whiteSpace: 'nowrap',
 };
 const td: React.CSSProperties = {
-  padding: '11px 16px', color: '#475569', fontWeight: 600, whiteSpace: 'nowrap',
+  padding: '11px 16px', color: 'rgba(255,255,255,0.68)', fontWeight: 600, whiteSpace: 'nowrap',
 };
 const actionBtn: React.CSSProperties = {
   padding: '9px 18px', borderRadius: 9, cursor: 'pointer',

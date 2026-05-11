@@ -63,12 +63,10 @@ function TenantShell({ slug, children }: { slug: string; children: React.ReactNo
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', fontFamily: "'Inter', system-ui, sans-serif",
       background: [
-        'radial-gradient(ellipse at 8% 8%,   #3a9ab8 0%, transparent 50%)',
-        'radial-gradient(ellipse at 85% 15%,  #4e7a58 0%, transparent 50%)',
-        'radial-gradient(ellipse at 55% 50%,  #1e4d3a 0%, transparent 55%)',
-        'radial-gradient(ellipse at 8% 90%,   #c2b49a 0%, transparent 42%)',
-        'radial-gradient(ellipse at 75% 88%,  #0c1a10 0%, transparent 50%)',
-        '#152a1e',
+        'radial-gradient(ellipse at 12% 12%,  rgba(20,55,90,0.55) 0%, transparent 55%)',
+        'radial-gradient(ellipse at 88% 88%,  rgba(15,50,40,0.45) 0%, transparent 55%)',
+        'radial-gradient(ellipse at 50% 50%,  rgba(10,18,35,0.7)  0%, transparent 70%)',
+        '#0d1117',
       ].join(', '),
     }}>
       <Sidebar />
@@ -140,16 +138,16 @@ export default function TenantLayout({ children }: { children: React.ReactNode }
 const loadingWrap: React.CSSProperties = {
   minHeight: '100vh', display: 'flex', flexDirection: 'column',
   alignItems: 'center', justifyContent: 'center',
-  background: 'transparent', fontFamily: 'system-ui, sans-serif',
+  background: '#0d1117', fontFamily: 'system-ui, sans-serif',
   color: '#f8fafc',
 };
 
 const topBarStyle: React.CSSProperties = {
   height: 56,
-  background: 'rgba(255,255,255,0.55)',
-  backdropFilter: 'blur(16px)',
-  WebkitBackdropFilter: 'blur(16px)',
-  borderBottom: '1px solid rgba(255,255,255,0.3)',
+  background: 'rgba(13,17,23,0.82)',
+  backdropFilter: 'blur(20px)',
+  WebkitBackdropFilter: 'blur(20px)',
+  borderBottom: '1px solid rgba(255,255,255,0.08)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -162,14 +160,14 @@ const pageTitleStyle: React.CSSProperties = {
   margin: 0,
   fontSize: 15,
   fontWeight: 700,
-  color: '#0f172a',
+  color: '#f1f5f9',
   letterSpacing: -0.2,
 };
 
 const clockStyle: React.CSSProperties = {
   fontSize: 13,
   fontWeight: 700,
-  color: '#64748b',
+  color: 'rgba(255,255,255,0.40)',
   fontVariantNumeric: 'tabular-nums',
   letterSpacing: 0.5,
   minWidth: 70,
@@ -178,10 +176,10 @@ const clockStyle: React.CSSProperties = {
 
 const actionBtnStyle = (color: string, active = false): React.CSSProperties => ({
   padding: '6px 12px',
-  border: `1px solid ${active ? color + '44' : '#e2e8f0'}`,
+  border: `1px solid ${active ? color + '50' : 'rgba(255,255,255,0.12)'}`,
   borderRadius: 8,
-  background: active ? color + '10' : '#fff',
-  color: active ? color : '#64748b',
+  background: active ? color + '18' : 'rgba(255,255,255,0.07)',
+  color: active ? color : 'rgba(255,255,255,0.50)',
   cursor: 'pointer',
   fontSize: 10,
   fontWeight: 800,

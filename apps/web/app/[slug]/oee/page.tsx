@@ -54,7 +54,7 @@ export default function OEEPage() {
               <div style={{ fontSize: 48, fontWeight: 900, color: oeeColor(summary.oee), lineHeight: 1, marginBottom: 6 }}>
                 {summary.oee}%
               </div>
-              <div style={{ fontSize: 10, color: '#64748b' }}>
+              <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)' }}>
                 {summary.oee >= 85 ? '✓ Clase mundial' : summary.oee >= 65 ? '~ Promedio industria' : '⚠ Requiere atención'}
               </div>
               <ProgressBar value={summary.oee} color={oeeColor(summary.oee)} />
@@ -71,7 +71,7 @@ export default function OEEPage() {
                 <div style={{ fontSize: 40, fontWeight: 900, color: oeeColor(comp.value), lineHeight: 1, marginBottom: 6 }}>
                   {comp.value}%
                 </div>
-                <div style={{ fontSize: 10, color: '#94a3b8', fontWeight: 600 }}>{comp.desc}</div>
+                <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.40)', fontWeight: 600 }}>{comp.desc}</div>
                 <ProgressBar value={comp.value} color={oeeColor(comp.value)} />
               </div>
             ))}
@@ -87,12 +87,12 @@ export default function OEEPage() {
                     data={history.map(h => ({ ...h, date: fmtDate(h.date) }))}
                     margin={{ top: 5, right: 10, left: -20, bottom: 0 }}
                   >
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                    <XAxis dataKey="date" tick={{ fontSize: 9, fill: '#94a3b8', fontWeight: 700 }} axisLine={false} tickLine={false} />
-                    <YAxis domain={[0, 100]} tick={{ fontSize: 9, fill: '#94a3b8' }} axisLine={false} tickLine={false} />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.07)" />
+                    <XAxis dataKey="date" tick={{ fontSize: 9, fill: 'rgba(255,255,255,0.35)', fontWeight: 700 }} axisLine={false} tickLine={false} />
+                    <YAxis domain={[0, 100]} tick={{ fontSize: 9, fill: 'rgba(255,255,255,0.35)' }} axisLine={false} tickLine={false} />
                     <Tooltip
                       formatter={(v: any) => `${v}%`}
-                      contentStyle={{ borderRadius: 10, border: '1px solid #e2e8f0', boxShadow: '0 4px 16px rgba(0,0,0,0.08)', fontSize: 11 }}
+                      contentStyle={{ borderRadius: 10, border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(13,17,23,0.92)', boxShadow: '0 4px 16px rgba(0,0,0,0.4)', fontSize: 11, color: '#f1f5f9' }}
                     />
                     <ReferenceLine y={85} stroke="#10b981" strokeDasharray="4 4"
                       label={{ value: 'Clase mundial', fill: '#10b981', fontSize: 9 }} />
@@ -104,7 +104,7 @@ export default function OEEPage() {
                 </ResponsiveContainer>
                 <div style={{ display: 'flex', gap: 20, marginTop: 12, justifyContent: 'center' }}>
                   {[{ c: primaryColor, l: 'OEE' }, { c: '#3b82f6', l: 'Disponibilidad' }, { c: '#f59e0b', l: 'Rendimiento' }, { c: '#10b981', l: 'Calidad' }].map(({ c, l }) => (
-                    <div key={l} style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 10, fontWeight: 700, color: '#64748b' }}>
+                    <div key={l} style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.45)' }}>
                       <div style={{ width: 12, height: 2, background: c, borderRadius: 2 }} />{l}
                     </div>
                   ))}
@@ -124,9 +124,9 @@ export default function OEEPage() {
                 { label: 'Meta de producción', value: `${summary.details.target_quantity.toLocaleString()} pzs` },
                 { label: 'Scrap',              value: `${summary.details.scrap_quantity} pzs`, alert: summary.details.scrap_quantity > 0 },
               ].map(item => (
-                <div key={item.label} style={{ background: 'rgba(255,255,255,0.5)', borderRadius: 8, padding: '12px 14px' }}>
-                  <div style={{ fontSize: 9, fontWeight: 700, color: '#94a3b8', marginBottom: 4 }}>{item.label}</div>
-                  <div style={{ fontSize: 16, fontWeight: 900, color: (item as any).alert ? '#ef4444' : '#0f172a' }}>
+                <div key={item.label} style={{ background: 'rgba(255,255,255,0.06)', borderRadius: 8, padding: '12px 14px' }}>
+                  <div style={{ fontSize: 9, fontWeight: 700, color: 'rgba(255,255,255,0.35)', marginBottom: 4 }}>{item.label}</div>
+                  <div style={{ fontSize: 16, fontWeight: 900, color: (item as any).alert ? '#ef4444' : '#f1f5f9' }}>
                     {item.value}
                   </div>
                 </div>
@@ -140,12 +140,12 @@ export default function OEEPage() {
 }
 
 function Label({ children }: { children: React.ReactNode }) {
-  return <div style={{ fontSize: 9, fontWeight: 800, color: '#94a3b8', letterSpacing: 1.5, marginBottom: 8 }}>{children}</div>;
+  return <div style={{ fontSize: 9, fontWeight: 800, color: 'rgba(255,255,255,0.38)', letterSpacing: 1.5, marginBottom: 8 }}>{children}</div>;
 }
 
 function ProgressBar({ value, color }: { value: number; color: string }) {
   return (
-    <div style={{ marginTop: 12, height: 5, background: '#f1f5f9', borderRadius: 4, overflow: 'hidden' }}>
+    <div style={{ marginTop: 12, height: 5, background: 'rgba(255,255,255,0.10)', borderRadius: 4, overflow: 'hidden' }}>
       <div style={{ height: '100%', width: `${value}%`, background: color, borderRadius: 4 }} />
     </div>
   );
@@ -153,14 +153,14 @@ function ProgressBar({ value, color }: { value: number; color: string }) {
 
 function EmptyState({ text }: { text: string }) {
   return (
-    <div style={{ ...card, padding: 48, textAlign: 'center', color: '#94a3b8', fontSize: 13, fontWeight: 700 }}>
+    <div style={{ ...card, padding: 48, textAlign: 'center', color: 'rgba(255,255,255,0.35)', fontSize: 13, fontWeight: 700 }}>
       {text}
     </div>
   );
 }
 
 const card: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.55)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
-  borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)',
-  padding: 20, boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+  background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+  borderRadius: 12, border: '1px solid rgba(255,255,255,0.10)',
+  padding: 20, boxShadow: '0 4px 24px rgba(0,0,0,0.30)',
 };

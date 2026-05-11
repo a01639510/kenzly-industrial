@@ -207,9 +207,9 @@ export default function DashboardPage() {
 // ── Styles ───────────────────────────────────────────────────────────────────
 
 const offlineBanner: React.CSSProperties = {
-  background: '#fef3c7', color: '#92400e', borderRadius: 10,
+  background: 'rgba(251,191,36,0.12)', color: '#fbbf24', borderRadius: 10,
   padding: '8px 16px', fontSize: 11, fontWeight: 700, letterSpacing: 0.5,
-  marginBottom: 16, border: '1px solid #fde68a',
+  marginBottom: 16, border: '1px solid rgba(251,191,36,0.25)',
 };
 
 const controlsBar: React.CSSProperties = {
@@ -218,26 +218,29 @@ const controlsBar: React.CSSProperties = {
 };
 
 const shiftBadge: React.CSSProperties = {
-  fontSize: 9, fontWeight: 800, color: '#475569',
-  background: '#f1f5f9', padding: '4px 10px', borderRadius: 20, letterSpacing: 1,
+  fontSize: 9, fontWeight: 800, color: 'rgba(255,255,255,0.50)',
+  background: 'rgba(255,255,255,0.08)', padding: '4px 10px', borderRadius: 20, letterSpacing: 1,
+  border: '1px solid rgba(255,255,255,0.12)',
 };
 
 const alertBadge: React.CSSProperties = {
-  fontSize: 9, fontWeight: 800, color: '#92400e',
-  background: '#fef3c7', padding: '4px 10px', borderRadius: 20, letterSpacing: 1,
+  fontSize: 9, fontWeight: 800, color: '#fbbf24',
+  background: 'rgba(251,191,36,0.12)', padding: '4px 10px', borderRadius: 20, letterSpacing: 1,
+  border: '1px solid rgba(251,191,36,0.20)',
 };
 
 const viewToggle: React.CSSProperties = {
-  display: 'flex', background: '#f1f5f9',
+  display: 'flex', background: 'rgba(255,255,255,0.07)',
   borderRadius: 9, padding: 3, gap: 2,
+  border: '1px solid rgba(255,255,255,0.10)',
 };
 
 const viewBtn = (active: boolean, primary: string): React.CSSProperties => ({
   padding: '5px 12px', border: 'none', borderRadius: 7, cursor: 'pointer',
   fontSize: 9, fontWeight: 800, letterSpacing: 0.5, transition: 'all 0.15s',
-  background: active ? '#fff' : 'transparent',
-  color: active ? primary : '#94a3b8',
-  boxShadow: active ? '0 1px 4px rgba(0,0,0,0.1)' : 'none',
+  background: active ? 'rgba(255,255,255,0.14)' : 'transparent',
+  color: active ? primary : 'rgba(255,255,255,0.40)',
+  boxShadow: active ? '0 1px 4px rgba(0,0,0,0.25)' : 'none',
   fontFamily: 'inherit',
 });
 
@@ -246,12 +249,12 @@ const sectionHeader: React.CSSProperties = {
 };
 
 const sectionTitle: React.CSSProperties = {
-  margin: 0, fontSize: 11, fontWeight: 800, color: '#94a3b8',
+  margin: 0, fontSize: 11, fontWeight: 800, color: 'rgba(255,255,255,0.28)',
   letterSpacing: 2, whiteSpace: 'nowrap',
 };
 
 const sectionLine: React.CSSProperties = {
-  flex: 1, height: 1, background: '#e2e8f0',
+  flex: 1, height: 1, background: 'rgba(255,255,255,0.07)',
 };
 
 const widgetGrid: React.CSSProperties = {
@@ -265,17 +268,17 @@ const kanbanGrid: React.CSSProperties = {
 };
 
 const widgetCard: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.55)',
-  backdropFilter: 'blur(12px)',
-  WebkitBackdropFilter: 'blur(12px)',
+  background: 'rgba(255,255,255,0.07)',
+  backdropFilter: 'blur(20px)',
+  WebkitBackdropFilter: 'blur(20px)',
   borderRadius: 12,
-  border: '1px solid rgba(255,255,255,0.6)',
+  border: '1px solid rgba(255,255,255,0.10)',
   padding: 20,
-  boxShadow: '0 2px 12px rgba(0,0,0,0.1)',
+  boxShadow: '0 4px 24px rgba(0,0,0,0.30)',
   transition: 'transform 0.15s, box-shadow 0.15s',
 };
 
 const alertCard: React.CSSProperties = {
-  border: '1px solid #fca5a5',
+  border: '1px solid rgba(239,68,68,0.45)',
   boxShadow: '0 0 0 3px rgba(239,68,68,0.08)',
 };

@@ -82,13 +82,13 @@ export default function ParosPage() {
 
           {/* Events table */}
           <div style={tableCard}>
-            <div style={{ padding: '14px 20px', borderBottom: '1px solid #f1f5f9' }}>
-              <span style={{ fontSize: 11, fontWeight: 800, color: '#475569', letterSpacing: 1 }}>
+            <div style={{ padding: '14px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+              <span style={{ fontSize: 11, fontWeight: 800, color: 'rgba(255,255,255,0.55)', letterSpacing: 1 }}>
                 HISTORIAL DE PAROS ({events.length})
               </span>
             </div>
             {events.length === 0 ? (
-              <div style={{ padding: 48, textAlign: 'center', color: '#94a3b8', fontSize: 12, fontWeight: 700 }}>
+              <div style={{ padding: 48, textAlign: 'center', color: 'rgba(255,255,255,0.35)', fontSize: 12, fontWeight: 700 }}>
                 Sin paros registrados
               </div>
             ) : (
@@ -103,7 +103,7 @@ export default function ParosPage() {
                   </thead>
                   <tbody>
                     {events.map(ev => (
-                      <tr key={ev.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                      <tr key={ev.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                         <td style={td}>{fmtDate(ev.started_at)}</td>
                         <td style={td}>{ev.asset_id || '—'}</td>
                         <td style={td}>{ev.area_id || '—'}</td>
@@ -117,7 +117,7 @@ export default function ParosPage() {
                         <td style={{ ...td, maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                           {ev.cause_label || ev.cause_description || '—'}
                         </td>
-                        <td style={{ ...td, fontWeight: 800, color: Number(ev.duration_minutes) > 30 ? '#ef4444' : '#1e293b' }}>
+                        <td style={{ ...td, fontWeight: 800, color: Number(ev.duration_minutes) > 30 ? '#ef4444' : '#f1f5f9' }}>
                           {fmtDur(ev.duration_minutes)}
                         </td>
                         <td style={td}>{ev.responsible || '—'}</td>
@@ -136,28 +136,28 @@ export default function ParosPage() {
 
 function KpiCard({ label, value, sub, color }: { label: string; value: string; sub: string; color: string }) {
   return (
-    <div style={{ background: 'rgba(255,255,255,0.55)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)', padding: '16px 20px', minWidth: 160, boxShadow: '0 2px 12px rgba(0,0,0,0.08)' }}>
-      <div style={{ fontSize: 8, fontWeight: 800, color: '#94a3b8', letterSpacing: 1.5, marginBottom: 8 }}>{label}</div>
+    <div style={{ background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.10)', padding: '16px 20px', minWidth: 160, boxShadow: '0 4px 24px rgba(0,0,0,0.30)' }}>
+      <div style={{ fontSize: 8, fontWeight: 800, color: 'rgba(255,255,255,0.35)', letterSpacing: 1.5, marginBottom: 8 }}>{label}</div>
       <div style={{ fontSize: 36, fontWeight: 900, color, lineHeight: 1, marginBottom: 4 }}>{value}</div>
-      <div style={{ fontSize: 10, fontWeight: 600, color: '#94a3b8' }}>{sub}</div>
+      <div style={{ fontSize: 10, fontWeight: 600, color: 'rgba(255,255,255,0.40)' }}>{sub}</div>
     </div>
   );
 }
 
 const catBadge = (color: string): React.CSSProperties => ({
   fontSize: 9, fontWeight: 800, padding: '2px 8px', borderRadius: 6,
-  background: `${color}18`, color,
+  background: `${color}20`, color,
 });
 const tableCard: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.55)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
-  borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)',
-  overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+  background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+  borderRadius: 12, border: '1px solid rgba(255,255,255,0.10)',
+  overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.30)',
 };
 const th: React.CSSProperties = {
   padding: '9px 16px', textAlign: 'left', fontSize: 9, fontWeight: 800,
-  color: '#64748b', letterSpacing: 1.5, background: 'rgba(255,255,255,0.4)',
-  borderBottom: '1px solid rgba(255,255,255,0.3)', whiteSpace: 'nowrap',
+  color: 'rgba(255,255,255,0.35)', letterSpacing: 1.5, background: 'rgba(255,255,255,0.04)',
+  borderBottom: '1px solid rgba(255,255,255,0.08)', whiteSpace: 'nowrap',
 };
 const td: React.CSSProperties = {
-  padding: '12px 16px', color: '#475569', fontWeight: 600, whiteSpace: 'nowrap',
+  padding: '12px 16px', color: 'rgba(255,255,255,0.68)', fontWeight: 600, whiteSpace: 'nowrap',
 };

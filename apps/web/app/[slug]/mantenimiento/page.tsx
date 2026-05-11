@@ -122,9 +122,9 @@ export default function MantenimientoPage() {
             { label: 'COMPLETADAS MES', value: summary.doneMonth, color: '#10b981' },
             { label: 'TOTAL TAREAS',    value: summary.total,     color: '#6366f1' },
           ].map(c => (
-            <div key={c.label} style={{ background: 'rgba(255,255,255,0.55)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)', padding: '14px 18px', flex: 1, minWidth: 130, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
+            <div key={c.label} style={{ background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.10)', padding: '14px 18px', flex: 1, minWidth: 130, boxShadow: '0 4px 24px rgba(0,0,0,0.30)' }}>
               <div style={{ fontSize: 24, fontWeight: 900, color: c.color, lineHeight: 1 }}>{c.value}</div>
-              <div style={{ fontSize: 8, fontWeight: 800, color: '#94a3b8', letterSpacing: 1.5, marginTop: 6 }}>{c.label}</div>
+              <div style={{ fontSize: 8, fontWeight: 800, color: 'rgba(255,255,255,0.35)', letterSpacing: 1.5, marginTop: 6 }}>{c.label}</div>
             </div>
           ))}
         </div>
@@ -147,11 +147,11 @@ export default function MantenimientoPage() {
       {/* Plans table */}
       <div style={tableCard}>
         {loading ? (
-          <div style={{ padding: 32, textAlign: 'center', color: '#94a3b8', fontSize: 12 }}>Cargando...</div>
+          <div style={{ padding: 32, textAlign: 'center', color: 'rgba(255,255,255,0.35)', fontSize: 12 }}>Cargando...</div>
         ) : plans.length === 0 ? (
           <div style={{ padding: 48, textAlign: 'center' }}>
             <div style={{ fontSize: 28, marginBottom: 10 }}>🔧</div>
-            <p style={{ color: '#94a3b8', fontSize: 12, fontWeight: 700, letterSpacing: 1 }}>SIN TAREAS DE MANTENIMIENTO</p>
+            <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12, fontWeight: 700, letterSpacing: 1 }}>SIN TAREAS DE MANTENIMIENTO</p>
             <button style={{ padding: '9px 18px', background: primaryColor, color: '#fff', border: 'none', borderRadius: 9, cursor: 'pointer', fontSize: 10, fontWeight: 900 }} onClick={openNew}>+ AGREGAR</button>
           </div>
         ) : (
@@ -168,23 +168,23 @@ export default function MantenimientoPage() {
                 const st   = ST[plan.status] ?? ST.PENDIENTE;
                 const days = daysUntil(plan.next_due_at);
                 return (
-                  <tr key={plan.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                  <tr key={plan.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                     <td style={td}><span style={assetBadge}>{plan.asset_id}</span></td>
                     <td style={td}>
-                      <div style={{ fontWeight: 700, color: '#0f172a', fontSize: 12 }}>{plan.name}</div>
-                      {plan.responsible && <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 2 }}>👤 {plan.responsible}</div>}
+                      <div style={{ fontWeight: 700, color: '#f1f5f9', fontSize: 12 }}>{plan.name}</div>
+                      {plan.responsible && <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.40)', marginTop: 2 }}>👤 {plan.responsible}</div>}
                     </td>
                     <td style={td}>
-                      <div style={{ fontSize: 11, fontWeight: 700, color: '#475569' }}>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.68)' }}>
                         {FREQ_OPTS.find(f => f.days === plan.frequency_days)?.label ?? `${plan.frequency_days}d`}
                       </div>
-                      <div style={{ fontSize: 10, color: '#94a3b8' }}>~{plan.estimated_duration_min} min</div>
+                      <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.40)' }}>~{plan.estimated_duration_min} min</div>
                     </td>
-                    <td style={{ ...td, fontSize: 11, color: '#475569' }}>{fmtDate(plan.last_done_at)}</td>
+                    <td style={{ ...td, fontSize: 11, color: 'rgba(255,255,255,0.60)' }}>{fmtDate(plan.last_done_at)}</td>
                     <td style={td}>
-                      <div style={{ fontSize: 11, color: plan.status === 'VENCIDO' ? '#ef4444' : '#475569', fontWeight: plan.status === 'VENCIDO' ? 700 : 400 }}>{fmtDate(plan.next_due_at)}</div>
+                      <div style={{ fontSize: 11, color: plan.status === 'VENCIDO' ? '#ef4444' : 'rgba(255,255,255,0.60)', fontWeight: plan.status === 'VENCIDO' ? 700 : 400 }}>{fmtDate(plan.next_due_at)}</div>
                       {days !== null && (
-                        <div style={{ fontSize: 10, color: days < 0 ? '#ef4444' : days <= 7 ? '#f59e0b' : '#94a3b8' }}>
+                        <div style={{ fontSize: 10, color: days < 0 ? '#ef4444' : days <= 7 ? '#f59e0b' : 'rgba(255,255,255,0.35)' }}>
                           {days < 0 ? `hace ${Math.abs(days)}d` : days === 0 ? 'hoy' : `en ${days}d`}
                         </div>
                       )}
@@ -212,7 +212,7 @@ export default function MantenimientoPage() {
       {/* History */}
       {history.length > 0 && (
         <div style={{ ...tableCard, marginTop: 16 }}>
-          <div style={{ padding: '12px 18px', borderBottom: '1px solid #f1f5f9', fontSize: 11, fontWeight: 800, color: '#475569', letterSpacing: 1 }}>
+          <div style={{ padding: '12px 18px', borderBottom: '1px solid rgba(255,255,255,0.08)', fontSize: 11, fontWeight: 800, color: 'rgba(255,255,255,0.55)', letterSpacing: 1 }}>
             HISTORIAL RECIENTE
           </div>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -221,13 +221,13 @@ export default function MantenimientoPage() {
             </thead>
             <tbody>
               {history.map(rec => (
-                <tr key={rec.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
-                  <td style={{ ...td, fontSize: 11 }}>{fmtDate(rec.done_at)}</td>
+                <tr key={rec.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                  <td style={{ ...td, fontSize: 11, color: 'rgba(255,255,255,0.60)' }}>{fmtDate(rec.done_at)}</td>
                   <td style={td}><span style={assetBadge}>{rec.asset_id}</span></td>
-                  <td style={{ ...td, fontWeight: 700, fontSize: 12, color: '#0f172a' }}>{rec.plan_name || '—'}</td>
-                  <td style={{ ...td, fontSize: 11 }}>{rec.done_by || '—'}</td>
-                  <td style={{ ...td, fontSize: 11 }}>{rec.duration_min ? `${rec.duration_min} min` : '—'}</td>
-                  <td style={{ ...td, fontSize: 11, maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{rec.notes || '—'}</td>
+                  <td style={{ ...td, fontWeight: 700, fontSize: 12, color: '#f1f5f9' }}>{rec.plan_name || '—'}</td>
+                  <td style={{ ...td, fontSize: 11, color: 'rgba(255,255,255,0.60)' }}>{rec.done_by || '—'}</td>
+                  <td style={{ ...td, fontSize: 11, color: 'rgba(255,255,255,0.60)' }}>{rec.duration_min ? `${rec.duration_min} min` : '—'}</td>
+                  <td style={{ ...td, fontSize: 11, color: 'rgba(255,255,255,0.60)', maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{rec.notes || '—'}</td>
                 </tr>
               ))}
             </tbody>
@@ -282,9 +282,9 @@ export default function MantenimientoPage() {
       {/* Complete Modal */}
       {completeModal && (
         <Modal onClose={() => setCompleteModal(null)} title="REGISTRAR MANTENIMIENTO">
-          <div style={{ padding: '12px 14px', background: 'rgba(16,185,129,0.06)', borderRadius: 9, marginBottom: 14, border: '1px solid rgba(16,185,129,0.15)' }}>
-            <div style={{ fontWeight: 700, color: '#0f172a', fontSize: 13 }}>{completeModal.name}</div>
-            <div style={{ fontSize: 10, color: '#64748b', marginTop: 3 }}>{completeModal.asset_id} · cada {completeModal.frequency_days} días</div>
+          <div style={{ padding: '12px 14px', background: 'rgba(16,185,129,0.10)', borderRadius: 9, marginBottom: 14, border: '1px solid rgba(16,185,129,0.20)' }}>
+            <div style={{ fontWeight: 700, color: '#f1f5f9', fontSize: 13 }}>{completeModal.name}</div>
+            <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)', marginTop: 3 }}>{completeModal.asset_id} · cada {completeModal.frequency_days} días</div>
           </div>
           <FGroup label="REALIZADO POR">
             <input style={fi} value={completeForm.doneBy} onChange={e => setCompleteForm(f => ({ ...f, doneBy: e.target.value }))} placeholder="Nombre del técnico" />
@@ -295,7 +295,7 @@ export default function MantenimientoPage() {
           <FGroup label="OBSERVACIONES">
             <textarea style={{ ...fi, height: 64, resize: 'vertical' as const }} value={completeForm.notes} onChange={e => setCompleteForm(f => ({ ...f, notes: e.target.value }))} placeholder="Hallazgos, repuestos usados..." />
           </FGroup>
-          <div style={{ fontSize: 10, color: '#64748b', padding: '8px 12px', background: '#f8fafc', borderRadius: 7, marginTop: 4 }}>
+          <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)', padding: '8px 12px', background: 'rgba(255,255,255,0.06)', borderRadius: 7, marginTop: 4 }}>
             La próxima fecha se programará en <strong>{completeModal.frequency_days} días</strong>.
           </div>
           <div style={mFooter}>
@@ -310,8 +310,8 @@ export default function MantenimientoPage() {
       {/* Delete confirm */}
       {deleteConfirm && (
         <Modal onClose={() => setDeleteConfirm(null)} title="ELIMINAR TAREA">
-          <p style={{ color: '#0f172a', fontSize: 13, margin: '0 0 8px' }}>¿Eliminar <strong>"{deleteConfirm.name}"</strong>?</p>
-          <p style={{ color: '#64748b', fontSize: 12, margin: 0 }}>Esta acción no se puede deshacer.</p>
+          <p style={{ color: '#f1f5f9', fontSize: 13, margin: '0 0 8px' }}>¿Eliminar <strong>"{deleteConfirm.name}"</strong>?</p>
+          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 12, margin: 0 }}>Esta acción no se puede deshacer.</p>
           <div style={mFooter}>
             <button style={cancelBtn} onClick={() => setDeleteConfirm(null)}>CANCELAR</button>
             <button style={{ ...confirmBtn(saving, '#ef4444'), background: saving ? '#fca5a5' : '#ef4444' }} disabled={saving} onClick={() => deletePlan(deleteConfirm)}>
@@ -327,11 +327,11 @@ export default function MantenimientoPage() {
 // ── Mini components ────────────────────────────────────────────────────────────
 function Modal({ title, children, onClose }: { title: string; children: React.ReactNode; onClose: () => void }) {
   return (
-    <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, backdropFilter: 'blur(4px)' }} onClick={e => e.target === e.currentTarget && onClose()}>
-      <div style={{ background: 'rgba(240,249,255,0.95)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', borderRadius: 16, width: '100%', maxWidth: 520, maxHeight: '90vh', overflow: 'auto', border: '1px solid rgba(255,255,255,0.6)', boxShadow: '0 20px 60px rgba(0,0,0,0.3)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '18px 22px', borderBottom: '1px solid #e2e8f0' }}>
-          <span style={{ fontSize: 13, fontWeight: 800, color: '#0f172a', letterSpacing: 0.5 }}>{title}</span>
-          <button style={{ background: '#f1f5f9', border: 'none', borderRadius: 7, width: 28, height: 28, cursor: 'pointer', fontSize: 12, color: '#64748b' }} onClick={onClose}>✕</button>
+    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.65)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, backdropFilter: 'blur(8px)' }} onClick={e => e.target === e.currentTarget && onClose()}>
+      <div style={{ background: 'rgba(20,25,35,0.97)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)', borderRadius: 16, width: '100%', maxWidth: 520, maxHeight: '90vh', overflow: 'auto', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 24px 64px rgba(0,0,0,0.6)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '18px 22px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+          <span style={{ fontSize: 13, fontWeight: 800, color: '#f1f5f9', letterSpacing: 0.5 }}>{title}</span>
+          <button style={{ background: 'rgba(255,255,255,0.08)', border: 'none', borderRadius: 7, width: 28, height: 28, cursor: 'pointer', fontSize: 12, color: 'rgba(255,255,255,0.50)' }} onClick={onClose}>✕</button>
         </div>
         <div style={{ padding: '18px 22px', display: 'flex', flexDirection: 'column', gap: 12 }}>{children}</div>
       </div>
@@ -339,45 +339,45 @@ function Modal({ title, children, onClose }: { title: string; children: React.Re
   );
 }
 function FGroup({ label, children }: { label: string; children: React.ReactNode }) {
-  return <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}><label style={{ fontSize: 9, fontWeight: 800, color: '#94a3b8', letterSpacing: 1.5 }}>{label}</label>{children}</div>;
+  return <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}><label style={{ fontSize: 9, fontWeight: 800, color: 'rgba(255,255,255,0.38)', letterSpacing: 1.5 }}>{label}</label>{children}</div>;
 }
 function FRow({ children }: { children: React.ReactNode }) {
   return <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>{children}</div>;
 }
 
 const filterBtn = (active: boolean, primary: string): React.CSSProperties => ({
-  padding: '6px 12px', border: active ? '1px solid transparent' : '1px solid #e2e8f0', borderRadius: 8, cursor: 'pointer',
-  fontSize: 10, fontWeight: 800, letterSpacing: 0.5, background: active ? '#0f172a' : '#fff',
-  color: active ? '#fff' : '#64748b', fontFamily: 'inherit',
+  padding: '6px 12px', border: active ? `1px solid ${primary}40` : '1px solid rgba(255,255,255,0.12)', borderRadius: 8, cursor: 'pointer',
+  fontSize: 10, fontWeight: 800, letterSpacing: 0.5, background: active ? `${primary}18` : 'rgba(255,255,255,0.07)',
+  color: active ? primary : 'rgba(255,255,255,0.50)', fontFamily: 'inherit',
 });
 const tableCard: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.55)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
-  borderRadius: 12, border: '1px solid rgba(255,255,255,0.45)', overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+  background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+  borderRadius: 12, border: '1px solid rgba(255,255,255,0.10)', overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.30)',
 };
 const th: React.CSSProperties = {
-  padding: '9px 14px', textAlign: 'left', fontSize: 9, fontWeight: 800, color: '#64748b',
-  letterSpacing: 1.5, background: 'rgba(255,255,255,0.4)', borderBottom: '1px solid rgba(255,255,255,0.3)', whiteSpace: 'nowrap',
+  padding: '9px 14px', textAlign: 'left', fontSize: 9, fontWeight: 800, color: 'rgba(255,255,255,0.35)',
+  letterSpacing: 1.5, background: 'rgba(255,255,255,0.04)', borderBottom: '1px solid rgba(255,255,255,0.08)', whiteSpace: 'nowrap',
 };
 const td: React.CSSProperties = { padding: '11px 14px', verticalAlign: 'middle' };
 const assetBadge: React.CSSProperties = {
-  display: 'inline-block', padding: '2px 8px', background: '#f1f5f9', borderRadius: 5, fontSize: 10, fontWeight: 700, color: '#475569',
+  display: 'inline-block', padding: '2px 8px', background: 'rgba(255,255,255,0.10)', borderRadius: 5, fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.65)',
 };
 const actionBtn = (color: string): React.CSSProperties => ({
-  padding: '4px 9px', background: `${color}10`, border: `1px solid ${color}28`, borderRadius: 6,
+  padding: '4px 9px', background: `${color}15`, border: `1px solid ${color}35`, borderRadius: 6,
   fontSize: 9, fontWeight: 800, color, cursor: 'pointer', letterSpacing: 0.3, fontFamily: 'inherit',
 });
 const fi: React.CSSProperties = {
-  padding: '9px 11px', background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: 9,
-  fontSize: 12, color: '#0f172a', outline: 'none', fontFamily: 'inherit', width: '100%', boxSizing: 'border-box',
+  padding: '9px 11px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 9,
+  fontSize: 12, color: '#f1f5f9', outline: 'none', fontFamily: 'inherit', width: '100%', boxSizing: 'border-box',
 };
 const mFooter: React.CSSProperties = {
   display: 'flex', justifyContent: 'flex-end', gap: 8, paddingTop: 8,
 };
 const cancelBtn: React.CSSProperties = {
-  padding: '9px 18px', background: 'rgba(255,255,255,0.6)', border: '1px solid rgba(255,255,255,0.4)', borderRadius: 9,
-  fontSize: 11, fontWeight: 800, color: '#1e293b', cursor: 'pointer', fontFamily: 'inherit',
+  padding: '9px 18px', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 9,
+  fontSize: 11, fontWeight: 800, color: 'rgba(255,255,255,0.70)', cursor: 'pointer', fontFamily: 'inherit',
 };
 const confirmBtn = (disabled: boolean, color: string): React.CSSProperties => ({
-  padding: '9px 18px', background: disabled ? '#bae6fd' : color, border: 'none', borderRadius: 9,
+  padding: '9px 18px', background: disabled ? `${color}60` : color, border: 'none', borderRadius: 9,
   fontSize: 11, fontWeight: 800, color: '#fff', cursor: disabled ? 'not-allowed' : 'pointer', fontFamily: 'inherit',
 });
