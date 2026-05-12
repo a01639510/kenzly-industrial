@@ -18,10 +18,22 @@ import maintenanceRouter from './routes/maintenance.js';
 const app  = express();
 const port = Number(process.env.PORT) || 3001;
 
-const originsEnv = process.env.ALLOWED_ORIGINS || 'http://localhost:3000';
-const corsOrigin = originsEnv === '*' ? '*' : originsEnv.split(',').map(o => o.trim());
+const originsEnv = process.env.ALLOWED_ORIGINS || 'http://localhost:3000,http://localhost:5173';
 
-app.use(cors({ origin: corsOrigin, credentials: corsOrigin !== '*' }));
+function buildCorsOrigin(env: string): string | string[] | ((origin: string | undefined, cb: (e: Error | null, allow?: boolean) => void) => void) {
+  if (env === '*') return '*';
+  const list = env.split(',').map(o => o.trim());
+  return (origin, callback) => {
+    if (!origin) return callback(null, true);               // same-origin / curl
+    if (list.some(o => origin === o)) return callback(null, true);
+    if (/^https?:\/\/([a-z0-9-]+\.)?kenzly\.com\.mx$/.test(origin)) return callback(null, true);
+    if (/^https?:\/\/([a-z0-9-]+\.)?vercel\.app$/.test(origin)) return callback(null, true);
+    callback(new Error(`CORS blocked: ${origin}`));
+  };
+}
+
+const corsOrigin = buildCorsOrigin(originsEnv);
+app.use(cors({ origin: corsOrigin, credentials: true }));
 app.use(express.json({ limit: '1mb' }));
 app.use(cookieParser());
 

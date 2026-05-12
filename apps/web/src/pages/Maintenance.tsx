@@ -50,11 +50,15 @@ interface MaintenanceSummary {
 // ── API hooks ──────────────────────────────────────────────────
 function useSummary() {
   const [data, setData] = useState<MaintenanceSummary>({ overdue: 0, upcoming: 0, doneMonth: 0, total: 0 })
+  const [apiOnline, setApiOnline] = useState<boolean | null>(null)
   const load = useCallback(async () => {
-    try { setData(await apiFetch<MaintenanceSummary>('/maintenance/summary')) } catch {}
+    try {
+      setData(await apiFetch<MaintenanceSummary>('/maintenance/summary'))
+      setApiOnline(true)
+    } catch { setApiOnline(false) }
   }, [])
   useEffect(() => { load(); const t = setInterval(load, 60000); return () => clearInterval(t) }, [load])
-  return { data, reload: load }
+  return { data, apiOnline, reload: load }
 }
 
 function useAllPlans() {
@@ -429,7 +433,7 @@ export default function Maintenance() {
   const hist   = useSensorHistory(machineId)
   const last60 = hist.slice(-60)
 
-  const { data: summary, reload: reloadSummary } = useSummary()
+  const { data: summary, apiOnline, reload: reloadSummary } = useSummary()
   const { plans: allPlans, reload: reloadPlans }  = useAllPlans()
   const { records, reload: reloadHistory }        = useHistory()
 
@@ -485,6 +489,18 @@ export default function Maintenance() {
 
   return (
     <PageWrapper title="Mantenimiento Predictivo">
+      {/* API offline banner */}
+      {apiOnline === false && (
+        <div style={{
+          marginBottom: 16, padding: '10px 16px', borderRadius: 10,
+          background: 'var(--warning-dim)', border: '1px solid rgba(245,158,11,0.3)',
+          display: 'flex', alignItems: 'center', gap: 10, fontSize: 12, color: '#FCD34D', fontWeight: 600,
+        }}>
+          <AlertTriangle size={15} />
+          API no disponible — datos de mantenimiento sin conexión. Verifica que <code style={{ fontFamily: 'var(--font-mono)', fontSize: 11 }}>VITE_API_URL</code> apunte a tu API en Railway.
+        </div>
+      )}
+
       {/* Machine selector */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20, flexWrap: 'wrap' }}>
         <span style={{ fontSize: 10, fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '1px', textTransform: 'uppercase' }}>Equipo:</span>

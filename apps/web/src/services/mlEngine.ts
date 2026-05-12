@@ -88,8 +88,8 @@ export function predictFailure(readings: SensorReading[]): PredictionResult {
   }
   if (readings.length < 30) return empty
 
-  // Use last 90 days for regression window
-  const window   = readings.slice(-90)
+  // Use up to 180 days; exclude fault spikes so they don't corrupt the regression
+  const window   = readings.slice(-180).filter(r => !r.isFault)
   const vibData  = window.map(r => r.vibration)
   const tempData = window.map(r => r.temperature)
   const n        = vibData.length
@@ -120,10 +120,10 @@ export function predictFailure(readings: SensorReading[]): PredictionResult {
   const anomalyVib  = vibStd  > 0 ? Math.round(Math.abs(currentVib  - avg(vibData))  / vibStd  * 100) / 100 : 0
   const anomalyTemp = tempStd > 0 ? Math.round(Math.abs(currentTemp - avg(tempData)) / tempStd * 100) / 100 : 0
 
-  // ── Wear acceleration: compare slope of first vs second half of window
+  // ── Wear acceleration: compare slope first vs second half (fault-free data)
   const half        = Math.floor(n / 2)
-  const slopeFirst  = linearRegression(vibData.slice(0, half)).slope
-  const slopeSecond = linearRegression(vibData.slice(half)).slope
+  const slopeFirst  = half >= 2 ? linearRegression(vibData.slice(0, half)).slope : 0
+  const slopeSecond = half >= 2 ? linearRegression(vibData.slice(half)).slope    : 0
   const wearAcceleration = Math.round((slopeSecond - slopeFirst) * 10000) / 10000
 
   // ── Fault density: faults in last 30 readings
