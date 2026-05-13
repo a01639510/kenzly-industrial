@@ -55,13 +55,13 @@ async function cleanup() {
 async function seedAssets() {
   console.log('\n[2/7] Actualizando assets…');
   const items = [
-    { id: 'injector-1',       name: 'Inyectora Plástico #1'    },
-    { id: 'OVEN-B2',          name: 'Horno de Curado B2'        },
-    { id: 'METROLOGY_01',     name: 'Estación Metrológica 01'   },
-    { id: 'DEFECT_AI_01',     name: 'Cámara AI Defectos 01'     },
-    { id: 'CHILLER-UNIT-01',  name: 'Chiller de Proceso 01'     },
-    { id: 'HOPPER-LOAD-01',   name: 'Tolva de Carga 01'         },
-    { id: 'MCH-001',          name: 'Prensa Hidráulica 001'     },
+    { id: 'injector-1',       name: 'Inyectora Haitian MA900/II'   },
+    { id: 'OVEN-B2',          name: 'Secador Drymax HopperLoader 200' },
+    { id: 'METROLOGY_01',     name: 'CMM Mitutoyo CRYSTA-Apex'     },
+    { id: 'DEFECT_AI_01',     name: 'ViSmart 3D Visión Artificial'  },
+    { id: 'CHILLER-UNIT-01',  name: 'Chiller Frigel Microgel 7.5T' },
+    { id: 'HOPPER-LOAD-01',   name: 'Tolva Gravimétrica 500L'       },
+    { id: 'MCH-001',          name: 'Prensa Hidráulica Troquelado'  },
   ];
   for (const a of items) {
     await pool.query(
@@ -81,23 +81,23 @@ async function seedManifest() {
   console.log('\n[3/7] Actualizando manifest…');
 
   const manifest = {
-    branding: { primaryColor: '#1d84fb' },
+    branding: { primaryColor: '#0f62fe', companyName: 'PlásticosMex Industrial S.A. de C.V.' },
     areas: {
       a1: {
-        name: 'Línea de Ensamble A',
+        name: 'Línea de Inyección 1',
         operator: {
           widgets: [
-            { id: 'w-a1-op-1', type: 'ADVANCED_INPUT', props: { assetId: 'injector-1', key: 'ADVANCED_REPORT', label: 'Inyectora #1', unit: 'pzs' } },
-            { id: 'w-a1-op-2', type: 'ADVANCED_INPUT', props: { assetId: 'OVEN-B2',    key: 'ADVANCED_REPORT', label: 'Horno B2',     unit: 'pzs' } },
-            { id: 'w-a1-op-3', type: 'KANBAN',         props: { sourceAsset: 'injector-1', sourceKey: 'ADVANCED_REPORT', targetAsset: 'OVEN-B2', targetKey: 'ADVANCED_REPORT', label: 'Balance Línea' } },
+            { id: 'w-a1-op-1', type: 'ADVANCED_INPUT', props: { assetId: 'injector-1', key: 'ADVANCED_REPORT', label: 'Inyectora MA900', unit: 'pzs' } },
+            { id: 'w-a1-op-2', type: 'ADVANCED_INPUT', props: { assetId: 'OVEN-B2',    key: 'ADVANCED_REPORT', label: 'Secador Material', unit: 'pzs' } },
+            { id: 'w-a1-op-3', type: 'KANBAN',         props: { sourceAsset: 'injector-1', sourceKey: 'ADVANCED_REPORT', targetAsset: 'OVEN-B2', targetKey: 'ADVANCED_REPORT', label: 'Balance Producción' } },
           ]
         },
         analyst: {
           widgets: [
-            { id: 'w-a1-an-1', type: 'SEMI_DONUT',           props: { assetId: 'injector-1', key: 'ADVANCED_REPORT', subKey: 'presion_cierre', label: 'Presión de Cierre', unit: 'bar',  min: 0, max: 280 } },
-            { id: 'w-a1-an-2', type: 'GAUGE',                 props: { assetId: 'injector-1', key: 'ADVANCED_REPORT', subKey: 'temp_barril',    label: 'Temperatura Barril', unit: '°C', min: 150, max: 280, alertThreshold: 260 } },
-            { id: 'w-a1-an-3', type: 'GAUGE',                 props: { assetId: 'OVEN-B2',    key: 'ADVANCED_REPORT', subKey: 'flujo_gas',      label: 'Flujo Gas Horno',   unit: 'm³/h', min: 0, max: 40 } },
-            { id: 'w-a1-an-4', type: 'PRODUCTION_PER_HOUR',   props: { assetId: 'injector-1', key: 'ADVANCED_REPORT', subKey: 'value',          label: 'Producción/Hora' } },
+            { id: 'w-a1-an-1', type: 'SEMI_DONUT',           props: { assetId: 'injector-1', key: 'ADVANCED_REPORT', subKey: 'presion_cierre', label: 'Presión de Inyección', unit: 'bar',  min: 0, max: 280 } },
+            { id: 'w-a1-an-2', type: 'GAUGE',                 props: { assetId: 'injector-1', key: 'ADVANCED_REPORT', subKey: 'temp_barril',    label: 'Temp. Barril/Husillo', unit: '°C', min: 150, max: 280, alertThreshold: 260 } },
+            { id: 'w-a1-an-3', type: 'GAUGE',                 props: { assetId: 'OVEN-B2',    key: 'ADVANCED_REPORT', subKey: 'flujo_gas',      label: 'Flujo Aire Secado',   unit: 'm³/h', min: 0, max: 40 } },
+            { id: 'w-a1-an-4', type: 'PRODUCTION_PER_HOUR',   props: { assetId: 'injector-1', key: 'ADVANCED_REPORT', subKey: 'value',          label: 'Piezas/Hora' } },
             { id: 'w-a1-an-5', type: 'DAILY_EXECUTIVE_REPORT', props: { label: 'Reporte Ejecutivo' } },
           ]
         }
@@ -106,38 +106,38 @@ async function seedManifest() {
         name: 'Control de Calidad',
         operator: {
           widgets: [
-            { id: 'w-a2-op-1', type: 'ADVANCED_INPUT', props: { assetId: 'METROLOGY_01', key: 'INSPECCION', label: 'Metrología',     unit: 'mm' } },
-            { id: 'w-a2-op-2', type: 'ADVANCED_INPUT', props: { assetId: 'DEFECT_AI_01', key: 'DEFECTOS',   label: 'Defectos AI',    unit: 'pzs' } },
+            { id: 'w-a2-op-1', type: 'ADVANCED_INPUT', props: { assetId: 'METROLOGY_01', key: 'INSPECCION', label: 'Metrología CMM',   unit: 'mm' } },
+            { id: 'w-a2-op-2', type: 'ADVANCED_INPUT', props: { assetId: 'DEFECT_AI_01', key: 'DEFECTOS',   label: 'Defectos Visión', unit: 'pzs' } },
           ]
         },
         analyst: {
           widgets: [
-            { id: 'w-a2-an-1', type: 'GAUGE', props: { assetId: 'METROLOGY_01', key: 'INSPECCION', subKey: 'espesor_real', label: 'Espesor Real', unit: 'mm', min: 2.5, max: 3.5, alertThreshold: 3.3 } },
-            { id: 'w-a2-an-2', type: 'GAUGE', props: { assetId: 'DEFECT_AI_01', key: 'DEFECTOS',   subKey: 'tasa_defectos', label: 'Tasa Defectos', unit: '%', min: 0, max: 10, alertThreshold: 5 } },
+            { id: 'w-a2-an-1', type: 'GAUGE', props: { assetId: 'METROLOGY_01', key: 'INSPECCION', subKey: 'espesor_real', label: 'Espesor de Pared', unit: 'mm', min: 2.5, max: 3.5, alertThreshold: 3.3 } },
+            { id: 'w-a2-an-2', type: 'GAUGE', props: { assetId: 'DEFECT_AI_01', key: 'DEFECTOS',   subKey: 'tasa_defectos', label: 'Tasa de Rechazo', unit: '%', min: 0, max: 10, alertThreshold: 5 } },
           ]
         }
       },
       a3: {
-        name: 'Moldeo de Precisión',
+        name: 'Preparación y Secado de Material',
         operator: {
           widgets: [
-            { id: 'w-a3-op-1', type: 'ADVANCED_INPUT', props: { assetId: 'CHILLER-UNIT-01', key: 'OUTPUT', subKey: 'value', label: 'Chiller Agua', unit: '°C' } },
-            { id: 'w-a3-op-2', type: 'ADVANCED_INPUT', props: { assetId: 'HOPPER-LOAD-01',  key: 'OUTPUT',              label: 'Tolva Carga', unit: '%' } },
-            { id: 'w-a3-op-3', type: 'KANBAN',         props: { sourceAsset: 'HOPPER-LOAD-01', sourceKey: 'OUTPUT', targetAsset: 'CHILLER-UNIT-01', targetKey: 'OUTPUT', label: 'Balance Moldeo' } },
+            { id: 'w-a3-op-1', type: 'ADVANCED_INPUT', props: { assetId: 'CHILLER-UNIT-01', key: 'OUTPUT', subKey: 'value', label: 'Temp. Agua Molde', unit: '°C' } },
+            { id: 'w-a3-op-2', type: 'ADVANCED_INPUT', props: { assetId: 'HOPPER-LOAD-01',  key: 'OUTPUT',              label: 'Nivel Tolva', unit: '%' } },
+            { id: 'w-a3-op-3', type: 'KANBAN',         props: { sourceAsset: 'HOPPER-LOAD-01', sourceKey: 'OUTPUT', targetAsset: 'CHILLER-UNIT-01', targetKey: 'OUTPUT', label: 'Balance Material' } },
           ]
         },
         analyst: {
           widgets: [
-            { id: 'w-a3-an-1', type: 'GAUGE', props: { assetId: 'CHILLER-UNIT-01', key: 'OUTPUT', subKey: 'value', label: 'Temperatura Chiller', unit: '°C', min: 5, max: 20, alertThreshold: 16 } },
-            { id: 'w-a3-an-2', type: 'PRODUCTION_PER_HOUR', props: { assetId: 'HOPPER-LOAD-01', key: 'OUTPUT', label: 'Nivel Tolva/Hora' } },
+            { id: 'w-a3-an-1', type: 'GAUGE', props: { assetId: 'CHILLER-UNIT-01', key: 'OUTPUT', subKey: 'value', label: 'Temp. Chiller Molde', unit: '°C', min: 5, max: 20, alertThreshold: 16 } },
+            { id: 'w-a3-an-2', type: 'PRODUCTION_PER_HOUR', props: { assetId: 'HOPPER-LOAD-01', key: 'OUTPUT', label: 'Consumo Tolva/Hora' } },
           ]
         }
       }
     }
   };
 
-  await pool.query(`UPDATE tenants SET manifest = $1, primary_color = $2 WHERE id = $3`, [
-    JSON.stringify(manifest), '#1d84fb', TENANT_ID
+  await pool.query(`UPDATE tenants SET name = $1, manifest = $2, primary_color = $3 WHERE id = $4`, [
+    'PlásticosMex Industrial S.A. de C.V.', JSON.stringify(manifest), '#0f62fe', TENANT_ID
   ]);
 
   // Remove old area key that was auto-generated
@@ -257,8 +257,9 @@ async function seedTelemetry() {
 async function seedOrders() {
   console.log('\n[6/7] Creando órdenes de producción…');
   const products = [
-    'Tapa Plástica 32mm', 'Cuerpo Inyectado A14', 'Conector PP-40', 'Palanca ABS Negro',
-    'Bracket Soporte 2T', 'Carcasa Motor K9', 'Empaque Silicón B', 'Pieza Fundición #7'
+    'Tapa PE 32mm', 'Cuerpo Inyectado PP-14', 'Conector ABS 40mm', 'Palanca Acetal Negro',
+    'Bracket Nylon PA6', 'Carcasa ABS K9', 'Empaque TPE Soft B', 'Guía POM Deslizante #7',
+    'Clip Plástico PP Natural', 'Cubierta ABS Cromada'
   ];
   const areas   = ['a1', 'a2', 'a3'];
   const assets  = ['injector-1', 'OVEN-B2', 'CHILLER-UNIT-01'];
@@ -338,21 +339,116 @@ async function seedOrders() {
 // ──────────────────────────────────────────────
 async function seedScrap(orderIds: string[]) {
   console.log('     + Scrap records…');
-  const categories = ['DIMENSIONAL','COSMÉTICO','FUNCIONAL','MATERIAL','PROCESO','OTRO'];
-  const inspectors = ['Ana García','Carlos M.','Lucía H.'];
-  const scrapRows = [];
-  for (let i = 0; i < 25; i++) {
+
+  // Defectos típicos de inyección de plástico por categoría
+  const defects: Record<string, string[]> = {
+    DIMENSIONAL: [
+      'Fuera de tolerancia ±0.05 mm en diámetro exterior',
+      'Espesor de pared irregular (2.8 mm, spec 3.0 mm)',
+      'Deformación por enfriamiento — warping detectado en planitud',
+      'Longitud fuera de spec — pieza corta 1.2 mm',
+    ],
+    COSMÉTICO: [
+      'Líneas de flujo visibles en cara A — inaceptable para cliente',
+      'Marcas de quemado (diesel effect) en zona de unión de flujos',
+      'Rebaba excesiva en línea de partición del molde',
+      'Hundimientos (sink marks) en zona gruesa de pared',
+      'Plateado por humedad en pellet — burbujas superficiales',
+      'Rayaduras por eyector — zona de expulsión dañada',
+    ],
+    FUNCIONAL: [
+      'Short shot — pieza incompleta, falta llenado en nervio lateral',
+      'Jetting visible — chorro de material no fundido',
+      'Atrapamiento de aire — vacíos internos detectados por rayos X',
+      'Clip roto al primer ensamble — material frágil por degradación',
+    ],
+    MATERIAL: [
+      'Contaminación con material reciclado fuera de especificación',
+      'Degradación térmica por purga tardía — material quemado',
+      'Humedad en pellet PP — burbujas y porosidad en corte',
+      'Mezcla incorrecta de masterbatch de color — tono fuera de muestra',
+    ],
+    PROCESO: [
+      'Variación de peso de pieza > 2% — inestabilidad de proceso',
+      'Tiempo de ciclo excedido — enfriamiento insuficiente al eyectar',
+      'Presión de inyección inestable — fluctuación de 30 bar en ciclo',
+      'Temperatura de barril fuera de setpoint ±15°C — termopar fallando',
+      'Rechupes por presión de sostenimiento insuficiente',
+    ],
+    OTRO: [
+      'Daño en transporte interno — pieza golpeada en caja',
+      'Etiquetado incorrecto — número de parte erróneo en caja',
+    ],
+  };
+
+  const inspectors = ['Ana García','Carlos M.','Lucía H.','Roberto S.'];
+  const assets     = ['injector-1','OVEN-B2','METROLOGY_01'];
+  const areas      = ['a1','a2','a3'];
+  const scrapRows: any[] = [];
+
+  // 42 registros repartidos en los últimos 7 días
+  const seedEntries = [
+    // Hoy
+    { cat: 'COSMÉTICO',   qty: 12, dDay: 0, ai: 0, ii: 0 },
+    { cat: 'DIMENSIONAL', qty:  5, dDay: 0, ai: 1, ii: 1 },
+    { cat: 'FUNCIONAL',   qty:  3, dDay: 0, ai: 0, ii: 2 },
+    { cat: 'PROCESO',     qty:  8, dDay: 0, ai: 2, ii: 3 },
+    // Ayer
+    { cat: 'COSMÉTICO',   qty: 15, dDay: 1, ai: 0, ii: 1 },
+    { cat: 'DIMENSIONAL', qty:  7, dDay: 1, ai: 1, ii: 0 },
+    { cat: 'MATERIAL',    qty:  4, dDay: 1, ai: 2, ii: 2 },
+    { cat: 'FUNCIONAL',   qty:  2, dDay: 1, ai: 0, ii: 3 },
+    { cat: 'PROCESO',     qty: 10, dDay: 1, ai: 1, ii: 1 },
+    // Hace 2 días
+    { cat: 'COSMÉTICO',   qty:  9, dDay: 2, ai: 2, ii: 0 },
+    { cat: 'DIMENSIONAL', qty:  6, dDay: 2, ai: 0, ii: 2 },
+    { cat: 'OTRO',        qty:  3, dDay: 2, ai: 1, ii: 3 },
+    { cat: 'FUNCIONAL',   qty:  5, dDay: 2, ai: 2, ii: 1 },
+    // Hace 3 días
+    { cat: 'MATERIAL',    qty: 11, dDay: 3, ai: 0, ii: 0 },
+    { cat: 'COSMÉTICO',   qty: 14, dDay: 3, ai: 1, ii: 2 },
+    { cat: 'PROCESO',     qty:  6, dDay: 3, ai: 2, ii: 1 },
+    { cat: 'DIMENSIONAL', qty:  4, dDay: 3, ai: 0, ii: 3 },
+    // Hace 4 días
+    { cat: 'FUNCIONAL',   qty:  8, dDay: 4, ai: 1, ii: 0 },
+    { cat: 'COSMÉTICO',   qty: 17, dDay: 4, ai: 2, ii: 2 },
+    { cat: 'MATERIAL',    qty:  3, dDay: 4, ai: 0, ii: 1 },
+    { cat: 'PROCESO',     qty:  9, dDay: 4, ai: 1, ii: 3 },
+    // Hace 5 días
+    { cat: 'DIMENSIONAL', qty:  5, dDay: 5, ai: 2, ii: 0 },
+    { cat: 'COSMÉTICO',   qty: 11, dDay: 5, ai: 0, ii: 2 },
+    { cat: 'OTRO',        qty:  2, dDay: 5, ai: 1, ii: 1 },
+    { cat: 'FUNCIONAL',   qty:  4, dDay: 5, ai: 2, ii: 3 },
+    // Hace 6 días
+    { cat: 'MATERIAL',    qty:  7, dDay: 6, ai: 0, ii: 0 },
+    { cat: 'COSMÉTICO',   qty: 13, dDay: 6, ai: 1, ii: 2 },
+    { cat: 'PROCESO',     qty:  5, dDay: 6, ai: 2, ii: 1 },
+    { cat: 'DIMENSIONAL', qty:  3, dDay: 6, ai: 0, ii: 3 },
+    // Hace 7 días
+    { cat: 'COSMÉTICO',   qty: 16, dDay: 7, ai: 1, ii: 0 },
+    { cat: 'FUNCIONAL',   qty:  6, dDay: 7, ai: 2, ii: 2 },
+    { cat: 'DIMENSIONAL', qty:  8, dDay: 7, ai: 0, ii: 1 },
+    { cat: 'PROCESO',     qty:  7, dDay: 7, ai: 1, ii: 3 },
+    { cat: 'MATERIAL',    qty:  4, dDay: 7, ai: 2, ii: 0 },
+  ];
+
+  for (let i = 0; i < seedEntries.length; i++) {
+    const e = seedEntries[i];
+    const cat = e.cat as keyof typeof defects;
+    const descList = defects[cat];
+    const descIdx  = i % descList.length;
     scrapRows.push({
-      asset_id: ['injector-1','OVEN-B2','METROLOGY_01'][i % 3],
-      area_id:  ['a1','a2','a3'][i % 3],
+      asset_id: assets[e.ai],
+      area_id:  areas[e.ai],
       order_id: orderIds[i % orderIds.length] || null,
-      quantity: rnd(1, 18),
-      reason_category: categories[i % categories.length],
-      reason_description: ['Fuera de tolerancia','Burbuja en material','Rebaba excesiva','Decoloración','Falla dimensional','Sin defecto visible'][i % 6],
-      inspector: inspectors[i % inspectors.length],
-      created_at: daysAgo(rnd(0, 6))
+      quantity: e.qty,
+      reason_category:    cat,
+      reason_description: descList[descIdx],
+      inspector: inspectors[e.ii],
+      created_at: daysAgo(e.dDay),
     });
   }
+
   for (const s of scrapRows) {
     await pool.query(`
       INSERT INTO scrap_records (tenant_id, asset_id, area_id, order_id, quantity, reason_category, reason_description, inspector, created_at)
@@ -360,7 +456,7 @@ async function seedScrap(orderIds: string[]) {
       [TENANT_ID, s.asset_id, s.area_id, s.order_id, s.quantity, s.reason_category, s.reason_description, s.inspector, s.created_at]
     );
   }
-  console.log(`     ✓ ${scrapRows.length} registros de scrap`);
+  console.log(`     ✓ ${scrapRows.length} registros de scrap (inyección plástico)`);
 }
 
 async function seedDowntime() {

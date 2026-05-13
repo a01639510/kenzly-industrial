@@ -21,7 +21,12 @@
       "Bash(git -C /Users/mateochavezpinto/Desktop/KENZLY/backly-industrial diff)",
       "Bash(git -C /Users/mateochavezpinto/Desktop/KENZLY/backly-industrial log --oneline -3)",
       "Bash(git -C /Users/mateochavezpinto/Desktop/KENZLY/backly-industrial add apps/web/src/lib/apiClient.ts apps/web/src/store/useAuthStore.ts apps/web/.env.example .claude/settings.json)",
-      "Bash(git -C /Users/mateochavezpinto/Desktop/KENZLY/backly-industrial commit -m ' *)"
+      "Bash(git -C /Users/mateochavezpinto/Desktop/KENZLY/backly-industrial commit -m ' *)",
+      "Bash(git -C /Users/mateochavezpinto/Desktop/KENZLY/backly-industrial push)",
+      "Bash(git -C /Users/mateochavezpinto/Desktop/KENZLY/backly-industrial add apps/api/src/simulator.ts apps/api/package.json)",
+      "Bash(git -C /Users/mateochavezpinto/Desktop/KENZLY/backly-industrial add apps/web/src/pages/Orders.tsx apps/web/src/components/charts/AreaChartWidget.tsx apps/web/src/components/charts/BarChartWidget.tsx apps/web/src/components/charts/DonutChart.tsx)",
+      "Bash(pnpm --filter web exec tsc --noEmit)",
+      "Bash(pnpm --filter api exec tsc --noEmit)"
     ],
     "additionalDirectories": [
       "/Users/mateochavezpinto/Desktop/KENZLY/backly-industrial/apps/web/app/[slug]",

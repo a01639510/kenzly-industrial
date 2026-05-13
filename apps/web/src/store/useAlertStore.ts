@@ -23,34 +23,34 @@ interface AlertStore {
 
 const INITIAL_ALERTS: Alert[] = [
   {
-    id: 'a1', severity: 'critical', machineId: 'M03', machineName: 'Soldadora Robótica',
-    description: 'Vibración excede umbral crítico (8.2 mm/s). Riesgo de falla inminente.',
+    id: 'a1', severity: 'critical', machineId: 'M01', machineName: 'Inyectora Haitian MA900/II',
+    description: 'Presión de inyección inestable (variación ±35 bar). Riesgo de short shot inminente.',
     timestamp: new Date(Date.now() - 1000 * 60 * 8), acknowledged: false,
   },
   {
-    id: 'a2', severity: 'high', machineId: 'M01', machineName: 'Prensa Hidráulica 1',
-    description: 'Temperatura de aceite elevada (82°C). Verificar sistema de enfriamiento.',
+    id: 'a2', severity: 'high', machineId: 'M05', machineName: 'Chiller Frigel Microgel 7.5T',
+    description: 'Temperatura de agua de molde elevada (18.4°C, límite 16°C). Verificar condensador.',
     timestamp: new Date(Date.now() - 1000 * 60 * 23), acknowledged: false,
   },
   {
-    id: 'a3', severity: 'medium', machineId: 'M02', machineName: 'CNC Mazak 450',
-    description: 'Producción por hora 15% debajo del objetivo. Revisar programa CNC.',
+    id: 'a3', severity: 'medium', machineId: 'M02', machineName: 'Secador Drymax HopperLoader 200',
+    description: 'Humedad residual en pellet PP fuera de spec (>0.03%). Extender tiempo de secado.',
     timestamp: new Date(Date.now() - 1000 * 60 * 45), acknowledged: false,
   },
   {
-    id: 'a4', severity: 'low', machineId: 'M05', machineName: 'Cortadora Láser',
-    description: 'Mantenimiento preventivo programado para mañana. Preparar refacciones.',
+    id: 'a4', severity: 'low', machineId: 'M06', machineName: 'Tolva Gravimétrica 500L',
+    description: 'Nivel de tolva bajo (22%). Reabastecer antes del siguiente turno.',
     timestamp: new Date(Date.now() - 1000 * 60 * 90), acknowledged: false,
   },
   {
-    id: 'a5', severity: 'high', machineId: 'M04', machineName: 'Torno CNC T200',
-    description: 'OEE por debajo de objetivo (61%). Evaluar causa raíz.',
+    id: 'a5', severity: 'high', machineId: 'M01', machineName: 'Inyectora Haitian MA900/II',
+    description: 'OEE por debajo de objetivo (63%). Tasa de rechazo elevada — revisar proceso.',
     timestamp: new Date(Date.now() - 1000 * 60 * 120), acknowledged: true,
     acknowledgedBy: 'Ing. García', acknowledgedAt: new Date(Date.now() - 1000 * 60 * 100),
   },
   {
-    id: 'a6', severity: 'medium', machineId: 'M06', machineName: 'Centro de Maquinado',
-    description: 'Consumo energético 12% superior al promedio. Revisar parámetros.',
+    id: 'a6', severity: 'medium', machineId: 'M03', machineName: 'CMM Mitutoyo CRYSTA-Apex',
+    description: 'Calibración de palpadores vencida. Programar mantenimiento metrológico.',
     timestamp: new Date(Date.now() - 1000 * 60 * 180), acknowledged: true,
     acknowledgedBy: 'Ing. López', acknowledgedAt: new Date(Date.now() - 1000 * 60 * 150),
   },
