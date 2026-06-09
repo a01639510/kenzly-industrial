@@ -18,12 +18,12 @@ import Login       from '@/pages/Login'
 
 function AppLayout() {
   const kioskActive = useKioskStore(s => s.active)
-  const { user, loading } = useAuthStore()
+  const { user, loading, apiToken } = useAuthStore()
 
-  // Once authenticated, refresh sensor cache from API in background
+  // Refresh sensor cache only after the API token is acquired, not just user
   useEffect(() => {
-    if (user) refreshSensorCache()
-  }, [user])
+    if (apiToken) refreshSensorCache()
+  }, [apiToken])
 
   if (loading) return (
     <div style={{
