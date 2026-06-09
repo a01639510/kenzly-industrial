@@ -7,7 +7,13 @@ import { TrendingUp, TrendingDown, Minus, RotateCcw } from 'lucide-react'
 
 // Baseline PPH per machine (from mockSensors params)
 const BASE_PPH: Record<string, number> = {
-  M01: 420, M02: 380, M03: 290, M04: 450, M05: 510, M06: 400,
+  'injector-1':      420,
+  'OVEN-B2':         380,
+  'METROLOGY_01':    290,
+  'DEFECT_AI_01':    450,
+  'CHILLER-UNIT-01': 510,
+  'HOPPER-LOAD-01':  400,
+  'MCH-001':         350,
 }
 const BASE_OEE          = 82    // %
 const PRICE_PER_UNIT    = 480   // MXN
@@ -17,9 +23,9 @@ const COST_PER_KWH      = 2.45
 
 // Flow topology for bottleneck calculation
 const FLOW_CHAINS = [
-  ['M01', 'M04', 'M03'],
-  ['M02', 'M06', 'M03'],
-  ['M05', 'M03'],
+  ['injector-1',      'DEFECT_AI_01',   'METROLOGY_01'],
+  ['OVEN-B2',         'HOPPER-LOAD-01', 'METROLOGY_01'],
+  ['CHILLER-UNIT-01', 'METROLOGY_01'],
 ]
 
 function calcSystemThroughput(pph: Record<string, number>) {

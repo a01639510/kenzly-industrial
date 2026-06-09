@@ -8,14 +8,14 @@ export interface Operator {
 }
 
 export const WORKFORCE_CONFIG: Operator[] = [
-  { id: 'OP-01', name: 'Mateo Chávez',    initials: 'MC', skillLevel: 'Senior', shift: 'T1', stations: ['M01', 'M04'] },
-  { id: 'OP-02', name: 'Jorge Aguilar',   initials: 'JA', skillLevel: 'Expert', shift: 'T1', stations: ['M02', 'M06'] },
-  { id: 'OP-03', name: 'Luis Ramírez',    initials: 'LR', skillLevel: 'Mid',    shift: 'T1', stations: ['M03'] },
-  { id: 'OP-04', name: 'Ana Torres',      initials: 'AT', skillLevel: 'Senior', shift: 'T2', stations: ['M01', 'M03', 'M04'] },
-  { id: 'OP-05', name: 'Carlos Mendoza',  initials: 'CM', skillLevel: 'Junior', shift: 'T2', stations: ['M05'] },
-  { id: 'OP-06', name: 'Diana Flores',    initials: 'DF', skillLevel: 'Expert', shift: 'T2', stations: ['M02', 'M05', 'M06'] },
-  { id: 'OP-07', name: 'Pedro Gutiérrez', initials: 'PG', skillLevel: 'Mid',    shift: 'T3', stations: ['M04', 'M06'] },
-  { id: 'OP-08', name: 'Sofia Herrera',   initials: 'SH', skillLevel: 'Senior', shift: 'T3', stations: ['M01', 'M02', 'M03'] },
+  { id: 'OP-01', name: 'Mateo Chávez',    initials: 'MC', skillLevel: 'Senior', shift: 'T1', stations: ['injector-1',      'DEFECT_AI_01'   ] },
+  { id: 'OP-02', name: 'Jorge Aguilar',   initials: 'JA', skillLevel: 'Expert', shift: 'T1', stations: ['OVEN-B2',         'HOPPER-LOAD-01'  ] },
+  { id: 'OP-03', name: 'Luis Ramírez',    initials: 'LR', skillLevel: 'Mid',    shift: 'T1', stations: ['METROLOGY_01'                       ] },
+  { id: 'OP-04', name: 'Ana Torres',      initials: 'AT', skillLevel: 'Senior', shift: 'T2', stations: ['injector-1',      'METROLOGY_01',    'DEFECT_AI_01'   ] },
+  { id: 'OP-05', name: 'Carlos Mendoza',  initials: 'CM', skillLevel: 'Junior', shift: 'T2', stations: ['CHILLER-UNIT-01'                    ] },
+  { id: 'OP-06', name: 'Diana Flores',    initials: 'DF', skillLevel: 'Expert', shift: 'T2', stations: ['OVEN-B2',         'CHILLER-UNIT-01', 'HOPPER-LOAD-01' ] },
+  { id: 'OP-07', name: 'Pedro Gutiérrez', initials: 'PG', skillLevel: 'Mid',    shift: 'T3', stations: ['DEFECT_AI_01',    'HOPPER-LOAD-01'  ] },
+  { id: 'OP-08', name: 'Sofia Herrera',   initials: 'SH', skillLevel: 'Senior', shift: 'T3', stations: ['injector-1',      'OVEN-B2',         'METROLOGY_01'   ] },
 ]
 
 // Seeded mock stats per operator (deterministic)

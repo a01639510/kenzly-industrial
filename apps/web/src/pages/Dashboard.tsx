@@ -18,27 +18,33 @@ import { useAlertStore } from '@/store/useAlertStore'
 
 // ── Machine PPH baseline (from mock params) ───────────────────────────
 const MACHINE_PPH: Record<string, number> = {
-  M01: 420, M02: 380, M03: 290, M04: 450, M05: 510, M06: 400,
+  'injector-1':      420,
+  'OVEN-B2':         380,
+  'METROLOGY_01':    290,
+  'DEFECT_AI_01':    450,
+  'CHILLER-UNIT-01': 510,
+  'HOPPER-LOAD-01':  400,
+  'MCH-001':         350,
 }
 
 // ── Flow topology ─────────────────────────────────────────────────────
 const CONNECTIONS = [
-  { from: 'M01', to: 'M04' },
-  { from: 'M04', to: 'M03' },
-  { from: 'M05', to: 'M03' },
-  { from: 'M02', to: 'M06' },
-  { from: 'M06', to: 'M03' },
+  { from: 'injector-1',      to: 'DEFECT_AI_01'    },
+  { from: 'DEFECT_AI_01',    to: 'METROLOGY_01'    },
+  { from: 'CHILLER-UNIT-01', to: 'METROLOGY_01'    },
+  { from: 'OVEN-B2',         to: 'HOPPER-LOAD-01'  },
+  { from: 'HOPPER-LOAD-01',  to: 'METROLOGY_01'    },
 ]
 
 // Node layout: left, top, each node is NODE_W × NODE_H px
 const NODE_W = 144, NODE_H = 88
 const FLOW_POS: Record<string, { left: number; top: number }> = {
-  M01: { left: 24,  top: 18  },
-  M04: { left: 218, top: 18  },
-  M05: { left: 24,  top: 148 },
-  M03: { left: 448, top: 148 },
-  M02: { left: 24,  top: 278 },
-  M06: { left: 218, top: 278 },
+  'injector-1':      { left: 24,  top: 18  },
+  'DEFECT_AI_01':    { left: 218, top: 18  },
+  'CHILLER-UNIT-01': { left: 24,  top: 148 },
+  'METROLOGY_01':    { left: 448, top: 148 },
+  'OVEN-B2':         { left: 24,  top: 278 },
+  'HOPPER-LOAD-01':  { left: 218, top: 278 },
 }
 const SVG_W = 636, SVG_H = 370
 
@@ -204,9 +210,9 @@ function MachinePanel({ machineId, onClose }: { machineId: string; onClose: () =
 
 // ── Bottleneck summary card ───────────────────────────────────────────
 function BottleneckCard() {
-  const bottleneckId = 'M03'  // always M03 in this topology (290 pph vs 450+ upstream)
+  const bottleneckId = 'METROLOGY_01'  // always METROLOGY_01 in this topology (290 pph vs 450+ upstream)
   const machine = COMPANY_CONFIG.machines.find(m => m.id === bottleneckId)!
-  const upstreamAvg = Math.round((MACHINE_PPH['M04'] + MACHINE_PPH['M05'] + MACHINE_PPH['M06']) / 3)
+  const upstreamAvg = Math.round((MACHINE_PPH['DEFECT_AI_01'] + MACHINE_PPH['CHILLER-UNIT-01'] + MACHINE_PPH['HOPPER-LOAD-01']) / 3)
   const lostUnitsPerHour = upstreamAvg - MACHINE_PPH[bottleneckId]
   const revenuePerUnit   = 480  // MXN
   const lostPerHour      = lostUnitsPerHour * revenuePerUnit
