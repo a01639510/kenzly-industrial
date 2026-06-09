@@ -42,12 +42,13 @@ export function generateMachineHistory(machineId: string): MachineHistory {
 
   // Machine-specific base params
   const params: Record<string, { vib: number; temp: number; pph: number; kw: number }> = {
-    M01: { vib: 2.2, temp: 58, pph: 420, kw: 38 },
-    M02: { vib: 1.8, temp: 52, pph: 380, kw: 28 },
-    M03: { vib: 3.1, temp: 65, pph: 290, kw: 52 },
-    M04: { vib: 2.5, temp: 60, pph: 450, kw: 35 },
-    M05: { vib: 1.5, temp: 45, pph: 510, kw: 22 },
-    M06: { vib: 2.0, temp: 55, pph: 400, kw: 44 },
+    'injector-1':      { vib: 2.2, temp: 58, pph: 420, kw: 38 },
+    'OVEN-B2':         { vib: 1.8, temp: 52, pph: 380, kw: 28 },
+    'METROLOGY_01':    { vib: 3.1, temp: 65, pph: 290, kw: 52 },
+    'DEFECT_AI_01':    { vib: 2.5, temp: 60, pph: 450, kw: 35 },
+    'CHILLER-UNIT-01': { vib: 1.5, temp: 45, pph: 510, kw: 22 },
+    'HOPPER-LOAD-01':  { vib: 2.0, temp: 55, pph: 400, kw: 44 },
+    'MCH-001':         { vib: 2.8, temp: 62, pph: 350, kw: 55 },
   }
   const p = params[machineId] ?? { vib: 2.0, temp: 55, pph: 400, kw: 35 }
 

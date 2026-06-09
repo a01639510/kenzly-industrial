@@ -85,21 +85,6 @@ export async function runMigrations() {
   `).catch(err => console.warn('Migración tenant_users:', err.message));
 
   await pool.query(`
-    CREATE TABLE IF NOT EXISTS scrap_records (
-      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-      tenant_id UUID NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
-      asset_id VARCHAR(100),
-      area_id VARCHAR(100),
-      order_id UUID REFERENCES production_orders(id) ON DELETE SET NULL,
-      quantity INTEGER NOT NULL DEFAULT 0,
-      reason_category VARCHAR(50),
-      reason_description TEXT,
-      inspector VARCHAR(100),
-      created_at TIMESTAMPTZ DEFAULT NOW()
-    );
-  `).catch(err => console.warn('Migración scrap_records:', err.message));
-
-  await pool.query(`
     CREATE TABLE IF NOT EXISTS production_orders (
       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
       tenant_id UUID NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
@@ -119,6 +104,21 @@ export async function runMigrations() {
       updated_at TIMESTAMPTZ DEFAULT NOW()
     );
   `).catch(err => console.warn('Migración production_orders:', err.message));
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS scrap_records (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      tenant_id UUID NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
+      asset_id VARCHAR(100),
+      area_id VARCHAR(100),
+      order_id UUID REFERENCES production_orders(id) ON DELETE SET NULL,
+      quantity INTEGER NOT NULL DEFAULT 0,
+      reason_category VARCHAR(50),
+      reason_description TEXT,
+      inspector VARCHAR(100),
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `).catch(err => console.warn('Migración scrap_records:', err.message));
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS downtime_events (

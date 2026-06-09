@@ -18,12 +18,13 @@ export const COMPANY_CONFIG = {
   },
 
   machines: [
-    { id: 'M01', name: 'Inyectora Haitian MA900/II', area: 'Línea de Inyección 1', icon: '⚙️' },
-    { id: 'M02', name: 'Secador Drymax HopperLoader 200', area: 'Preparación de Material', icon: '🌡️' },
-    { id: 'M03', name: 'CMM Mitutoyo CRYSTA-Apex',   area: 'Control de Calidad', icon: '📏' },
-    { id: 'M04', name: 'ViSmart 3D Visión Artificial', area: 'Control de Calidad', icon: '👁️' },
-    { id: 'M05', name: 'Chiller Frigel Microgel 7.5T', area: 'Línea de Inyección 1', icon: '❄️' },
-    { id: 'M06', name: 'Tolva Gravimétrica 500L',    area: 'Preparación de Material', icon: '🏭' },
+    { id: 'injector-1',      name: 'Inyectora Haitian MA900/II',      area: 'Línea de Inyección 1',    icon: '⚙️' },
+    { id: 'OVEN-B2',         name: 'Secador Drymax HopperLoader 200',  area: 'Preparación de Material', icon: '🌡️' },
+    { id: 'METROLOGY_01',    name: 'CMM Mitutoyo CRYSTA-Apex',         area: 'Control de Calidad',      icon: '📏' },
+    { id: 'DEFECT_AI_01',    name: 'ViSmart 3D Visión Artificial',     area: 'Control de Calidad',      icon: '👁️' },
+    { id: 'CHILLER-UNIT-01', name: 'Chiller Frigel Microgel 7.5T',     area: 'Línea de Inyección 1',    icon: '❄️' },
+    { id: 'HOPPER-LOAD-01',  name: 'Tolva Gravimétrica 500L',          area: 'Preparación de Material', icon: '🏭' },
+    { id: 'MCH-001',         name: 'Prensa Hidráulica Troquelado',     area: 'Línea de Inyección 1',    icon: '🔩' },
   ],
 
   shifts: [
