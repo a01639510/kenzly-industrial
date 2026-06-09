@@ -141,7 +141,7 @@ function CreatePlanModal({ assetId, onClose, onSaved }: CreatePlanModalProps) {
   const inputStyle: React.CSSProperties = {
     width: '100%', padding: '8px 12px', borderRadius: 8, fontSize: 12, fontWeight: 600,
     background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)',
-    color: 'var(--text-primary)', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box',
+    color: 'var(--text-primary)', outline: '2px solid transparent', fontFamily: 'inherit', boxSizing: 'border-box',
   }
   const labelStyle: React.CSSProperties = {
     fontSize: 9, fontWeight: 800, color: 'var(--text-muted)',
@@ -149,11 +149,13 @@ function CreatePlanModal({ assetId, onClose, onSaved }: CreatePlanModalProps) {
   }
 
   return (
-    <div style={{
-      position: 'fixed', inset: 0, zIndex: 1000,
-      background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(6px)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24,
-    }} onClick={onClose}>
+    <div
+      role="presentation"
+      style={{
+        position: 'fixed', inset: 0, zIndex: 1000,
+        background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(6px)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24,
+      }} onClick={onClose}>
       <div style={{
         background: 'var(--bg-card)', border: '1px solid rgba(255,255,255,0.12)',
         borderRadius: 16, padding: 28, width: '100%', maxWidth: 520,
@@ -161,43 +163,43 @@ function CreatePlanModal({ assetId, onClose, onSaved }: CreatePlanModalProps) {
       }} onClick={e => e.stopPropagation()}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--text-primary)' }}>Nuevo Plan de Mantenimiento</div>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', display: 'flex' }}>
+          <button onClick={onClose} aria-label="Cerrar" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', display: 'flex' }}>
             <X size={18} />
           </button>
         </div>
 
         <div style={{ display: 'grid', gap: 14 }}>
           <div>
-            <label style={labelStyle}>Nombre del plan *</label>
-            <input style={inputStyle} value={form.name} onChange={set('name')} placeholder="Ej. Cambio de rodamientos" />
+            <label htmlFor="mp-name" style={labelStyle}>Nombre del plan *</label>
+            <input id="mp-name" style={inputStyle} value={form.name} onChange={set('name')} placeholder="Ej. Cambio de rodamientos" />
           </div>
           <div>
-            <label style={labelStyle}>Descripción</label>
-            <input style={inputStyle} value={form.description} onChange={set('description')} placeholder="Detalle del procedimiento" />
+            <label htmlFor="mp-desc" style={labelStyle}>Descripción</label>
+            <input id="mp-desc" style={inputStyle} value={form.description} onChange={set('description')} placeholder="Detalle del procedimiento" />
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <div>
-              <label style={labelStyle}>Frecuencia (días) *</label>
-              <input style={inputStyle} type="number" min="1" value={form.frequencyDays} onChange={set('frequencyDays')} />
+              <label htmlFor="mp-freq" style={labelStyle}>Frecuencia (días) *</label>
+              <input id="mp-freq" style={inputStyle} type="number" min="1" value={form.frequencyDays} onChange={set('frequencyDays')} />
             </div>
             <div>
-              <label style={labelStyle}>Duración estimada (min)</label>
-              <input style={inputStyle} type="number" min="1" value={form.estimatedDurationMin} onChange={set('estimatedDurationMin')} />
+              <label htmlFor="mp-dur" style={labelStyle}>Duración estimada (min)</label>
+              <input id="mp-dur" style={inputStyle} type="number" min="1" value={form.estimatedDurationMin} onChange={set('estimatedDurationMin')} />
             </div>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <div>
-              <label style={labelStyle}>Responsable</label>
-              <input style={inputStyle} value={form.responsible} onChange={set('responsible')} placeholder="Ing. García" />
+              <label htmlFor="mp-resp" style={labelStyle}>Responsable</label>
+              <input id="mp-resp" style={inputStyle} value={form.responsible} onChange={set('responsible')} placeholder="Ing. García" />
             </div>
             <div>
-              <label style={labelStyle}>Fecha de inicio</label>
-              <input style={{ ...inputStyle, colorScheme: 'dark' }} type="date" value={form.startingDate} onChange={set('startingDate')} />
+              <label htmlFor="mp-date" style={labelStyle}>Fecha de inicio</label>
+              <input id="mp-date" style={{ ...inputStyle, colorScheme: 'dark' }} type="date" value={form.startingDate} onChange={set('startingDate')} />
             </div>
           </div>
           <div>
-            <label style={labelStyle}>Notas</label>
-            <textarea style={{ ...inputStyle, resize: 'vertical', minHeight: 60 }}
+            <label htmlFor="mp-notes" style={labelStyle}>Notas</label>
+            <textarea id="mp-notes" style={{ ...inputStyle, resize: 'vertical', minHeight: 60 }}
               value={form.notes} onChange={set('notes') as any} placeholder="Observaciones adicionales" />
           </div>
 
@@ -266,7 +268,7 @@ function CompletePlanModal({ plan, onClose, onSaved }: CompletePlanModalProps) {
       }} onClick={e => e.stopPropagation()}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
           <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--text-primary)' }}>Completar Mantenimiento</div>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', display: 'flex' }}>
+          <button onClick={onClose} aria-label="Cerrar" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', display: 'flex' }}>
             <X size={18} />
           </button>
         </div>
@@ -274,22 +276,22 @@ function CompletePlanModal({ plan, onClose, onSaved }: CompletePlanModalProps) {
 
         <div style={{ display: 'grid', gap: 14 }}>
           <div>
-            <label style={{ fontSize: 9, fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 4, display: 'block' }}>
+            <label htmlFor="cp-done-by" style={{ fontSize: 9, fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 4, display: 'block' }}>
               Realizado por
             </label>
-            <input style={inputStyle} value={form.doneBy} onChange={set('doneBy')} placeholder="Nombre del técnico" />
+            <input id="cp-done-by" style={inputStyle} value={form.doneBy} onChange={set('doneBy')} placeholder="Nombre del técnico" />
           </div>
           <div>
-            <label style={{ fontSize: 9, fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 4, display: 'block' }}>
+            <label htmlFor="cp-duration" style={{ fontSize: 9, fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 4, display: 'block' }}>
               Duración real (min)
             </label>
-            <input style={inputStyle} type="number" min="1" value={form.durationMin} onChange={set('durationMin')} />
+            <input id="cp-duration" style={inputStyle} type="number" min="1" value={form.durationMin} onChange={set('durationMin')} />
           </div>
           <div>
-            <label style={{ fontSize: 9, fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 4, display: 'block' }}>
+            <label htmlFor="cp-notes" style={{ fontSize: 9, fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 4, display: 'block' }}>
               Notas del técnico
             </label>
-            <textarea style={{ ...inputStyle, resize: 'vertical', minHeight: 80 }}
+            <textarea id="cp-notes" style={{ ...inputStyle, resize: 'vertical', minHeight: 80 }}
               value={form.notes} onChange={set('notes') as any} placeholder="Observaciones, piezas reemplazadas, etc." />
           </div>
 
@@ -561,9 +563,9 @@ export default function Maintenance() {
             ]}
           />
           <div style={{ marginTop: 10, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-            {last60.map((r, i) => r.isFault ? (
-              <Badge key={i} variant="critical" dot>Falla {r.date}</Badge>
-            ) : null).filter(Boolean)}
+            {last60.flatMap((r) => r.isFault ? [
+              <Badge key={r.date} variant="critical" dot>Falla {r.date}</Badge>
+            ] : [])}
           </div>
         </GlassCard>
 

@@ -119,6 +119,7 @@ function OrderForm({
 
   return (
     <motion.div
+      role="presentation"
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
       style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}
       onClick={onClose}
@@ -130,49 +131,49 @@ function OrderForm({
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <span style={{ fontWeight: 700, fontSize: 16 }}>Nueva Orden de Producción</span>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}><X size={18} /></button>
+          <button onClick={onClose} aria-label="Cerrar" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}><X size={18} /></button>
         </div>
 
         <div style={{ display: 'grid', gap: 14 }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <div>
-              <label style={labelStyle}>No. Orden</label>
-              <input style={inputStyle} value={form.order_number} onChange={e => set('order_number', e.target.value)} placeholder="OP-2026-0001" />
+              <label htmlFor="of-order-num" style={labelStyle}>No. Orden</label>
+              <input id="of-order-num" style={inputStyle} value={form.order_number} onChange={e => set('order_number', e.target.value)} placeholder="OP-2026-0001" />
             </div>
             <div>
-              <label style={labelStyle}>Prioridad</label>
-              <select style={inputStyle} value={form.priority} onChange={e => set('priority', e.target.value)}>
+              <label htmlFor="of-priority" style={labelStyle}>Prioridad</label>
+              <select id="of-priority" style={inputStyle} value={form.priority} onChange={e => set('priority', e.target.value)}>
                 {(['BAJA','NORMAL','ALTA','URGENTE'] as Priority[]).map(p => <option key={p} value={p}>{p}</option>)}
               </select>
             </div>
           </div>
 
           <div>
-            <label style={labelStyle}>Producto</label>
-            <input style={inputStyle} value={form.product_name} onChange={e => set('product_name', e.target.value)} placeholder="Nombre del producto" />
+            <label htmlFor="of-product" style={labelStyle}>Producto</label>
+            <input id="of-product" style={inputStyle} value={form.product_name} onChange={e => set('product_name', e.target.value)} placeholder="Nombre del producto" />
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <div>
-              <label style={labelStyle}>Cantidad objetivo</label>
-              <input style={inputStyle} type="number" min={1} value={form.target_quantity} onChange={e => set('target_quantity', Number(e.target.value))} />
+              <label htmlFor="of-qty" style={labelStyle}>Cantidad objetivo</label>
+              <input id="of-qty" style={inputStyle} type="number" min={1} value={form.target_quantity} onChange={e => set('target_quantity', Number(e.target.value))} />
             </div>
             <div>
-              <label style={labelStyle}>Máquina</label>
-              <select style={inputStyle} value={form.asset_id} onChange={e => set('asset_id', e.target.value)}>
+              <label htmlFor="of-machine" style={labelStyle}>Máquina</label>
+              <select id="of-machine" style={inputStyle} value={form.asset_id} onChange={e => set('asset_id', e.target.value)}>
                 {COMPANY_CONFIG.machines.map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
               </select>
             </div>
           </div>
 
           <div>
-            <label style={labelStyle}>Fecha límite</label>
-            <input style={inputStyle} type="datetime-local" value={form.due_at} onChange={e => set('due_at', e.target.value)} />
+            <label htmlFor="of-due" style={labelStyle}>Fecha límite</label>
+            <input id="of-due" style={inputStyle} type="datetime-local" value={form.due_at} onChange={e => set('due_at', e.target.value)} />
           </div>
 
           <div>
-            <label style={labelStyle}>Notas</label>
-            <textarea style={{ ...inputStyle, resize: 'vertical', minHeight: 60 }} value={form.notes} onChange={e => set('notes', e.target.value)} placeholder="Instrucciones especiales…" />
+            <label htmlFor="of-notes" style={labelStyle}>Notas</label>
+            <textarea id="of-notes" style={{ ...inputStyle, resize: 'vertical', minHeight: 60 }} value={form.notes} onChange={e => set('notes', e.target.value)} placeholder="Instrucciones especiales…" />
           </div>
         </div>
 

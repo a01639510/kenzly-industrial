@@ -63,11 +63,12 @@ function Slider({ label, value, min, max, step = 1, unit, color, onChange }: {
       </div>
       <input
         type="range" min={min} max={max} step={step} value={value}
+        aria-label={label}
         onChange={e => onChange(Number(e.target.value))}
         style={{
           width: '100%', accentColor: color, height: 5, cursor: 'pointer',
           background: `linear-gradient(90deg, ${color} ${((value - min) / (max - min)) * 100}%, rgba(255,255,255,0.12) 0)`,
-          borderRadius: 100, outline: 'none', border: 'none',
+          borderRadius: 100, border: 'none',
           WebkitAppearance: 'none',
         }}
       />
@@ -188,6 +189,7 @@ export default function WhatsIf() {
                     </div>
                   </div>
                   <input type="range" min={60} max={140} step={5} value={machineEff[m.id]}
+                    aria-label={`Eficiencia ${m.name}`}
                     onChange={e => setMachineEff(prev => ({ ...prev, [m.id]: Number(e.target.value) }))}
                     style={{ width: '100%', accentColor: 'var(--primary)', cursor: 'pointer', height: 4 }}
                   />

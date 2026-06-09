@@ -70,12 +70,13 @@ export default function Login() {
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             {/* Email */}
             <div>
-              <label style={{ fontSize: 10, fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '1px', textTransform: 'uppercase', display: 'block', marginBottom: 7 }}>
+              <label htmlFor="login-email" style={{ fontSize: 10, fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '1px', textTransform: 'uppercase', display: 'block', marginBottom: 7 }}>
                 Correo electrónico
               </label>
               <div style={{ position: 'relative' }}>
                 <Mail size={15} color="var(--text-muted)" style={{ position: 'absolute', left: 13, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
                 <input
+                  id="login-email"
                   type="email"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
@@ -87,7 +88,7 @@ export default function Login() {
                     padding: '11px 14px 11px 38px',
                     background: 'rgba(255,255,255,0.06)',
                     border: '1px solid rgba(255,255,255,0.14)',
-                    borderRadius: 10, outline: 'none',
+                    borderRadius: 10, outline: '2px solid transparent',
                     color: 'var(--text-primary)',
                     fontSize: 13, fontFamily: 'inherit',
                     transition: 'border-color 0.15s, background 0.15s',
@@ -100,12 +101,13 @@ export default function Login() {
 
             {/* Password */}
             <div>
-              <label style={{ fontSize: 10, fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '1px', textTransform: 'uppercase', display: 'block', marginBottom: 7 }}>
+              <label htmlFor="login-password" style={{ fontSize: 10, fontWeight: 800, color: 'var(--text-muted)', letterSpacing: '1px', textTransform: 'uppercase', display: 'block', marginBottom: 7 }}>
                 Contraseña
               </label>
               <div style={{ position: 'relative' }}>
                 <Lock size={15} color="var(--text-muted)" style={{ position: 'absolute', left: 13, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
                 <input
+                  id="login-password"
                   type={showPass ? 'text' : 'password'}
                   value={password}
                   onChange={e => setPassword(e.target.value)}
@@ -117,7 +119,7 @@ export default function Login() {
                     padding: '11px 40px 11px 38px',
                     background: 'rgba(255,255,255,0.06)',
                     border: '1px solid rgba(255,255,255,0.14)',
-                    borderRadius: 10, outline: 'none',
+                    borderRadius: 10, outline: '2px solid transparent',
                     color: 'var(--text-primary)',
                     fontSize: 13, fontFamily: 'inherit',
                     transition: 'border-color 0.15s, background 0.15s',

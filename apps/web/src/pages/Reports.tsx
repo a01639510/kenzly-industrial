@@ -9,7 +9,6 @@ import { COMPANY_CONFIG, type Machine } from '@/config/company'
 import { getOEEStats } from '@/data/mockSensors'
 import { getCachedHistory, useCacheVersion } from '@/data/sensorCache'
 import { FileText, Download, FileSpreadsheet, Calendar } from 'lucide-react'
-import jsPDF from 'jspdf'
 
 type ReportType = 'oee' | 'energy' | 'maintenance' | 'production'
 
@@ -70,8 +69,8 @@ function OEEReport({ machines }: { machines: readonly Machine[] }) {
             </tr>
           </thead>
           <tbody>
-            {data.map((d, i) => (
-              <tr key={i}>
+            {data.map((d) => (
+              <tr key={d.machine}>
                 <td style={{ padding: '9px 10px', fontSize: 12, color: 'var(--text-primary)', fontWeight: 600 }}>{d.machine}</td>
                 <td style={{ padding: '9px 10px', fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 800, color: d.oee >= COMPANY_CONFIG.kpis.oeeTarget ? 'var(--success)' : 'var(--danger)' }}>{d.oee}%</td>
                 <td style={{ padding: '9px 10px', fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-secondary)' }}>{d.availability}%</td>
@@ -100,8 +99,8 @@ function EnergyReport({ machines, selectedArea }: { machines: readonly Machine[]
   const donutData = selectedArea === 'Todas'
     ? Object.entries(
         data.reduce((acc, d) => { acc[d.area] = (acc[d.area] || 0) + d.kwh; return acc }, {} as Record<string, number>)
-      ).map(([name, value]) => ({ name, value, color: AREA_COLORS[name] ?? 'var(--accent)' })).filter(d => d.value > 0)
-    : data.map(d => ({ name: d.name, value: d.kwh, color: d.color })).filter(d => d.value > 0)
+      ).flatMap(([name, value]) => value > 0 ? [{ name, value, color: AREA_COLORS[name] ?? 'var(--accent)' }] : [])
+    : data.flatMap(d => d.kwh > 0 ? [{ name: d.name, value: d.kwh, color: d.color }] : [])
 
   if (data.length === 0) {
     return <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-secondary)' }}>Sin equipos en esta área</div>
@@ -176,48 +175,34 @@ export default function Reports() {
     ? COMPANY_CONFIG.machines
     : COMPANY_CONFIG.machines.filter(m => m.area === selectedArea)
 
-  const exportPDF = async () => {
-    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' })
+  const exportPDF = () => {
     const typeLabel = REPORT_TYPES.find(t => t.id === reportType)?.label ?? ''
     const areaLabel = selectedArea === 'Todas' ? 'Todas las áreas' : selectedArea
-
-    doc.setFillColor(10, 15, 30)
-    doc.rect(0, 0, 210, 297, 'F')
-    doc.setTextColor(240, 245, 250)
-    doc.setFontSize(20)
-    doc.setFont('helvetica', 'bold')
-    doc.text(COMPANY_CONFIG.name, 20, 30)
-    doc.setFontSize(12)
-    doc.setFont('helvetica', 'normal')
-    doc.setTextColor(160, 180, 200)
-    doc.text(`Reporte: ${typeLabel}`, 20, 40)
-    doc.text(`Área: ${areaLabel}`, 20, 48)
-    doc.text(`Período: ${dateRange.from} — ${dateRange.to}`, 20, 56)
-    doc.text(`Generado: ${new Date().toLocaleString('es-MX')}`, 20, 64)
-    doc.setDrawColor(26, 109, 255)
-    doc.line(20, 71, 190, 71)
-
-    doc.setTextColor(200, 220, 240)
-    doc.setFontSize(10)
-    doc.text(`Datos generados automáticamente por el sistema de monitoreo industrial.`, 20, 83)
-
-    let y = 96
-    doc.setFontSize(9)
-    filteredMachines.forEach(m => {
-      const s = getOEEStats(m.id)
-      doc.setTextColor(180, 200, 220)
-      doc.text(`${m.name} (${m.area})`, 20, y)
-      doc.setTextColor(26, 109, 255)
-      doc.text(`OEE: ${s.oee}%  Disp: ${s.availability}%  Rend: ${s.performance}%  Cal: ${s.quality}%`, 80, y)
-      y += 8
-    })
-
-    doc.setFontSize(8)
-    doc.setTextColor(100, 120, 140)
-    doc.text(`${COMPANY_CONFIG.name} — Reporte confidencial`, 20, 280)
-    doc.text(`Página 1 de 1`, 180, 280)
-
-    doc.save(`reporte-${reportType}-${selectedArea === 'Todas' ? 'todas' : selectedArea.replace(/ /g, '-')}-${dateRange.from}.pdf`)
+    const lines = [
+      COMPANY_CONFIG.name,
+      '═'.repeat(60),
+      `Reporte:   ${typeLabel}`,
+      `Área:      ${areaLabel}`,
+      `Período:   ${dateRange.from} — ${dateRange.to}`,
+      `Generado:  ${new Date().toLocaleString('es-MX')}`,
+      '─'.repeat(60),
+      '',
+      'DATOS POR EQUIPO',
+      '─'.repeat(60),
+      ...filteredMachines.map(m => {
+        const s = getOEEStats(m.id)
+        return `${m.name.padEnd(40)} OEE: ${String(s.oee).padStart(3)}%  Disp: ${s.availability}%  Rend: ${s.performance}%  Cal: ${s.quality}%`
+      }),
+      '',
+      '─'.repeat(60),
+      `${COMPANY_CONFIG.name} — Reporte confidencial`,
+    ]
+    const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' })
+    const a = document.createElement('a')
+    a.href = URL.createObjectURL(blob)
+    a.download = `reporte-${reportType}-${selectedArea === 'Todas' ? 'todas' : selectedArea.replace(/ /g, '-')}-${dateRange.from}.txt`
+    a.click()
+    URL.revokeObjectURL(a.href)
   }
 
   const exportExcel = () => {

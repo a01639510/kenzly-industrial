@@ -27,16 +27,17 @@ export default function Alerts() {
   const [showAcknowledged, setShowAcknowledged] = useState(false)
 
   const filtered = alerts
-    .filter(a => filterSeverity === 'all' || a.severity === filterSeverity)
-    .filter(a => filterMachine  === 'all' || a.machineId === filterMachine)
-    .filter(a => showAcknowledged ? a.acknowledged : !a.acknowledged)
+    .filter(a =>
+      (filterSeverity === 'all' || a.severity === filterSeverity) &&
+      (filterMachine  === 'all' || a.machineId === filterMachine) &&
+      (showAcknowledged ? a.acknowledged : !a.acknowledged)
+    )
     .sort((a, b) => SEVERITY_ORDER.indexOf(a.severity) - SEVERITY_ORDER.indexOf(b.severity))
 
-  const donutData = SEVERITY_ORDER.map(s => ({
-    name:  SEVERITY_LABELS[s],
-    value: alerts.filter(a => a.severity === s).length,
-    color: SEVERITY_COLORS[s],
-  })).filter(d => d.value > 0)
+  const donutData = SEVERITY_ORDER.flatMap(s => {
+    const value = alerts.filter(a => a.severity === s).length
+    return value > 0 ? [{ name: SEVERITY_LABELS[s], value, color: SEVERITY_COLORS[s] }] : []
+  })
 
   const active = alerts.filter(a => !a.acknowledged)
 

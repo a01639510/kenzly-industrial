@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { formatDistanceToNow } from 'date-fns'
+import { es } from 'date-fns/locale'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Activity, Zap, Package, AlertTriangle, Thermometer, X, TrendingDown, QrCode } from 'lucide-react'
 import { QRCodeSVG } from 'qrcode.react'
@@ -397,7 +399,7 @@ export default function Dashboard() {
       setSelectedMachine(machineParam)
       setSearchParams({}, { replace: true })  // clean URL after opening
     }
-  }, [])
+  }, [searchParams])
 
   const oeeData = [
     { label: 'Disponibilidad', value: (kpis as any).availability ?? kpis.uptime,            color: 'var(--primary)' },
@@ -476,7 +478,7 @@ export default function Dashboard() {
                     <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 700, color }}>{Math.round(value)}%</span>
                   </div>
                   <div style={{ height: 5, borderRadius: 100, background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
-                    <div style={{ height: '100%', borderRadius: 100, background: color, width: `${Math.min(100, value)}%`, transition: 'width 1.2s ease', boxShadow: `0 0 10px ${color}66` }} />
+                    <div style={{ height: '100%', borderRadius: 100, background: color, width: `${Math.min(100, value)}%`, transition: 'width 0.5s ease', boxShadow: `0 0 10px ${color}66` }} />
                   </div>
                 </div>
               ))}
@@ -524,7 +526,7 @@ export default function Dashboard() {
                     {a.severity.toUpperCase()}
                   </Badge>
                   <span style={{ fontSize: 9, color: 'var(--text-muted)' }}>
-                    {Math.floor((Date.now() - a.timestamp.getTime()) / 60000)}m
+                    {formatDistanceToNow(a.timestamp, { addSuffix: false, locale: es })}
                   </span>
                 </div>
                 <div style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 4, fontWeight: 600, lineHeight: 1.4 }}>

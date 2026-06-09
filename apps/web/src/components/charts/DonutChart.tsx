@@ -21,8 +21,8 @@ export function DonutChart({ data, size = 180, inner = 55, label }: DonutChartPr
             innerRadius={inner} outerRadius={size / 2 - 4}
             paddingAngle={2} dataKey="value" startAngle={90} endAngle={-270}
           >
-            {data.map((entry, i) => (
-              <Cell key={i} fill={entry.color} stroke="transparent"
+            {data.map((entry) => (
+              <Cell key={entry.name} fill={entry.color} stroke="transparent"
                 style={{ filter: `drop-shadow(0 0 6px ${entry.color}66)` }}
               />
             ))}

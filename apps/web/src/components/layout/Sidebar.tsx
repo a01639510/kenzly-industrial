@@ -99,6 +99,7 @@ export function Sidebar() {
           }}
           onMouseEnter={e => { e.currentTarget.style.background = 'var(--bg-surface-hover)'; e.currentTarget.style.color = 'var(--text-primary)' }}
           onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--text-muted)' }}
+          aria-label={collapsed ? 'Expandir menú' : 'Colapsar menú'}
         >
           {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
         </button>
@@ -110,7 +111,7 @@ export function Sidebar() {
           const isActive = to === '/' ? location.pathname === '/' : location.pathname.startsWith(to)
           const isAlerts = to === '/alerts'
           return (
-            <NavLink key={to} to={to} style={{ textDecoration: 'none' }}>
+            <NavLink key={to} to={to} style={{ textDecoration: 'none' }} aria-label={label}>
               <div style={{
                 display: 'flex', alignItems: 'center', gap: 10,
                 padding: '9px 10px', borderRadius: 10,
@@ -169,6 +170,7 @@ export function Sidebar() {
           onMouseEnter={e => { e.currentTarget.style.background = 'rgba(26,109,255,0.20)' }}
           onMouseLeave={e => { e.currentTarget.style.background = 'rgba(26,109,255,0.10)' }}
           title="Modo Quiosco"
+          aria-label="Modo Quiosco"
         >
           <Monitor size={16} style={{ flexShrink: 0 }} />
           <AnimatePresence>
@@ -281,6 +283,7 @@ export function Sidebar() {
             onMouseEnter={e => { if (!userPopover) e.currentTarget.style.background = 'var(--bg-surface-hover)' }}
             onMouseLeave={e => { if (!userPopover) e.currentTarget.style.background = 'transparent' }}
             title="Cuenta"
+            aria-label="Cuenta de usuario"
           >
             <div style={{
               width: 28, height: 28, borderRadius: '50%', flexShrink: 0,

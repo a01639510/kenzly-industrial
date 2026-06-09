@@ -32,13 +32,14 @@ export function KioskBar() {
   const indexRef  = useRef(0)
   const tickRef   = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  const currentSlide = KIOSK_ROTATION.find(r => r.path === location.pathname) ?? KIOSK_ROTATION[0]
+  const { pathname } = location
+  const currentSlide = KIOSK_ROTATION.find(r => r.path === pathname) ?? KIOSK_ROTATION[0]
   const totalDuration = currentSlide.duration
 
   // Progress animation + navigation cycle
   useEffect(() => {
     setProgress(0)
-    const idx = KIOSK_ROTATION.findIndex(r => r.path === location.pathname)
+    const idx = KIOSK_ROTATION.findIndex(r => r.path === pathname)
     indexRef.current = idx >= 0 ? idx : 0
 
     const startTime = Date.now()
@@ -55,7 +56,7 @@ export function KioskBar() {
     }, 100)
 
     return () => { if (tickRef.current) clearInterval(tickRef.current) }
-  }, [location.pathname])
+  }, [pathname])
 
   // ESC to exit
   useEffect(() => {
@@ -64,7 +65,7 @@ export function KioskBar() {
     return () => window.removeEventListener('keydown', handler)
   }, [exit])
 
-  const nextSlide = KIOSK_ROTATION[(KIOSK_ROTATION.findIndex(r => r.path === location.pathname) + 1) % KIOSK_ROTATION.length]
+  const nextSlide = KIOSK_ROTATION[(KIOSK_ROTATION.findIndex(r => r.path === pathname) + 1) % KIOSK_ROTATION.length]
 
   return (
     <div style={{
@@ -99,11 +100,13 @@ export function KioskBar() {
       {/* Slide dots */}
       <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
         {KIOSK_ROTATION.map((r, i) => (
-          <button key={r.path} onClick={() => navigate(r.path)} style={{
-            width: i === indexRef.current ? 20 : 7, height: 7,
-            borderRadius: 100, border: 'none', cursor: 'pointer',
-            background: r.path === location.pathname ? 'var(--primary)' : 'rgba(255,255,255,0.20)',
-            transition: 'all 0.3s',
+          <button key={r.path} onClick={() => navigate(r.path)}
+            aria-label={r.label}
+            style={{
+              width: i === indexRef.current ? 20 : 7, height: 7,
+              borderRadius: 100, border: 'none', cursor: 'pointer',
+              background: r.path === pathname ? 'var(--primary)' : 'rgba(255,255,255,0.20)',
+              transition: 'all 0.3s',
           }} />
         ))}
       </div>

@@ -44,9 +44,9 @@ export function BarChartWidget({
           />
         )}
         <Bar dataKey={valueKey} radius={[4, 4, 0, 0]} barSize={barSize}>
-          {data.map((entry, i) => (
+          {data.map((entry) => (
             <Cell
-              key={i}
+              key={String(entry[xKey])}
               fill={color}
               fillOpacity={reference && Number(entry[valueKey]) < reference ? 0.4 : 1}
             />
