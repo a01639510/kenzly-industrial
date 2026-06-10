@@ -5,8 +5,12 @@ try { (process as any).loadEnvFile('.env'); } catch {}
 
 const connectionString = process.env.DATABASE_URL;
 
+const isRemote = connectionString
+  && !connectionString.includes('localhost')
+  && !connectionString.includes('127.0.0.1')
+
 const pool = connectionString
-  ? new Pool({ connectionString })
+  ? new Pool({ connectionString, ssl: isRemote ? { rejectUnauthorized: false } : false })
   : new Pool({
       user: process.env.DB_USER || 'postgres',
       host: process.env.DB_HOST || 'localhost',
